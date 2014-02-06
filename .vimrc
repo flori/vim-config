@@ -198,8 +198,8 @@ map <leader>n :new <cfile><CR>
 map <silent> <leader>q :call CtoggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call CtoggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
-map <silent> <leader>b :cexpr system("bundle exec ~/scm/utils/bin/brakeman2err")<CR>:copen<CR>
-map <silent> <leader>B :cexpr system("bundle exec ~/scm/utils/bin/brakeman2err -c")<CR>:copen<CR>
+map <silent> <leader>b :cexpr system("bundle exec brakeman2err")<CR>:copen<CR>
+map <silent> <leader>B :cexpr system("bundle exec brakeman2err -c")<CR>:copen<CR>
 
 function! GetBufferList()
   redir =>buflist
