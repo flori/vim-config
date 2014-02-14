@@ -1,0 +1,1 @@
+../../vim-plugins/Decho.git/syntax/Decho.vim

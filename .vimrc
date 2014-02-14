@@ -560,9 +560,9 @@ endfunction
 
 function! Ccamelunderscore(...)
   silent w
-  let name = expand('<cword>')
+  let name = expand('<cWORD>')
   let output = system('classify -t ' . name)
-  execute "silent normal ciw" . output
+  execute "silent normal ciW" . output
 endfunction
 
 function! Csymbolhash() range

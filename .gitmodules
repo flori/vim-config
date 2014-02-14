@@ -58,3 +58,6 @@
 [submodule "vim-plugins/vis.git"]
 	path = vim-plugins/vis.git
 	url = https://github.com/vim-scripts/vis.git
+[submodule "vim-plugins/Decho.git"]
+	path = vim-plugins/Decho.git
+	url = https://github.com/vim-scripts/Decho.git
