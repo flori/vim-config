@@ -559,7 +559,6 @@ function! Cdeclassify(...)
 endfunction
 
 function! Ccamelunderscore(...)
-  silent w
   let name = expand('<cWORD>')
   let output = system('classify -t ' . name)
   execute "silent normal ciW" . output
