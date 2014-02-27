@@ -64,3 +64,6 @@
 [submodule "vim-plugins/Simplecov-Vim.git"]
 	path = vim-plugins/Simplecov-Vim.git
 	url = https://github.com/nyarly/Simplecov-Vim.git
+[submodule "vim-plugins/vim-slim.git"]
+	path = vim-plugins/vim-slim.git
+	url = https://github.com/slim-template/vim-slim.git
