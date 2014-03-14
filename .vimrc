@@ -404,9 +404,8 @@ if has("autocmd")
 
   augroup javascript
     autocmd!
-    autocmd BufNewFile,BufRead *.json setl filetype=javascript
     autocmd FileType javascript setl et sw=2 ts=2 cindent
-    autocmd BufWritePost *.js call CcheckSyntax()
+    autocmd BufWritePost *.js,*.json call CcheckSyntax()
   augroup end
 
   augroup java
@@ -616,6 +615,15 @@ function! CcheckSyntax(...)
       endif
     else
       lf! "/tmp/errors.err"
+    end
+  elseif !empty(matchstr(file, '\.json$'))
+    call system("json_check " . file)
+    if v:shell_error == 0
+      redraw
+      echo "Syntax: 👍"
+    else
+      redraw
+      echo "Syntax: 👎"
     end
   elseif &filetype == 'javascript'
     call system("jsl -process " . file . " >/tmp/errors.err")
