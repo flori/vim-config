@@ -199,8 +199,8 @@ map <silent> <leader>q :call CtoggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Cerrors()<CR>
 map <silent> <leader>w :call CtoggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
-map <silent> <leader>b :cexpr system("bundle exec brakeman2err")<CR>:copen<CR>
-map <silent> <leader>B :cexpr system("bundle exec brakeman2err -c")<CR>:copen<CR>
+map <silent> <leader>b :cexpr system("brakeman2err")<CR>:copen<CR>
+map <silent> <leader>B :cexpr system("brakeman2err -c")<CR>:copen<CR>
 
 function! GetBufferList()
   redir =>buflist
@@ -574,7 +574,7 @@ function! Csymbolhash() range
 endfunction
 
 function! CcreateTags()
-  call system("bundle exec create_tags &")
+  call system("create_tags &")
 endfunction
 
 function! PrintGivenRange() range
