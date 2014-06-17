@@ -575,7 +575,7 @@ function! Csymbolhash() range
 endfunction
 
 function! CcreateTags()
-  let output = system("bundle exec create_tags 2>&1")
+  let output = system("create_tags 2>&1")
   if v:shell_error == 0
     echo "Tags created."
   else
