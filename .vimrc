@@ -6,6 +6,7 @@
 set autoindent
 set autowrite
 set backspace=indent,eol,start
+set backupskip=/tmp/*,/private/tmp/*
 if exists('&colorcolumn')
   set colorcolumn=79
 end
@@ -574,7 +575,12 @@ function! Csymbolhash() range
 endfunction
 
 function! CcreateTags()
-  call system("create_tags &")
+  let output = system("bundle exec create_tags 2>&1")
+  if v:shell_error == 0
+    echo "Tags created."
+  else
+    echo output
+  end
 endfunction
 
 function! PrintGivenRange() range
