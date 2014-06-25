@@ -1,1 +1,0 @@
-../../vim-plugins/vim-slim.git/ftdetect/slim.vim

@@ -1,1 +1,0 @@
-../../vim-plugins/vim-rails/autoload/rails.vim

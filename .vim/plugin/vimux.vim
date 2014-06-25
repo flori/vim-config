@@ -1,1 +1,0 @@
-../../vim-plugins/vimux.git/plugin/vimux.vim

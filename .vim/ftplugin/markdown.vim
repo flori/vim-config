@@ -1,1 +1,0 @@
-../../vim-plugins/vim-markdown.git/ftplugin/markdown.vim

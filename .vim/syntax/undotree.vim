@@ -1,1 +1,0 @@
-../../vim-plugins/undotree.git/syntax/undotree.vim

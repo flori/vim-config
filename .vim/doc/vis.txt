@@ -1,1 +1,0 @@
-../../vim-plugins/vis.git/doc/vis.txt

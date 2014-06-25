@@ -1,1 +1,0 @@
-../../vim-plugins/vim-ruby.git/ftdetect/ruby.vim

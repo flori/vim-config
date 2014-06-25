@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 url=$1
 test -z "$url" && exit 1

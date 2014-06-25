@@ -1,1 +1,0 @@
-../../vim-plugins/Align.git/plugin/AlignPlugin.vim

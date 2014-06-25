@@ -179,6 +179,8 @@ if has("cscope")
   set csverb
 end
 
+execute pathogen#infect()
+
 " Mappings
 let mapleader=","
 let maplocalleader=","

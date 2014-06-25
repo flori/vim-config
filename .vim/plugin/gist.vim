@@ -1,1 +1,0 @@
-../../vim-plugins/gist-vim/plugin/gist.vim

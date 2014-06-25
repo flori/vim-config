@@ -1,1 +1,0 @@
-../../vim-plugins/nerdtree.git/plugin/NERD_tree.vim

@@ -1,1 +1,0 @@
-../../vim-plugins/netrw.vim.git/autoload/netrw.vim
