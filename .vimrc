@@ -655,11 +655,16 @@ function! Cirb_eval()
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
-function! CCiErrors()
-  if getftype(".zeus.sock") == "fifo"
-    cexpr system("zeus rake feature:ci:errors")
+function! CCiErrors(...)
+  if a:0 == 0
+    let branch = 'betterplace_master'
   else
-    cexpr system("rake feature:ci:errors")
+    let branch = a:1
+  endif
+  if getftype(".zeus.sock") == "fifo"
+    cexpr system("zeus rake feature:ci:errors " . "BRANCH=" . branch)
+  else
+    cexpr system("rake feature:ci:errors" . "BRANCH=" . branch)
   endif
   copen
 endfunction
@@ -674,7 +679,7 @@ command! CreateTags call CcreateTags()
 command! -range Symbolhash <line1>,<line2>call Csymbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Cedit(<f-args>)
-command! CiErrors call CCiErrors()
+command! -nargs=* CiErrors call CCiErrors(<f-args>)
 
 function! Iexec(cmd)
   let output = system(a:cmd)
