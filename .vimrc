@@ -484,6 +484,11 @@ if has("autocmd")
     autocmd BufNewFile,BufRead mutt-* setl textwidth=72
   augroup END
 
+  augroup qf
+    autocmd!
+    autocmd  FileType qf set foldenable foldmethod=marker
+  augroup END
+
   au! BufRead,BufNewFile *.rl   set filetype=ragel
 
   autocmd BufWritePre *.rb,*.rake,*.slim,*.haml,*.js,*.c,*.cpp,*.h :%s/\s\+$//e
