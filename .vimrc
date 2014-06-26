@@ -655,6 +655,15 @@ function! Cirb_eval()
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
+function! CCiErrors()
+  if getftype(".zeus.sock") == "fifo"
+    cexpr system("zeus rake feature:ci:errors")
+  else
+    cexpr system("rake feature:ci:errors")
+  endif
+  copen
+endfunction
+
 command! -bar -nargs=1 OpenURL :!open <args>
 command! -bar -nargs=* -complete=file Find call Cfind(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Cgrep(<f-args>)
@@ -665,6 +674,7 @@ command! CreateTags call CcreateTags()
 command! -range Symbolhash <line1>,<line2>call Csymbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Cedit(<f-args>)
+command! CiErrors call CCiErrors()
 
 function! Iexec(cmd)
   let output = system(a:cmd)
