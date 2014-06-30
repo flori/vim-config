@@ -8,5 +8,5 @@ then
   echo >&2 "$target_dir already exists!"
   exit 1
 fi
-git submodule add $url $target_dir
+git submodule add --force $url $target_dir
 ./install.sh
