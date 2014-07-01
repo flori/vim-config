@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -n Updating pathogen.vim…
+echo -n "Updating pathogen.vim…"
 curl -LSso .vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 echo Done.
 git submodule init

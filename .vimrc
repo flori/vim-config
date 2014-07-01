@@ -80,6 +80,7 @@ filetype plugin on
 source $VIMRUNTIME/macros/matchit.vim
 set t_Co=256
 colorscheme flori
+let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
 
 " Configure GUIs
 if has("gui_running")
@@ -180,6 +181,7 @@ if has("cscope")
 end
 
 execute pathogen#infect()
+execute pathogen#helptags()
 
 " Mappings
 let mapleader=","
