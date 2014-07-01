@@ -180,8 +180,8 @@ if has("cscope")
   set csverb
 end
 
-execute pathogen#infect()
-execute pathogen#helptags()
+call pathogen#infect()
+call pathogen#helptags()
 
 " Mappings
 let mapleader=","
