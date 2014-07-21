@@ -598,6 +598,11 @@ endfunction
 
 function! Cedit(...)
   let args = copy(a:000)
+  if len(args) == 1 && args[0][0:1] == '!/'
+    let dir  = system("dirname " . expand('%'))
+    let dir  = dir[0:len(dir) - 2]
+    let args = [ substitute(args[0], '!', dir, '') ]
+  endif
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
 endfunction
 
@@ -671,7 +676,7 @@ function! CCiErrors(...)
   if getftype(".zeus.sock") == "fifo"
     cexpr system("zeus rake feature:ci:errors " . "BRANCH=" . branch)
   else
-    cexpr system("rake feature:ci:errors" . "BRANCH=" . branch)
+    cexpr system("rake feature:ci:errors " . "BRANCH=" . branch)
   endif
   copen
 endfunction
