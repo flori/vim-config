@@ -14,7 +14,6 @@ set clipboard=unnamed
 "set textwidth=80
 set clipboard=unnamed
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
-set nodigraph
 set encoding=utf8
 set errorfile=/tmp/errors.err
 set errorformat+=%f:%l
@@ -27,12 +26,13 @@ set history=1000
 set hlsearch
 set laststatus=2
 set modelines=5
-set mousehide
 set mouse=nv
+set mousehide
 set nocindent
 set nocompatible
 set nocursorcolumn
 set nocursorline
+set nodigraph
 set nofoldenable
 set noignorecase
 set noincsearch
@@ -49,6 +49,8 @@ set showcmd
 set showmatch
 set showmode
 set smarttab
+set splitbelow
+set splitright
 set statusline=\ ☠\ %<%f\ ⚐\ %y%m%r%*\ ❑\ %n%=✎\ %(%l:%c\%)\ ⇨\ %P
 set swapsync="fsync"
 set termencoding=utf8
@@ -285,16 +287,13 @@ if has("fullscreen")
 end
 
 " Switch Windows
-map <C-j> <C-W>j<C-W>_
-map <C-k> <C-W>k<C-W>_
-
-" Switch Buffers
-map <C-l> <ESC>:bn<CR>
-map <C-h> <ESC>:bp<CR>
+noremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Don't use these for navigation navigation keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
+noremap <Up> <Nop> noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
