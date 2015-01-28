@@ -704,7 +704,9 @@ endfunction
 " Abbreviations
 iabclear
 iabbrev I_MFG Mit freundlichen Grüssen<CR><CR>Florian Frank
+iabbrev I_VERSION <ESC>:call Iexec("tr -d '\n' <VERSION")<CR>
 iabbrev I_DATE <ESC>:call Itime("%F")<CR>
+iabbrev I_RELEASE * <ESC>:call Itime("%F")<CR> iRelease <ESC>:call Iexec("tr -d '\n' <VERSION")<CR>kJ
 iabbrev I_DATETIME <ESC>:call Itime("%F %T")<CR>
 iabbrev I_TIME <ESC>:call Itime("%T")<CR>
 iabbrev I_CLASS <ESC>:call Iexec("classify -b " . expand('%'))<CR>
