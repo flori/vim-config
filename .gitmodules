@@ -76,3 +76,6 @@
 [submodule "vim-plugins/vim-ansible-yaml.git"]
 	path = vim-plugins/vim-ansible-yaml.git
 	url = git@github.com:chase/vim-ansible-yaml.git
+[submodule "vim-plugins/vim-textobj-rubyblock.git"]
+	path = vim-plugins/vim-textobj-rubyblock.git
+	url = git@github.com:nelstrom/vim-textobj-rubyblock.git

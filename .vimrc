@@ -41,7 +41,7 @@ set nopaste
 set nosmartcase
 set nosmartindent
 set nowrap
-set number
+set nonumber
 set ruler
 set shell=bash
 set shortmess=atI
@@ -62,6 +62,7 @@ set visualbell t_vb=
 set wildchar=<TAB>
 set wildmenu
 set winminheight=0
+set wrap
 if has("persistent_undo")
   set undofile
   if has("win32") || has("win64")
