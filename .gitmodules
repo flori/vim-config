@@ -82,3 +82,6 @@
 [submodule "vim-plugins/vim-textobj-user.git"]
 	path = vim-plugins/vim-textobj-user.git
 	url = git@github.com:kana/vim-textobj-user.git
+[submodule "vim-plugins/vim-blockle.git"]
+	path = vim-plugins/vim-blockle.git
+	url = git@github.com:jgdavey/vim-blockle.git
