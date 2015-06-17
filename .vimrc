@@ -41,7 +41,7 @@ set nopaste
 set nosmartcase
 set nosmartindent
 set nowrap
-set nonumber
+set number
 set ruler
 set shell=bash
 set shortmess=atI
@@ -722,3 +722,5 @@ iabbrev I_MODULE <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_PATH_KLASS <ESC>:call Iexec("classify " . expand('%'))<CR>
 iabbrev I_CODE # encoding: utf-8
 iabbrev I_ENCODE # encoding: utf-8
+iabbrev I_BYEBUG require 'byebug'; byebug
+iabbrev I_DEBUG require 'byebug'; byebug
