@@ -255,8 +255,9 @@ function! Cprobe(...)
 endfunction
 
 function! Cerrors()
+  set errorformat+=%f:%l
   silent! execute 'cf errors.lst'
-  silent! copen
+  silent! cwindow
 endfunction
 
 map <leader>p :silent w<CR>:call CprobeLine()<CR>
