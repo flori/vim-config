@@ -195,17 +195,18 @@ map <leader>t :TlistToggle<CR>
 map <leader>T :tabe <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>V :call CcheckSyntax()<CR>
+map <leader>V :call CheckSyntax()<CR>
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>h :call Csymbolhash()<CR>
-map <leader>H :%call Csymbolhash()<CR>
-map <leader>C :call Ccamelunderscore()<CR>
+map <leader>h :call Symbolhash()<CR>
+map <leader>H :%call Symbolhash()<CR>
+map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <leader>n :new <cfile><CR>
-map <silent> <leader>q :call CtoggleList("Quickfix List", 'c')<CR>
-map <silent> <leader>Q :call Cerrors()<CR>
-map <silent> <leader>w :call CtoggleList("Location List", 'l')<CR>
+map <leader>x :call ToggleExecutable<CR>
+map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
+map <silent> <leader>Q :call Errors()<CR>
+map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
 map <silent> <leader>B :cexpr system("brakeman2err -c")<CR>:copen<CR>
 
@@ -216,7 +217,7 @@ function! GetBufferList()
   return buflist
 endfunction
 
-function! CtoggleList(bufname, pfx)
+function! ToggleList(bufname, pfx)
   let buflist = GetBufferList()
   for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
     if bufwinnr(bufnum) != -1
@@ -236,7 +237,7 @@ function! CtoggleList(bufname, pfx)
   endif
 endfunction
 
-function! CprobeLine(...)
+function! ProbeLine(...)
   execute 'w'
   if &filetype == 'cucumber'
     call system(join([ 'probe', '-t', 'cucumber', '-c', join([ expand('%'), line('.') ], ':') ], ' ') . ' &')
@@ -245,7 +246,7 @@ function! CprobeLine(...)
   endif
 endfunction
 
-function! Cprobe(...)
+function! Probe(...)
   execute 'w'
   if &filetype == 'cucumber'
     call system('probe -c -t cucumber ' . expand('%') . ' &')
@@ -254,27 +255,65 @@ function! Cprobe(...)
   endif
 endfunction
 
-function! Cerrors()
+function! Errors()
   set errorformat+=%f:%l
   silent! execute 'cf errors.lst'
   silent! cwindow
 endfunction
 
-map <leader>p :silent w<CR>:call CprobeLine()<CR>
-map <leader>P :silent w<CR>:call Cprobe()<CR>
+function! AnsibleDecrypt()
+  call system('ansible-vault decrypt ' . expand('%'))
+  silent! n! %
+  echo "Decrypted ansible vault file."
+endfunction
+
+function! AnsibleEncrypt()
+  call system('ansible-vault encrypt ' . expand('%'))
+  silent! n! %
+  echo "Encrypted ansible vault file."
+endfunction
+
+function! AnsibleToggle()
+  call system("awk 'NR == 1 && /^\\$ANSIBLE_VAULT;/ { exit 1 }' " . expand('%'))
+  if v:shell_error == 1
+    call AnsibleDecrypt()
+  else
+    call AnsibleEncrypt()
+  end
+endfunction
+
+function! MakeFileExecutable()
+  checktime
+  execute 'au FileChangedShell ' . expand('%') . ' :echo'
+  call system('chmod a+x ' . expand('%'))
+  checktime
+  execute 'au! FileChangedShell ' . expand('%')
+endfunction
+
+function! MakeFileNonExecutable()
+  checktime
+  execute 'au FileChangedShell ' . expand('%') . ' :echo'
+  call system('chmod a-x ' . expand('%'))
+  checktime
+  execute 'au! FileChangedShell ' . expand('%')
+endfunction
+
+map <leader>p :silent w<CR>:call ProbeLine()<CR>
+map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
-map <leader>E :call Cirb_eval()<CR>
-map <leader>g :call Cgrep()<CR>
-map <leader>d :call Cremove()<CR>
-map <leader>D :call Cremove('force')<CR>
+map <leader>E :call IrbEal()<CR>
+map <leader>g :call Grep()<CR>
+map <leader>d :call Remove()<CR>
+map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
-map K :Grep <cword><CR>
+map <leader>a :call AnsibleToggle()<CR>
+map K :call Grep(expand('<cword>'))<CR>
 
 " Switch of search highlighting
 if has("fullscreen")
   set fuoptions=maxhorz,maxvert
-  function! Cfullscreen()
+  function! Fullscreen()
     if &fullscreen == "1"
       set nofullscreen
     else
@@ -411,13 +450,13 @@ if has("autocmd")
     autocmd FileType ruby setl path+=test/**
     autocmd FileType ruby setl path+=tests/**
     autocmd FileType ruby setl path+=spec/**
-    autocmd BufWritePost *.rb,*.rake call CcheckSyntax()
+    autocmd BufWritePost *.rb,*.rake call CheckSyntax()
   augroup END
 
   augroup javascript
     autocmd!
     autocmd FileType javascript setl et sw=2 ts=2 cindent
-    autocmd BufWritePost *.js,*.json call CcheckSyntax()
+    autocmd BufWritePost *.js,*.json call CheckSyntax()
   augroup end
 
   augroup java
@@ -503,7 +542,7 @@ if has("autocmd")
   autocmd BufWritePre *.rb,*.rake,*.slim,*.haml,*.js,*.c,*.cpp,*.h :%s/\s\+$//e
 end
 
-function! Cfind(...)
+function! Find(...)
   redraw
   if a:0 == 0
     let args = [ expand( '<cword>') ]
@@ -520,7 +559,7 @@ function! Cfind(...)
   redraw!
 endfunction
 
-function! Cgrep(...)
+function! Grep(...)
   redraw
   if a:0 == 0
     let pattern = getreg('"')
@@ -549,7 +588,7 @@ function! Cgrep(...)
   redraw!
 endfunction
 
-function! Cclassify(...)
+function! Classify(...)
   if a:0 == 0
     let args = [ expand( '<cword>') ]
   else
@@ -559,7 +598,7 @@ function! Cclassify(...)
   execute "normal a" . output
 endfunction
 
-function! CpathClassify(...)
+function! PathClassify(...)
   if a:0 == 0
     let args = [ expand( '<cword>') ]
   else
@@ -569,7 +608,7 @@ function! CpathClassify(...)
   execute "normal a" . output
 endfunction
 
-function! Cdeclassify(...)
+function! Declassify(...)
   if a:0 == 0
     let args = [ expand( '<cword>') ]
   else
@@ -579,17 +618,17 @@ function! Cdeclassify(...)
   execute "normal a" . output
 endfunction
 
-function! Ccamelunderscore(...)
+function! CamelUnderscore(...)
   let name = expand('<cword>')
   let output = system('classify -t ' . name)
   execute "normal ciw" . output
 endfunction
 
-function! Csymbolhash() range
+function! Symbolhash() range
   execute join([ 'silent ', a:firstline, ',', a:lastline, 's/\([^:]\):\([^:=!', "'", '" ]\{1,\}\) *=>/\1\2:/g' ])
 endfunction
 
-function! CcreateTags()
+function! CreateTags()
   let output = system("create_tags 2>&1")
   if v:shell_error == 0
     echo "Tags created."
@@ -603,7 +642,7 @@ function! PrintGivenRange() range
     " Do some more things
 endfunction
 
-function! Cedit(...)
+function! Edit(...)
   let args = copy(a:000)
   if len(args) == 1 && args[0][0:1] == '!/'
     let dir  = system("dirname " . expand('%'))
@@ -613,7 +652,7 @@ function! Cedit(...)
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
 endfunction
 
-function! Cremove(...)
+function! Remove(...)
   let answer = input('Really delete "' . expand('%') . '" (y/n)? ')
   if answer =~ "^[Yy]"
     call system('rm -f ' . expand('%p'))
@@ -627,7 +666,7 @@ function! Cremove(...)
   endif
 endfunction
 
-function! CcheckSyntax(...)
+function! CheckSyntax(...)
   if a:0 == 1
     let file = expand(a:1)
   else
@@ -669,12 +708,12 @@ function! CcheckSyntax(...)
   end
 endfunction
 
-function! Cirb_eval()
+function! IrbEval()
   y
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
-function! CCiErrors(...)
+function! CiErrors(...)
   if a:0 == 0
     let branch = 'betterplace_master'
   else
@@ -689,16 +728,18 @@ function! CCiErrors(...)
 endfunction
 
 command! -bar -nargs=1 OpenURL :!open <args>
-command! -bar -nargs=* -complete=file Find call Cfind(<f-args>)
-command! -bar -nargs=* -complete=file Grep call Cgrep(<f-args>)
-command! -bar -nargs=* -complete=file Classify call Cclassify(<f-args>)
-command! -bar -nargs=* -complete=file PathClassify call CpathClassify(<f-args>)
-command! -bar -nargs=* -complete=file Declassify call Cdeclassify(<f-args>)
-command! CreateTags call CcreateTags()
-command! -range Symbolhash <line1>,<line2>call Csymbolhash()
+command! -bar -nargs=* -complete=file Find call Find(<f-args>)
+command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
+command! -bar -nargs=* -complete=file Classify call Classify(<f-args>)
+command! -bar -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
+command! -bar -nargs=* -complete=file Declassify call Declassify(<f-args>)
+command! CreateTags call CreateTags()
+command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
-command! -nargs=* -complete=file Edit call Cedit(<f-args>)
-command! -nargs=* CiErrors call CCiErrors(<f-args>)
+command! -nargs=* -complete=file Edit call Edit(<f-args>)
+command! -nargs=* CiErrors call CiErrors(<f-args>)
+command! -nargs=* MakeFileExecutable call MakeFileExecutable()
+command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 
 function! Iexec(cmd)
   let output = system(a:cmd)
