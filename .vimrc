@@ -303,12 +303,12 @@ map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
-map <leader>g :call CGrep()<CR>
+map <leader>g :call Grep()<CR>
 map <leader>d :call Remove()<CR>
 map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleToggle()<CR>
-map K :call CGrep(expand('<cword>'))<CR>
+nmap g :call Grep(expand('<cword>'))<CR>
 
 " Switch of search highlighting
 if has("fullscreen")
@@ -559,7 +559,7 @@ function! Find(...)
   redraw!
 endfunction
 
-function! CGrep(...)
+function! Grep(...)
   redraw
   if a:0 == 0
     let pattern = getreg('"')
@@ -729,7 +729,7 @@ endfunction
 
 command! -bar -nargs=1 OpenURL :!open <args>
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
-command! -bar -nargs=* -complete=file Grep call CGrep(<f-args>)
+command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
 command! -bar -nargs=* -complete=file Classify call Classify(<f-args>)
 command! -bar -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
 command! -bar -nargs=* -complete=file Declassify call Declassify(<f-args>)
