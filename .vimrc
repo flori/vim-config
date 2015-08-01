@@ -203,7 +203,6 @@ map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <leader>n :new <cfile><CR>
-map <leader>x :call ToggleExecutable<CR>
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
