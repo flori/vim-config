@@ -720,9 +720,9 @@ function! CiErrors(...)
     let branch = a:1
   endif
   if getftype(".zeus.sock") == "fifo"
-    cexpr system("zeus rake feature:ci:errors " . "BRANCH=" . branch)
+    cexpr system("zeus rake ci:errors " . "BRANCH=" . branch)
   else
-    cexpr system("rake feature:ci:errors " . "BRANCH=" . branch)
+    cexpr system("rake ci:errors " . "BRANCH=" . branch)
   endif
   copen
 endfunction
