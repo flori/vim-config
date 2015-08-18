@@ -44,7 +44,7 @@ set nowrap
 set number
 set ruler
 set shell=bash
-set shortmess=atI
+set shortmess=atIO
 set showcmd
 set showmatch
 set showmode
@@ -261,24 +261,23 @@ function! Errors()
 endfunction
 
 function! AnsibleDecrypt()
-  call system('ansible-vault decrypt ' . expand('%'))
-  silent! n! %
-  echo "Decrypted ansible vault file."
+  call cursor(1, 1)
+  execute ":1,$d"
+  silent! .!ansible-vault view %
+  silent! file %.av
+  silent! set filetype=av
+  echo "Content of ansible vault decrypted."
 endfunction
 
 function! AnsibleEncrypt()
-  call system('ansible-vault encrypt ' . expand('%'))
-  silent! n! %
-  echo "Encrypted ansible vault file."
-endfunction
-
-function! AnsibleToggle()
-  call system("awk 'NR == 1 && /^\\$ANSIBLE_VAULT;/ { exit 1 }' " . expand('%'))
-  if v:shell_error == 1
-    call AnsibleDecrypt()
-  else
-    call AnsibleEncrypt()
-  end
+  if expand('%:e') == 'av'
+    silent! set filetype=ansible
+    silent! file %:r
+    silent! w!
+    silent! !ansible-vault >/dev/null 2>&1 encrypt %
+    silent! !rm -f %.av
+    silent! n! %
+  endif
 endfunction
 
 function! MakeFileExecutable()
@@ -302,12 +301,12 @@ map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
-map <leader>g :call Grep()<CR>
+map <leader>G :call Grep()<CR>
 map <leader>d :call Remove()<CR>
 map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
-map <leader>a :call AnsibleToggle()<CR>
-nmap g :call Grep(expand('<cword>'))<CR>
+map <leader>a :call AnsibleDecrypt()<CR>
+map <leader>g :call Grep(expand('<cword>'))<CR>
 
 " Switch of search highlighting
 if has("fullscreen")
@@ -374,6 +373,11 @@ nnoremap ` '
 map Y y$
 
 if has("autocmd")
+  augroup av
+    autocmd!
+    autocmd BufWritePost,FileWritePost *.av silent! call AnsibleEncrypt()
+  augroup END
+
   " Auto Command - Hooks
   augroup gzip
     autocmd!
