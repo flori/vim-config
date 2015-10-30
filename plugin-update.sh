@@ -9,7 +9,7 @@ for plugin in vim-plugins/*/
 do
   cd "$plugin"
   echo Pulling $plugin
-  git co master
+  git checkout master
   git pull
   cd >/dev/null -
 done
