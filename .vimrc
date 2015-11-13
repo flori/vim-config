@@ -84,6 +84,7 @@ source $VIMRUNTIME/macros/matchit.vim
 set t_Co=256
 colorscheme flori
 "let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
+let g:ctrlp_custom_ignore = '\v[\/](api_docs|coverage|yard|.git)'
 
 " Configure GUIs
 if has("gui_running")
@@ -722,10 +723,15 @@ function! CiErrors(...)
   else
     let branch = a:1
   endif
-  if getftype(".zeus.sock") == "fifo"
-    cexpr system("zeus rake ci:errors " . "BRANCH=" . branch)
+  if a:0 < 2
+    let build = ''
   else
-    cexpr system("rake ci:errors " . "BRANCH=" . branch)
+    let build = a:2
+  endif
+  if getftype(".zeus.sock") == "fifo"
+    cexpr system("zeus rake ci:errors " . "BRANCH=" . branch . " BUILD=" . build)
+  else
+    cexpr system("rake ci:errors " . "BRANCH=" . branch . " BUILD=" . build)
   endif
   copen
 endfunction
