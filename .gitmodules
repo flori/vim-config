@@ -85,3 +85,6 @@
 [submodule "vim-plugins/vim-blockle.git"]
 	path = vim-plugins/vim-blockle.git
 	url = git@github.com:jgdavey/vim-blockle.git
+[submodule "vim-plugins/github-vim.git"]
+	path = vim-plugins/github-vim.git
+	url = https://github.com/solars/github-vim.git
