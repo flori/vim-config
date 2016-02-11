@@ -255,6 +255,17 @@ function! Probe(...)
   endif
 endfunction
 
+function! ProbeToggleCoverage()
+  let result = system('probe -C START_SIMPLECOV')
+  if result == "0\n" || result == "\n"
+    call system('probe -C START_SIMPLECOV=1')
+    echo "Switching coverage on."
+  else
+    call system('probe -C START_SIMPLECOV=0')
+    echo "Switching coverage off."
+  endif
+endfunction
+
 function! Errors()
   set errorformat+=%f:%l
   silent! execute 'cf errors.lst'
@@ -299,6 +310,7 @@ endfunction
 
 map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
+map <leader>c :call ProbeToggleCoverage()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
