@@ -9,7 +9,7 @@
 	url = https://github.com/tpope/vim-rvm.git
 [submodule "vim-plugins/ctrlp"]
 	path = vim-plugins/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
 [submodule "vim-plugins/vim-surround"]
 	path = vim-plugins/vim-surround
 	url = https://github.com/tpope/vim-surround.git
