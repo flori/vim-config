@@ -86,7 +86,7 @@ colorscheme flori
 let g:ctrlp_user_command = 'discover -d -c -b -r . %s'
 let g:ctrlp_custom_ignore = '\v[\/](api_docs|coverage|yard|.git)'
 let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
+let g:ctrlp_max_depth=100
 
 " Configure GUIs
 if has("gui_running")
