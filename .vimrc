@@ -83,8 +83,10 @@ filetype plugin on
 source $VIMRUNTIME/macros/matchit.vim
 set t_Co=256
 colorscheme flori
-"let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
+let g:ctrlp_user_command = 'discover -d -c -b -r . %s'
 let g:ctrlp_custom_ignore = '\v[\/](api_docs|coverage|yard|.git)'
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 " Configure GUIs
 if has("gui_running")
