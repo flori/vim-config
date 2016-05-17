@@ -637,9 +637,9 @@ function! Declassify(...)
 endfunction
 
 function! CamelUnderscore(...)
-  let name = expand('<cword>')
+  let name = expand('<cWORD>')
   let output = system('classify -t ' . name)
-  execute "normal ciw" . output
+  execute "normal ciW" . output
 endfunction
 
 function! Symbolhash() range
