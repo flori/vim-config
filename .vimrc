@@ -781,10 +781,8 @@ iabbrev I_DATE <ESC>:call Itime("%F")<CR>
 iabbrev I_RELEASE * <ESC>:call Itime("%F")<CR> iRelease <ESC>:call Iexec("tr -d '\n' <VERSION")<CR>kJ
 iabbrev I_DATETIME <ESC>:call Itime("%F %T")<CR>
 iabbrev I_TIME <ESC>:call Itime("%T")<CR>
-iabbrev I_CLASS <ESC>:call Iexec("classify -b " . expand('%'))<CR>
-iabbrev I_KLASS <ESC>:call Iexec("classify -b " . expand('%'))<CR>
-iabbrev I_MODULE <ESC>:call Iexec("classify -b " . expand('%'))<CR>
-iabbrev I_PATH_KLASS <ESC>:call Iexec("classify " . expand('%'))<CR>
+iabbrev I_M <ESC>:call Iexec("classify -b " . expand('%'))<CR>
+iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
 iabbrev I_CODE # encoding: utf-8
 iabbrev I_ENCODE # encoding: utf-8
 iabbrev I_BYEBUG require 'byebug'; byebug
