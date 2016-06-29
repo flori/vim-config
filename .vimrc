@@ -552,7 +552,7 @@ if has("autocmd")
 
   augroup slim
     autocmd!
-    autocmd FileType slim setl wrap
+    autocmd FileType slim setl wrap et sw=2 ts=2
   augroup END
 
   au! BufRead,BufNewFile *.rl   set filetype=ragel
@@ -782,6 +782,7 @@ iabbrev I_RELEASE * <ESC>:call Itime("%F")<CR> iRelease <ESC>:call Iexec("tr -d 
 iabbrev I_DATETIME <ESC>:call Itime("%F %T")<CR>
 iabbrev I_TIME <ESC>:call Itime("%T")<CR>
 iabbrev I_M <ESC>:call Iexec("classify -b " . expand('%'))<CR>
+iabbrev I_C <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
 iabbrev I_CODE # encoding: utf-8
 iabbrev I_ENCODE # encoding: utf-8
