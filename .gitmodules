@@ -7,9 +7,6 @@
 [submodule "vim-plugins/vim-rvm"]
 	path = vim-plugins/vim-rvm
 	url = https://github.com/tpope/vim-rvm.git
-[submodule "vim-plugins/ctrlp"]
-	path = vim-plugins/ctrlp
-	url = https://github.com/ctrlpvim/ctrlp.vim.git
 [submodule "vim-plugins/vim-surround"]
 	path = vim-plugins/vim-surround
 	url = https://github.com/tpope/vim-surround.git
@@ -70,9 +67,6 @@
 [submodule "vim-plugins/vim-slim.git"]
 	path = vim-plugins/vim-slim.git
 	url = https://github.com/slim-template/vim-slim.git
-[submodule "vim-plugins/vim-go"]
-	path = vim-plugins/vim-go
-	url = https://github.com/fatih/vim-go
 [submodule "vim-plugins/vim-ansible-yaml.git"]
 	path = vim-plugins/vim-ansible-yaml.git
 	url = git@github.com:chase/vim-ansible-yaml.git
