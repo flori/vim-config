@@ -568,7 +568,7 @@ function! Find(...)
   set grepformat=%f
   set grepprg=discover
   let @/=args[0]
-  silent execute "silent gr -a 'a-zA-Z0-9' -c -i " . args_string
+  silent execute "silent gr -c " . args_string
   copen
   redraw!
 endfunction
