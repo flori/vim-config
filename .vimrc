@@ -692,14 +692,23 @@ function! CheckSyntax(...)
     if v:shell_error == 0
       call system("ruby -wc " . file . " 2>/tmp/errors.err") " check warnings
       if v:shell_error == 0
-        redraw
-        echo "Syntax: 👍"
-        "echo "Syntax: ✓"
+        call system("which -s rubocop && rubocop -D " . file . " >/tmp/errors.err") " check style
+        if v:shell_error == 0
+          redraw
+          lclose
+          echo "Syntax: 👍"
+          "echo "Syntax: ✓"
+        else
+          lf! "/tmp/errors.err"
+          lopen
+        endif
       else
-      lf! "/tmp/errors.err"
+        lf! "/tmp/errors.err"
+        lopen
       endif
     else
       lf! "/tmp/errors.err"
+      lopen
     end
   elseif !empty(matchstr(file, '\.json$'))
     call system("json_check " . file)
@@ -714,10 +723,12 @@ function! CheckSyntax(...)
     call system("jsl -process " . file . " >/tmp/errors.err")
     if v:shell_error == 0
       redraw
+      lcose
       echo "Syntax: 👍"
       "echo "Syntax: ✓"
     else
       lf! "/tmp/errors.err"
+      lopen
     end
   end
 endfunction
