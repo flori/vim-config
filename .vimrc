@@ -700,15 +700,12 @@ function! CheckSyntax(...)
           "echo "Syntax: ✓"
         else
           lf! "/tmp/errors.err"
-          lopen
         endif
       else
         lf! "/tmp/errors.err"
-        lopen
       endif
     else
       lf! "/tmp/errors.err"
-      lopen
     end
   elseif !empty(matchstr(file, '\.json$'))
     call system("json_check " . file)
@@ -728,7 +725,6 @@ function! CheckSyntax(...)
       "echo "Syntax: ✓"
     else
       lf! "/tmp/errors.err"
-      lopen
     end
   end
 endfunction

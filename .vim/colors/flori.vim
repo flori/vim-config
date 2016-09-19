@@ -19,7 +19,7 @@ let g:colors_name="flori"
 
 " general highlight groups
 hi Normal ctermfg=230 ctermbg=none
-hi ColorColumn ctermbg=234
+hi ColorColumn ctermbg=88
 "hi CursorColumn ctermbg=234
 "hi CursorLine ctermbg=234
 hi Folded ctermbg=lightgrey ctermfg=black
