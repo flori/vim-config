@@ -544,6 +544,12 @@ if has("autocmd")
   augroup qf
     autocmd!
     autocmd  FileType qf set foldenable foldmethod=marker
+    autocmd  FileType qf set nowrap
+  augroup END
+
+  augroup lf
+    autocmd!
+    autocmd  FileType lf set nowrap
   augroup END
 
   augroup slim
@@ -692,20 +698,32 @@ function! CheckSyntax(...)
     if v:shell_error == 0
       call system("ruby -wc " . file . " 2>/tmp/errors.err") " check warnings
       if v:shell_error == 0
-        call system("which -s rubocop && rubocop -D " . file . " >/tmp/errors.err") " check style
-        if v:shell_error == 0
-          redraw
-          lclose
-          echo "Syntax: 👍"
-          "echo "Syntax: ✓"
-        else
-          lf! "/tmp/errors.err"
-        endif
+        redraw
+        lclose
+        echo "Syntax: 👍"
+        "echo "Syntax: ✓"
       else
         lf! "/tmp/errors.err"
+        lopen
       endif
+      "if v:shell_error == 0
+      "  call system("which -s rubocop && rubocop -D " . file . " >/tmp/errors.err") " check style
+      "  if v:shell_error == 0
+      "    redraw
+      "    lclose
+      "    echo "Syntax: 👍"
+      "    "echo "Syntax: ✓"
+      "  else
+      "    lf! "/tmp/errors.err"
+      "    lopen
+      "  endif
+      "else
+      "  lf! "/tmp/errors.err"
+      "  lopen
+      "endif
     else
       lf! "/tmp/errors.err"
+      lopen
     end
   elseif !empty(matchstr(file, '\.json$'))
     call system("json_check " . file)
@@ -725,6 +743,7 @@ function! CheckSyntax(...)
       "echo "Syntax: ✓"
     else
       lf! "/tmp/errors.err"
+      lopen
     end
   end
 endfunction
