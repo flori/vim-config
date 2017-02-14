@@ -17,6 +17,7 @@ set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
 set encoding=utf8
 set errorfile=/tmp/errors.err
 set errorformat+=%f:%l
+set errorformat+=%E%f:%l
 set expandtab shiftwidth=2 tabstop=2
 set foldcolumn=0
 set formatoptions=cqrt
@@ -207,6 +208,7 @@ map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
 map <silent> <leader>B :cexpr system("brakeman2err -c")<CR>:copen<CR>
+map <silent> <leader>b :cexpr system("brakeman2err")<CR>:copen<CR>
 
 function! GetBufferList()
   redir =>buflist
@@ -266,6 +268,7 @@ endfunction
 
 function! Errors()
   set errorformat+=%f:%l
+  set errorformat+=%E%f:%l
   silent! execute 'cf errors.lst'
   silent! cwindow
 endfunction
@@ -603,7 +606,7 @@ function! Grep(...)
   set hlsearch
   let @/=args[0]
   let @"=''
-  silent execute "silent gr -i -c " . args_string
+  silent execute "silent gr -c " . args_string
   copen
   redraw!
 endfunction
@@ -753,6 +756,11 @@ function! IrbEval()
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
+function! ToggleBlock()
+  y
+  call system("./toggle_block.rb '" . getreg('"') . "'")
+endfunction
+
 function! CiErrors(...)
   if a:0 == 0
     let branch = 'betterplace_master'
@@ -810,3 +818,5 @@ iabbrev I_CODE # encoding: utf-8
 iabbrev I_ENCODE # encoding: utf-8
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
+iabbrev I_RUBOCOP # rubocop:disable
+
