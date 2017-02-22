@@ -207,7 +207,7 @@ map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
-map <silent> <leader>B :cexpr system("brakeman2err -c")<CR>:copen<CR>
+map <silent> <leader>B :!brakeman2err -c<CR><ESC>,b
 map <silent> <leader>b :cexpr system("brakeman2err")<CR>:copen<CR>
 
 function! GetBufferList()
@@ -652,7 +652,8 @@ function! Symbolhash() range
 endfunction
 
 function! CreateTags()
-  let output = system("create_tags 2>&1")
+  silent !create_tags
+  redraw!
   if v:shell_error == 0
     echo "Tags created."
   else
@@ -772,12 +773,10 @@ function! CiErrors(...)
   else
     let build = a:2
   endif
-  if getftype(".zeus.sock") == "fifo"
-    cexpr system("zeus rake ci:errors " . "JOB=" . branch . " BUILD=" . build)
-  else
-    cexpr system("rake ci:errors " . "JOB=" . branch . " BUILD=" . build)
-  endif
-  copen
+  let cmd = "!rake ci:errors " . "JOB=" . branch . " BUILD=" . build . " OUTPUT=errors.lst"
+  silent! execute cmd
+  redraw!
+  silent! execute 'cf errors.lst'
 endfunction
 
 command! -bar -nargs=1 OpenURL :!open <args>
