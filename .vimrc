@@ -315,12 +315,12 @@ map <leader>c :call ProbeToggleCoverage()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
-map <leader>G :call Grep()<CR>
+map <leader>g :call Grep()<CR>
 map <leader>d :call Remove()<CR>
 map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleDecrypt()<CR>
-map <leader>g :call Grep(expand('<cword>'))<CR>
+map <leader>G :call Grep(expand('<cword>'))<CR>
 
 " Switch of search highlighting
 if has("fullscreen")
