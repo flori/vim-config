@@ -82,3 +82,6 @@
 [submodule "vim-plugins/github-vim.git"]
 	path = vim-plugins/github-vim.git
 	url = https://github.com/solars/github-vim.git
+[submodule "vim-plugins/vim-go"]
+	path = vim-plugins/vim-go
+	url = https://github.com/fatih/vim-go

@@ -818,4 +818,5 @@ iabbrev I_ENCODE # encoding: utf-8
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
 iabbrev I_RUBOCOP # rubocop:disable
+iabbrev I_RUBY # vim: set ft=ruby et sw=2 ts=2:
 
