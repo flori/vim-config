@@ -49,9 +49,6 @@
 [submodule "vim-plugins/vim-ruby.git"]
 	path = vim-plugins/vim-ruby.git
 	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule "vim-plugins/dragvisuals.vim.git"]
-	path = vim-plugins/dragvisuals.vim.git
-	url = https://github.com/flori/dragvisuals.vim.git
 [submodule "vim-plugins/vis.git"]
 	path = vim-plugins/vis.git
 	url = https://github.com/vim-scripts/vis.git
