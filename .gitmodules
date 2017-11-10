@@ -36,7 +36,7 @@
 	url = https://github.com/c9s/bufexplorer.git
 [submodule "vim-plugins/Rename.git"]
 	path = vim-plugins/Rename.git
-	url = git://github.com/vim-scripts/Rename.git
+	url = https://github.com/vim-scripts/Rename.git
 [submodule "vim-plugins/vimux.git"]
 	path = vim-plugins/vimux.git
 	url = https://github.com/vim-scripts/vimux.git
@@ -66,19 +66,25 @@
 	url = https://github.com/slim-template/vim-slim.git
 [submodule "vim-plugins/vim-ansible-yaml.git"]
 	path = vim-plugins/vim-ansible-yaml.git
-	url = git@github.com:chase/vim-ansible-yaml.git
+	url = https://github.com/chase/vim-ansible-yaml.git
 [submodule "vim-plugins/vim-textobj-rubyblock.git"]
 	path = vim-plugins/vim-textobj-rubyblock.git
-	url = git@github.com:nelstrom/vim-textobj-rubyblock.git
+	url = https://github.com/nelstrom/vim-textobj-rubyblock.git
 [submodule "vim-plugins/vim-textobj-user.git"]
 	path = vim-plugins/vim-textobj-user.git
-	url = git@github.com:kana/vim-textobj-user.git
+	url = https://github.com/kana/vim-textobj-user.git
 [submodule "vim-plugins/vim-blockle.git"]
 	path = vim-plugins/vim-blockle.git
-	url = git@github.com:jgdavey/vim-blockle.git
+	url = https://github.com/jgdavey/vim-blockle.git
 [submodule "vim-plugins/github-vim.git"]
 	path = vim-plugins/github-vim.git
 	url = https://github.com/solars/github-vim.git
 [submodule "vim-plugins/vim-go"]
 	path = vim-plugins/vim-go
 	url = https://github.com/fatih/vim-go
+[submodule "vim-plugins/dragvisuals.vim.git"]
+	path = vim-plugins/dragvisuals.vim.git
+	url = https://github.com/jondkinney/dragvisuals.vim.git
+[submodule "vim-plugins/vim-dragvisuals.git"]
+	path = vim-plugins/vim-dragvisuals.git
+	url = https://github.com/atweiden/vim-dragvisuals.git
