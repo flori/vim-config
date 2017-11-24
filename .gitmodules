@@ -82,9 +82,3 @@
 [submodule "vim-plugins/vim-go"]
 	path = vim-plugins/vim-go
 	url = https://github.com/fatih/vim-go
-[submodule "vim-plugins/dragvisuals.vim.git"]
-	path = vim-plugins/dragvisuals.vim.git
-	url = https://github.com/jondkinney/dragvisuals.vim.git
-[submodule "vim-plugins/vim-dragvisuals.git"]
-	path = vim-plugins/vim-dragvisuals.git
-	url = https://github.com/atweiden/vim-dragvisuals.git
