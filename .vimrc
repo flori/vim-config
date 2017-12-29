@@ -365,6 +365,8 @@ noremap <Home> <Nop>
 noremap <End> <Nop>
 noremap <PageUp> <Nop>
 noremap <PageDown> <Nop>
+noremap <C-A> <Nop>
+noremap <C-X> <Nop>
 
 " Navigate command line
 cnoremap <C-0> <Home>
