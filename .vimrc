@@ -210,6 +210,9 @@ map <silent> <leader>u :UndotreeToggle<CR>
 map <silent> <leader>B :!brakeman2err -c<CR><ESC>,b
 map <silent> <leader>b :cexpr system("brakeman2err")<CR>:copen<CR>
 
+" Tweaks
+let g:go_version_warning=0
+
 function! GetBufferList()
   redir =>buflist
   silent! ls
