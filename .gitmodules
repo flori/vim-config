@@ -82,3 +82,12 @@
 [submodule "vim-plugins/vim-go"]
 	path = vim-plugins/vim-go
 	url = https://github.com/fatih/vim-go
+[submodule "vim-plugins/vim-jsx.git"]
+	path = vim-plugins/vim-jsx.git
+	url = https://github.com/mxw/vim-jsx.git
+[submodule "vim-plugins/vim-javascript.git"]
+	path = vim-plugins/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim-plugins/vim-json.git"]
+	path = vim-plugins/vim-json.git
+	url = https://github.com/elzr/vim-json.git

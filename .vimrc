@@ -144,6 +144,7 @@ let ruby_operators=1
 if has("syntax")
   syntax on
 end
+let g:vim_json_syntax_conceal=0
 
 " Browsing
 if has("browse")
