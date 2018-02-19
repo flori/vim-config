@@ -167,6 +167,8 @@ let g:rails_statusline=0
 
 let g:Tlist_WinWidth=70
 
+let g:go_version_warning = 0
+
 " CScope
 if has("cscope")
 "  set csprg=/usr/local/bin/cscope
@@ -712,21 +714,6 @@ function! CheckSyntax(...)
         lf! "/tmp/errors.err"
         lopen
       endif
-      "if v:shell_error == 0
-      "  call system("which -s rubocop && rubocop -D " . file . " >/tmp/errors.err") " check style
-      "  if v:shell_error == 0
-      "    redraw
-      "    lclose
-      "    echo "Syntax: 👍"
-      "    "echo "Syntax: ✓"
-      "  else
-      "    lf! "/tmp/errors.err"
-      "    lopen
-      "  endif
-      "else
-      "  lf! "/tmp/errors.err"
-      "  lopen
-      "endif
     else
       lf! "/tmp/errors.err"
       lopen
@@ -739,17 +726,6 @@ function! CheckSyntax(...)
     else
       redraw
       echo "Syntax: 👎"
-    end
-  elseif &filetype == 'javascript'
-    call system("jsl -process " . file . " >/tmp/errors.err")
-    if v:shell_error == 0
-      redraw
-      lcose
-      echo "Syntax: 👍"
-      "echo "Syntax: ✓"
-    else
-      lf! "/tmp/errors.err"
-      lopen
     end
   end
 endfunction
