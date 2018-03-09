@@ -476,12 +476,14 @@ if has("autocmd")
     autocmd FileType ruby setl path+=tests/**
     autocmd FileType ruby setl path+=spec/**
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
+    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup javascript
     autocmd!
-    autocmd FileType javascript setl et sw=2 ts=2 cindent
-    autocmd BufWritePost *.js,*.json call CheckSyntax()
+    autocmd FileType javascript setl et sw=2 ts=2 autoindent
+    autocmd FileType ruby setl suffixesadd=.js,.jsx
+    autocmd BufWritePre * %s/\s\+$//e
   augroup end
 
   augroup java
@@ -497,21 +499,25 @@ if has("autocmd")
     autocmd FileType java let JavaBrowser_Sort_Type = "name"
     autocmd FileType java let JavaBrowser_Display_Prototype = 1
     autocmd FileType java let JavaBrowser_Use_SingleClick = 0
+    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup lisp
     autocmd!
     autocmd FileType lisp setl lisp autoindent
+    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup scheme
     autocmd!
     autocmd FileType scheme setl lisp autoindent
+    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup ocaml
     autocmd!
     autocmd FileType ocaml setl et sw=2 ts=2 autoindent
+    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup xml
@@ -533,13 +539,6 @@ if has("autocmd")
     autocmd!
     autocmd BufNewFile,BufRead *.ino setl filetype=c
     autocmd FileType ino setl et sw=2 ts=2 autoindent
-  augroup END
-
-  augroup html2
-    autocmd!
-    autocmd BufReadPre,FileReadPre *.html.* map <buffer> <F1> <ESC>:w<CR><ESC>:!tidy -e %<CR>
-    autocmd BufReadPre,FileReadPre *.html.* map <buffer> <F2> <ESC>:silent %!tidy -wrap 72 -iu 2>/dev/null<CR>
-    autocmd BufReadPre,FileReadPre *.html.* so $VIMRUNTIME/syntax/html.vim
   augroup END
 
   augroup misc
@@ -800,5 +799,3 @@ iabbrev I_ENCODE # encoding: utf-8
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
 iabbrev I_RUBOCOP # rubocop:disable
-iabbrev I_RUBY # vim: set ft=ruby et sw=2 ts=2:
-
