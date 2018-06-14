@@ -206,6 +206,9 @@ map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <leader>n :new <cfile><CR>
+vnoremap <leader>64 c<C-R>=system('base64', @")<CR><ESC>
+vnoremap <leader>46 c<C-R>=system('base64 -D', @")<CR><ESC>
+
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
@@ -773,6 +776,7 @@ command! -nargs=* -complete=file Edit call Edit(<f-args>)
 command! -nargs=* CiErrors call CiErrors(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
+command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256
 
 function! Iexec(cmd)
   let output = system(a:cmd)
