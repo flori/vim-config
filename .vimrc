@@ -766,9 +766,9 @@ endfunction
 command! -bar -nargs=1 OpenURL :!open <args>
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
-command! -bar -nargs=* -complete=file Classify call Classify(<f-args>)
-command! -bar -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
-command! -bar -nargs=* -complete=file Declassify call Declassify(<f-args>)
+command! -nargs=* -complete=file Classify call Classify(<f-args>)
+command! -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
+command! -nargs=* -complete=file Declassify call Declassify(<f-args>)
 command! CreateTags call CreateTags()
 command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
@@ -777,6 +777,8 @@ command! -nargs=* CiErrors call CiErrors(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256
+command! -bar Gadd :!git add %
+command! Gfix Gadd|silent! execute 'bd'
 
 function! Iexec(cmd)
   let output = system(a:cmd)
