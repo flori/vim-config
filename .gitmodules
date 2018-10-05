@@ -91,3 +91,6 @@
 [submodule "vim-plugins/vim-json.git"]
 	path = vim-plugins/vim-json.git
 	url = https://github.com/elzr/vim-json.git
+[submodule "vim-plugins/vim-rhubarb.git"]
+	path = vim-plugins/vim-rhubarb.git
+	url = https://github.com/tpope/vim-rhubarb.git
