@@ -157,6 +157,8 @@ map <leader>V :call CheckSyntax()<CR>
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>h :call Symbolhash()<CR>
 map <leader>H :%call Symbolhash()<CR>
+map <leader>o :!discover -se<CR>
+map <leader>O :!discover -sre<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
@@ -732,7 +734,7 @@ command! -nargs=* -complete=file Edit call Edit(<f-args>)
 command! -nargs=* CiErrors call CiErrors(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
-command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256
+command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256 -dates
 command! -bar Gadd :!git add %
 command! Gfix Gadd|silent! execute 'bd'
 
