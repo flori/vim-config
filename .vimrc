@@ -54,6 +54,7 @@ set splitbelow
 set splitright
 set statusline=\ ☠\ %<%f\ ⚐\ %y%m%r%*\ ❑\ %n%=✎\ %(%l:%c\%)\ ⇨\ %P
 set swapsync="fsync"
+set tags=./tags,tags
 set termencoding=utf8
 set tildeop
 set title
@@ -81,69 +82,19 @@ end
 filetype on
 filetype indent on
 filetype plugin on
-source $VIMRUNTIME/macros/matchit.vim
 set t_Co=256
 colorscheme flori
 
-" Configure GUIs
-if has("gui_running")
-  set guipty
-  hi Pmenu ctermbg=Grey guibg=DarkGrey
-  set guioptions-=r
-  set guioptions-=R
-  set guioptions-=l
-  set guioptions-=L
-  if exists("+guioptions")
-    set guioptions+=c
-  end
-  if has("gui_win32")
-    set guifont=DejaVu\ Sans\ Mono:h12
-    "set antialias
-    if exists("+guioptions")
-      set guioptions-=T
-      set guioptions-=m
-      set guioptions+=p
-    end
-  elseif has("gui_gtk2")
-    set guifont=DejaVu\ Sans\ Mono\ 12
-    if exists("+guioptions")
-      set guioptions-=T
-      set guioptions-=m
-      set guioptions+=p
-    end
-    set guiheadroom=0
-    set columns=80
-  elseif has("gui_mac") || has("gui_macvim")
-    set guifont=DejaVu\ Sans\ Mono:h14
-    if exists("+guioptions")
-      set guioptions-=T
-      set guioptions-=m
-      set guioptions+=p
-    end
-    set antialias
-    set guiheadroom=0
-    "set macatsui
-    set columns=160
-  elseif has("x11")
-    set guifont=-b&h-lucidatypewriter-*-*-normal-*-17-*-*-*-*-*-iso10646-*
-    if exists("+guioptions")
-      set guioptions-=T
-      set guioptions-=m
-    end
-  end
-  set lines=999
-else
-  hi DiffAdd ctermbg=green
-  hi DiffChange ctermbg=blue
-  hi DiffText ctermbg=gray
-  hi DiffDelete  ctermbg=red
-end
+source $VIMRUNTIME/macros/matchit.vim
 
 " Syntax
-let ruby_operators=1
 if has("syntax")
   syntax on
 end
+hi DiffAdd ctermfg=white ctermbg=22
+hi DiffChange ctermfg=white ctermbg=202
+hi DiffText ctermfg=52 ctermbg=166
+hi DiffDelete ctermfg=white ctermbg=88
 let g:vim_json_syntax_conceal=0
 
 " Browsing
@@ -169,6 +120,7 @@ let g:rails_statusline=0
 let g:Tlist_WinWidth=70
 
 let g:go_version_warning = 0
+let g:go_def_mode='godef'
 
 " CScope
 if has("cscope")
@@ -186,8 +138,11 @@ if has("cscope")
   set csverb
 end
 
-call pathogen#infect()
-call pathogen#helptags()
+let g:pathogen_blacklist = []
+"call add(g:pathogen_blacklist, 'vim-go')
+
+execute pathogen#infect()
+execute pathogen#helptags()
 
 " Mappings
 let mapleader=","
@@ -360,14 +315,6 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
-" Remove any introduced trailing whitespace after moving...
-let g:DVB_TrimWS = 1
-
 noremap <Ins> <Nop>
 noremap <End> <Nop>
 noremap <Home> <Nop>
@@ -478,6 +425,7 @@ if has("autocmd")
     autocmd FileType ruby setl path+=test/**
     autocmd FileType ruby setl path+=tests/**
     autocmd FileType ruby setl path+=spec/**
+    autocmd FileType ruby let ruby_operators=1
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
     autocmd BufWritePre * %s/\s\+$//e
   augroup END
@@ -715,7 +663,6 @@ function! CheckSyntax(...)
         redraw
         lclose
         echo "Syntax: 👍"
-        "echo "Syntax: ✓"
       else
         lf! "/tmp/errors.err"
         lopen
@@ -763,6 +710,15 @@ function! CiErrors(...)
   silent! execute 'cf errors.lst'
 endfunction
 
+function! Iexec(cmd)
+  let output = system(a:cmd)
+  execute "normal a" . output
+endfunction
+
+function! Itime(fmt)
+  execute "normal a" . strftime(a:fmt)
+endfunction
+
 command! -bar -nargs=1 OpenURL :!open <args>
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
@@ -779,15 +735,6 @@ command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256
 command! -bar Gadd :!git add %
 command! Gfix Gadd|silent! execute 'bd'
-
-function! Iexec(cmd)
-  let output = system(a:cmd)
-  execute "normal a" . output
-endfunction
-
-function! Itime(fmt)
-  execute "normal a" . strftime(a:fmt)
-endfunction
 
 " Abbreviations
 iabclear
