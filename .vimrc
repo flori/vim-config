@@ -427,15 +427,13 @@ if has("autocmd")
     autocmd FileType ruby setl path+=spec/**
     autocmd FileType ruby let ruby_operators=1
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
-    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup javascript
     autocmd!
     autocmd FileType javascript setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.js,.jsx
-    autocmd BufWritePre * %s/\s\+$//e
-  augroup end
+  augroup END
 
   augroup java
     autocmd!
@@ -450,25 +448,21 @@ if has("autocmd")
     autocmd FileType java let JavaBrowser_Sort_Type = "name"
     autocmd FileType java let JavaBrowser_Display_Prototype = 1
     autocmd FileType java let JavaBrowser_Use_SingleClick = 0
-    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup lisp
     autocmd!
     autocmd FileType lisp setl lisp autoindent
-    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup scheme
     autocmd!
     autocmd FileType scheme setl lisp autoindent
-    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup ocaml
     autocmd!
     autocmd FileType ocaml setl et sw=2 ts=2 autoindent
-    autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   augroup xml
@@ -520,7 +514,7 @@ if has("autocmd")
 
   au! BufRead,BufNewFile *.rl   set filetype=ragel
 
-  autocmd BufWritePre *.rb,*.rake,*.slim,*.haml,*.js,*.c,*.cpp,*.h :%s/\s\+$//e
+  autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
 end
 
 function! Find(...)
