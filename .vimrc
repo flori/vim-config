@@ -163,15 +163,13 @@ map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <leader>n :new <cfile><CR>
-vnoremap <leader>64 c<C-R>=system('base64', @")<CR><ESC>
-vnoremap <leader>46 c<C-R>=system('base64 -D', @")<CR><ESC>
+vnoremap <leader>b c<C-R>=system('base64', @")<CR><ESC>
+vnoremap <leader>B c<C-R>=system('base64 -D', @")<CR><ESC>
 
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
-map <silent> <leader>B :!brakeman2err -c<CR><ESC>,b
-map <silent> <leader>b :cexpr system("brakeman2err")<CR>:copen<CR>
 
 " Tweaks
 let g:go_version_warning=0
