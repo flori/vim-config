@@ -1,8 +1,6 @@
 " Flori's vimrc
 
 " General Settings
-"set autochdir
-"set wildmode=list:full
 set autoindent
 set autowrite
 set backspace=indent,eol,start
@@ -62,6 +60,7 @@ set ttyfast
 set viminfo='20,<50,s10,h,!
 set visualbell t_vb=
 set wildchar=<TAB>
+set wildmode=full
 set wildmenu
 set winminheight=0
 set wrap
@@ -96,6 +95,9 @@ hi DiffChange ctermfg=white ctermbg=202
 hi DiffText ctermfg=52 ctermbg=166
 hi DiffDelete ctermfg=white ctermbg=88
 let g:vim_json_syntax_conceal=0
+
+" Tweaks
+let g:go_version_warning=0
 
 " Browsing
 if has("browse")
@@ -149,12 +151,16 @@ let mapleader=","
 let maplocalleader=","
 " open another file in this files directory
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>t :TlistToggle<CR>
 map <leader>T :tabe <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>V :call CheckSyntax()<CR>
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>n :new <cfile><CR>
+vnoremap <leader>b c<C-R>=system('base64', @")<CR><ESC>
+vnoremap <leader>B c<C-R>=system('base64 -D', @")<CR><ESC>
+" Depending on my own tools
+map <leader>t :TlistToggle<CR>
+map <leader>V :call CheckSyntax()<CR>
 map <leader>h :call Symbolhash()<CR>
 map <leader>H :%call Symbolhash()<CR>
 map <leader>o :!discover -se<CR>
@@ -162,17 +168,40 @@ map <leader>O :!discover -sre<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
 map <leader>y :w !pbcopy<CR><CR>
-map <leader>n :new <cfile><CR>
-vnoremap <leader>b c<C-R>=system('base64', @")<CR><ESC>
-vnoremap <leader>B c<C-R>=system('base64 -D', @")<CR><ESC>
-
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
+map <leader>p :silent w<CR>:call ProbeLine()<CR>
+map <leader>P :silent w<CR>:call Probe()<CR>
+map <leader>c :call ProbeToggleCoverage()<CR>
+map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
+map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
+map <leader>E :call IrbEal()<CR>
+map <leader>g :call Grep()<CR>
+map <leader>d :call Remove()<CR>
+map <leader>D :call Remove('force')<CR>
+map <leader>/ :let @/=''<CR>
+map <leader>a :call AnsibleDecrypt()<CR>
+map <leader>G :call Grep(expand('<cword>'))<CR>
 
-" Tweaks
-let g:go_version_warning=0
+" Functions
+
+function! MakeFileExecutable()
+  checktime
+  execute 'au FileChangedShell ' . expand('%') . ' :echo'
+  call system('chmod a+x ' . expand('%'))
+  checktime
+  execute 'au! FileChangedShell ' . expand('%')
+endfunction
+
+function! MakeFileNonExecutable()
+  checktime
+  execute 'au FileChangedShell ' . expand('%') . ' :echo'
+  call system('chmod a-x ' . expand('%'))
+  checktime
+  execute 'au! FileChangedShell ' . expand('%')
+endfunction
 
 function! GetBufferList()
   redir =>buflist
@@ -256,35 +285,6 @@ function! AnsibleEncrypt()
     silent! n! %
   endif
 endfunction
-
-function! MakeFileExecutable()
-  checktime
-  execute 'au FileChangedShell ' . expand('%') . ' :echo'
-  call system('chmod a+x ' . expand('%'))
-  checktime
-  execute 'au! FileChangedShell ' . expand('%')
-endfunction
-
-function! MakeFileNonExecutable()
-  checktime
-  execute 'au FileChangedShell ' . expand('%') . ' :echo'
-  call system('chmod a-x ' . expand('%'))
-  checktime
-  execute 'au! FileChangedShell ' . expand('%')
-endfunction
-
-map <leader>p :silent w<CR>:call ProbeLine()<CR>
-map <leader>P :silent w<CR>:call Probe()<CR>
-map <leader>c :call ProbeToggleCoverage()<CR>
-map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
-map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
-map <leader>E :call IrbEal()<CR>
-map <leader>g :call Grep()<CR>
-map <leader>d :call Remove()<CR>
-map <leader>D :call Remove('force')<CR>
-map <leader>/ :let @/=''<CR>
-map <leader>a :call AnsibleDecrypt()<CR>
-map <leader>G :call Grep(expand('<cword>'))<CR>
 
 " Switch of search highlighting
 if has("fullscreen")
@@ -682,11 +682,6 @@ function! IrbEval()
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
-function! ToggleBlock()
-  y
-  call system("./toggle_block.rb '" . getreg('"') . "'")
-endfunction
-
 function! CiErrors(...)
   if a:0 == 0
     let branch = 'betterplace_master'
@@ -713,6 +708,7 @@ function! Itime(fmt)
   execute "normal a" . strftime(a:fmt)
 endfunction
 
+" Commands
 command! -bar -nargs=1 OpenURL :!open <args>
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
@@ -741,8 +737,7 @@ iabbrev I_TIME <ESC>:call Itime("%T")<CR>
 iabbrev I_M <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_C <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
-iabbrev I_CODE # encoding: utf-8
-iabbrev I_ENCODE # encoding: utf-8
+iabbrev I_CODE # vim: set ft=ruby et sw=2 ts=2 autoindent:
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
 iabbrev I_RUBOCOP # rubocop:disable
