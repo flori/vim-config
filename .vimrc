@@ -64,6 +64,7 @@ set wildmode=full
 set wildmenu
 set winminheight=0
 set wrap
+set path+=**
 if has("persistent_undo")
   set undofile
   if has("win32") || has("win64")
@@ -420,11 +421,6 @@ if has("autocmd")
     autocmd!
     autocmd FileType ruby setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
-    autocmd FileType ruby setl path+=ext/**
-    autocmd FileType ruby setl path+=lib/**
-    autocmd FileType ruby setl path+=test/**
-    autocmd FileType ruby setl path+=tests/**
-    autocmd FileType ruby setl path+=spec/**
     autocmd FileType ruby let ruby_operators=1
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
   augroup END
