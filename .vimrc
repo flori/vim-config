@@ -5,17 +5,13 @@ set autoindent
 set autowrite
 set backspace=indent,eol,start
 set backupskip=/tmp/*,/private/tmp/*
-if exists('&colorcolumn')
-  set colorcolumn=79
-end
 set clipboard=unnamed
-"set textwidth=80
 set clipboard=unnamed
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
 set encoding=utf8
 set errorfile=/tmp/errors.err
-set errorformat+=%f:%l
 set errorformat+=%E%f:%l
+set errorformat+=%f:%l
 set expandtab shiftwidth=2 tabstop=2
 set foldcolumn=0
 set formatoptions=cqrt
@@ -41,6 +37,7 @@ set nosmartcase
 set nosmartindent
 set nowrap
 set number
+set path+=**
 set ruler
 set shell=bash
 set shortmess=atIO
@@ -51,7 +48,6 @@ set smarttab
 set splitbelow
 set splitright
 set statusline=\ ☠\ %<%f\ ⚐\ %y%m%r%*\ ❑\ %n%=✎\ %(%l:%c\%)\ ⇨\ %P
-set swapsync="fsync"
 set tags=./tags,tags
 set termencoding=utf8
 set tildeop
@@ -60,11 +56,13 @@ set ttyfast
 set viminfo='20,<50,s10,h,!
 set visualbell t_vb=
 set wildchar=<TAB>
-set wildmode=full
 set wildmenu
+set wildmode=full
 set winminheight=0
 set wrap
-set path+=**
+if exists('&colorcolumn')
+  set colorcolumn=79
+end
 if has("persistent_undo")
   set undofile
   if has("win32") || has("win64")
@@ -87,7 +85,6 @@ colorscheme flori
 
 source $VIMRUNTIME/macros/matchit.vim
 
-" Syntax
 if has("syntax")
   syntax on
 end
@@ -113,10 +110,11 @@ if has("browse")
   let g:explUseSeparators=1    " Use separator lines
 end
 
+let g:netrw_banner=0
 let g:netrw_longlist=1
 let g:netrw_use_noswf= 0
 let g:netrw_hide=1
-let g:netrw_list_hidee='\..*\.sw[pon]$'
+let g:netrw_list_hide='\..*\.sw[pon]$'
 
 let g:rails_statusline=0
 
@@ -428,7 +426,7 @@ if has("autocmd")
   augroup javascript
     autocmd!
     autocmd FileType javascript setl et sw=2 ts=2 autoindent
-    autocmd FileType ruby setl suffixesadd=.js,.jsx
+    autocmd FileType javascript setl suffixesadd=.js,.jsx
   augroup END
 
   augroup java
@@ -724,6 +722,7 @@ command! Gfix Gadd|silent! execute 'bd'
 
 " Abbreviations
 iabclear
+iabbrev I_CODE # vim: set et sw=2 ts=2 autoindent:
 iabbrev I_MFG Mit freundlichen Grüssen<CR><CR>Florian Frank
 iabbrev I_VERSION <ESC>:call Iexec("tr -d '\n' <VERSION")<CR>
 iabbrev I_DATE <ESC>:call Itime("%F")<CR>
@@ -733,7 +732,6 @@ iabbrev I_TIME <ESC>:call Itime("%T")<CR>
 iabbrev I_M <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_C <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
-iabbrev I_CODE # vim: set ft=ruby et sw=2 ts=2 autoindent:
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
 iabbrev I_RUBOCOP # rubocop:disable
