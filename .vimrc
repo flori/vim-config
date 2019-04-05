@@ -187,14 +187,18 @@ map <leader>G :call Grep(expand('<cword>'))<CR>
 " Functions
 
 function! SetPath()
-  let output = system("discover -D")
-  if v:shell_error == 0
-    let lines = split(output, '\n')
-    for line in lines
-      execute 'set path+=' . line . '**'
-    endfor
-  else
+  if !filereadable('.utilsrc')
     set path+=**
+  else
+    let output = system("discover -D")
+    if v:shell_error == 0
+      let lines = split(output, '\n')
+      for line in lines
+        execute 'set path+=' . line . '**'
+      endfor
+    else
+      set path+=**
+    endif
   endif
 endfunction
 call SetPath()
