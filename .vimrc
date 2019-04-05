@@ -37,7 +37,6 @@ set nosmartcase
 set nosmartindent
 set nowrap
 set number
-set path+=**
 set ruler
 set shell=bash
 set shortmess=atIO
@@ -60,6 +59,7 @@ set wildmenu
 set wildmode=full
 set winminheight=0
 set wrap
+
 if exists('&colorcolumn')
   set colorcolumn=79
 end
@@ -185,6 +185,19 @@ map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 
 " Functions
+
+function! SetPath()
+  let output = system("discover -D")
+  if v:shell_error == 0
+    let lines = split(output, '\n')
+    for line in lines
+      execute 'set path+=' . line . '**'
+    endfor
+  else
+    set path+=**
+  endif
+endfunction
+call SetPath()
 
 function! MakeFileExecutable()
   checktime
