@@ -624,6 +624,16 @@ function! CreateTags()
   end
 endfunction
 
+function! CreateCSTags()
+  silent !create_cstags
+  redraw!
+  if v:shell_error == 0
+    echo "Tags created."
+  else
+    echo output
+  end
+endfunction
+
 function! PrintGivenRange() range
     echo "firstline ".a:firstline." lastline ".a:lastline
     " Do some more things
@@ -727,6 +737,7 @@ command! -nargs=* -complete=file Classify call Classify(<f-args>)
 command! -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
 command! -nargs=* -complete=file Declassify call Declassify(<f-args>)
 command! CreateTags call CreateTags()
+command! CreateCSTags call CreateCSTags()
 command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Edit(<f-args>)
