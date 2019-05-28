@@ -96,6 +96,10 @@ let g:vim_json_syntax_conceal=0
 
 " Tweaks
 let g:go_version_warning=0
+let g:go_fmt_autosave = 1
+let g:go_version_warning = 0
+let g:go_def_mode='godef'
+let g:go_metalinter_autosave = 0
 
 " Browsing
 if has("browse")
@@ -119,9 +123,6 @@ let g:netrw_list_hide='\..*\.sw[pon]$'
 let g:rails_statusline=0
 
 let g:Tlist_WinWidth=70
-
-let g:go_version_warning = 0
-let g:go_def_mode='godef'
 
 " CScope
 if has("cscope")
@@ -366,6 +367,12 @@ if has("autocmd")
     autocmd BufWritePost,FileWritePost *.av silent! call AnsibleEncrypt()
   augroup END
 
+  augroup gitcommit
+    autocmd!
+    autocmd FileType gitcommit setl spell spelllang=en_us
+    autocmd FileType gitcommit setl complete+=k
+  augroup END
+
   " Auto Command - Hooks
   augroup gzip
     autocmd!
@@ -505,6 +512,8 @@ if has("autocmd")
   augroup mutt
     autocmd!
     autocmd BufNewFile,BufRead mutt-* setl textwidth=72
+    autocmd BufNewFile,BufRead mutt-* setl spell spelllang=en_us
+    autocmd BufNewFile,BufRead mutt-* gitcommit setl complete+=k
   augroup END
 
   augroup qf
@@ -523,7 +532,7 @@ if has("autocmd")
     autocmd FileType slim setl wrap et sw=2 ts=2
   augroup END
 
-  au! BufRead,BufNewFile *.rl   set filetype=ragel
+  au! BufRead,BufNewFile *.rl set filetype=ragel
 
   autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
 end
