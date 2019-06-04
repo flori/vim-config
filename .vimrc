@@ -77,6 +77,9 @@ else
   set directory=/tmp
 end
 
+execute pathogen#infect()
+execute pathogen#helptags()
+
 filetype on
 filetype indent on
 filetype plugin on
@@ -139,12 +142,6 @@ if has("cscope")
   end
   set csverb
 end
-
-let g:pathogen_blacklist = []
-"call add(g:pathogen_blacklist, 'vim-go')
-
-execute pathogen#infect()
-execute pathogen#helptags()
 
 " Mappings
 let mapleader=","

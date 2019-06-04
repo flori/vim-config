@@ -97,3 +97,6 @@
 [submodule "vim-plugins/tagbar.git"]
 	path = vim-plugins/tagbar.git
 	url = https://github.com/majutsushi/tagbar.git
+[submodule "vim-plugins/vim-pathogen"]
+	path = vim-plugins/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen
