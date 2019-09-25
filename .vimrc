@@ -366,7 +366,6 @@ if has("autocmd")
 
   augroup gitcommit
     autocmd!
-    autocmd FileType gitcommit setl spell spelllang=en_us
     autocmd FileType gitcommit setl complete+=k
   augroup END
 
@@ -509,7 +508,6 @@ if has("autocmd")
   augroup mutt
     autocmd!
     autocmd BufNewFile,BufRead mutt-* setl textwidth=72
-    autocmd BufNewFile,BufRead mutt-* setl spell spelllang=en_us
     autocmd BufNewFile,BufRead mutt-* gitcommit setl complete+=k
   augroup END
 
