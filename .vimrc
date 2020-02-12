@@ -709,23 +709,6 @@ function! IrbEval()
   call system("irb_connect -e '" . getreg('"') . "' &")
 endfunction
 
-function! CiErrors(...)
-  if a:0 == 0
-    let branch = 'betterplace_master'
-  else
-    let branch = a:1
-  endif
-  if a:0 < 2
-    let build = ''
-  else
-    let build = a:2
-  endif
-  let cmd = "!rake ci:errors " . "JOB=" . branch . " BUILD=" . build . " OUTPUT=errors.lst"
-  silent! execute cmd
-  redraw!
-  silent! execute 'cf errors.lst'
-endfunction
-
 function! Iexec(cmd)
   let output = system(a:cmd)
   execute "normal a" . output
@@ -747,7 +730,6 @@ command! CreateCSTags call CreateCSTags()
 command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Edit(<f-args>)
-command! -nargs=* CiErrors call CiErrors(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256 -dates
