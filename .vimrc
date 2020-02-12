@@ -5,7 +5,9 @@ set autoindent
 set autowrite
 set backspace=indent,eol,start
 set backupskip=/tmp/*,/private/tmp/*
-set clipboard=unnamed
+if $TMUX == ''
+    set clipboard+=unnamed
+endif
 set complete=.,w,b,u,t
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
 set encoding=utf8
