@@ -100,3 +100,6 @@
 [submodule "vim-plugins/vim-pathogen"]
 	path = vim-plugins/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
+[submodule "vim-plugins/vim-bundler.git"]
+	path = vim-plugins/vim-bundler.git
+	url = https://github.com/tpope/vim-bundler.git
