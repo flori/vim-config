@@ -733,8 +733,6 @@ command! -nargs=* -complete=file Edit call Edit(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!openssl x509 -inform pem -subject -fingerprint -issuer -sha256 -dates
-command! -bar Gadd :!git add %
-command! Gfix Gadd|silent! execute 'bd'
 
 " Abbreviations
 iabclear
