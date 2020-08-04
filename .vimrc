@@ -58,7 +58,7 @@ set viminfo='20,<50,s10,h,!
 set visualbell t_vb=
 set wildchar=<TAB>
 set wildmenu
-set wildmode=full
+set wildmode=list:full
 set winminheight=0
 set wrap
 
