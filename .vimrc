@@ -195,7 +195,7 @@ function! SetPath()
     if v:shell_error == 0
       let lines = split(output, '\n')
       for line in lines
-        execute 'set path+="' . line . '**"'
+        execute 'set path+=' . fnameescape(line) . '**'
       endfor
       return
     endif
