@@ -109,3 +109,6 @@
 [submodule "vim-plugins/vim-sexp-mappings-for-regular-people.git"]
 	path = vim-plugins/vim-sexp-mappings-for-regular-people.git
 	url = https://github.com/tpope/vim-sexp-mappings-for-regular-people.git
+[submodule "vim-plugins/NrrwRgn"]
+	path = vim-plugins/NrrwRgn
+	url = https://github.com/chrisbra/NrrwRgn

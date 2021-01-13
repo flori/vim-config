@@ -62,6 +62,9 @@ set wildmode=list:full
 set winminheight=0
 set wrap
 
+" Allow original buffer to be modified for NrrwRgn plugin
+let g:nrrw_rgn_protect='n'
+
 if exists('&colorcolumn')
   set colorcolumn=79
 end
