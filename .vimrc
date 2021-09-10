@@ -104,10 +104,6 @@ let g:vim_json_syntax_conceal=0
 
 " Tweaks
 let g:go_version_warning=0
-let g:go_fmt_autosave = 1
-let g:go_version_warning = 0
-let g:go_def_mode='godef'
-let g:go_metalinter_autosave = 0
 
 " Browsing
 if has("browse")
