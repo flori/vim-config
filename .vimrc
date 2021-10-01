@@ -1,4 +1,4 @@
-" Flori's vimrc
+
 
 " General Settings
 set autoindent
@@ -527,6 +527,11 @@ if has("autocmd")
   augroup slim
     autocmd!
     autocmd FileType slim setl wrap et sw=2 ts=2
+  augroup END
+
+  augroup tf
+    autocmd!
+    autocmd BufWritePre *.tf :%!hclfmt
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
