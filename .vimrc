@@ -183,6 +183,12 @@ map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " Functions
 
 function! SetPath()
@@ -531,7 +537,7 @@ if has("autocmd")
 
   augroup tf
     autocmd!
-    autocmd BufWritePre *.tf :%!hclfmt
+    autocmd BufWritePre *.tf,*.tfvars :%!hclfmt
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
