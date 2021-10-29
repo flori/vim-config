@@ -308,6 +308,12 @@ function! AnsibleEncrypt()
   endif
 endfunction
 
+function PrettyTerraform()
+  let view = winsaveview()
+  silent %!hclfmt
+  call winrestview(view)
+endfunction
+
 " Switch of search highlighting
 if has("fullscreen")
   set fuoptions=maxhorz,maxvert
@@ -537,7 +543,7 @@ if has("autocmd")
 
   augroup tf
     autocmd!
-    autocmd BufWritePre *.tf,*.tfvars :%!hclfmt
+    autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
