@@ -118,12 +118,6 @@ if has("browse")
   let g:explUseSeparators=1    " Use separator lines
 end
 
-let g:netrw_banner=0
-let g:netrw_longlist=1
-let g:netrw_use_noswf= 0
-let g:netrw_hide=1
-let g:netrw_list_hide='\..*\.sw[pon]$'
-
 let g:rails_statusline=0
 
 let g:Tlist_WinWidth=70
