@@ -148,8 +148,8 @@ map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<
 map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>n :new <cfile><CR>
-vnoremap <leader>b c<C-R>=system('base64', @")<CR><ESC>
-vnoremap <leader>B c<C-R>=system('base64 -D', @")<CR><ESC>
+vnoremap <leader>b c<C-R>=system("tr -d '\n' \| base64", @")<CR><ESC>
+vnoremap <leader>B c<C-R>=system("base64 -D", @")<CR><ESC>
 " Depending on my own tools
 map <leader>t :TlistToggle<CR>
 map <leader>V :call CheckSyntax()<CR>
