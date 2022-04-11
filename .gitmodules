@@ -121,3 +121,6 @@
 [submodule "vim-plugins/vim-vinegar.git"]
 	path = vim-plugins/vim-vinegar.git
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "vim-plugins/vim-go.git"]
+	path = vim-plugins/vim-go.git
+	url = https://github.com/fatih/vim-go.git
