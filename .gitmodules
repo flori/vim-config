@@ -79,9 +79,6 @@
 [submodule "vim-plugins/github-vim.git"]
 	path = vim-plugins/github-vim.git
 	url = https://github.com/solars/github-vim.git
-[submodule "vim-plugins/vim-go"]
-	path = vim-plugins/vim-go
-	url = https://github.com/fatih/vim-go
 [submodule "vim-plugins/vim-jsx.git"]
 	path = vim-plugins/vim-jsx.git
 	url = https://github.com/mxw/vim-jsx.git
@@ -127,3 +124,6 @@
 [submodule "vim-plugins/vim-hcl.git"]
 	path = vim-plugins/vim-hcl.git
 	url = https://github.com/jvirtanen/vim-hcl.git
+[submodule "vim-plugins/vim-go.git"]
+	path = vim-plugins/vim-go.git
+	url = https://github.com/fatih/vim-go.git
