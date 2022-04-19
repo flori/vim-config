@@ -515,7 +515,7 @@ if has("autocmd")
   augroup mutt
     autocmd!
     autocmd BufNewFile,BufRead mutt-* setl textwidth=72
-    autocmd BufNewFile,BufRead mutt-* gitcommit setl complete+=k
+    autocmd BufNewFile,BufRead mutt-* setl complete+=k
   augroup END
 
   augroup qf
