@@ -10,8 +10,9 @@ set complete=.,w,b,u,t
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
 set encoding=utf8
 set errorfile=/tmp/errors.err
-set errorformat+=%E%f:%l
 set errorformat+=%f:%l
+set errorformat+=%E%f:%l
+set errorformat+=%f:%l:%c:%m
 set expandtab shiftwidth=2 tabstop=2
 set foldcolumn=0
 set formatoptions=cqrt
@@ -275,8 +276,6 @@ function! ProbeToggleCoverage()
 endfunction
 
 function! Errors()
-  set errorformat+=%f:%l
-  set errorformat+=%E%f:%l
   silent! execute 'cf errors.lst'
   silent! cwindow
 endfunction
@@ -301,7 +300,7 @@ function! AnsibleEncrypt()
   endif
 endfunction
 
-function PrettyTerraform()
+function! PrettyTerraform()
   let view = winsaveview()
   silent %!hclfmt
   call winrestview(view)
@@ -448,6 +447,10 @@ if has("autocmd")
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
+  augroup END
+
+  augroup yaml
+    autocmd BufWritePost *.yml,*.yaml call CheckSyntax()
   augroup END
 
   augroup javascript
@@ -703,6 +706,15 @@ function! CheckSyntax(...)
       lf! "/tmp/errors.err"
       lopen
     end
+  elseif &filetype == 'yaml'
+    call system("check-yaml " . file . " >/dev/null 2>/tmp/errors.err") " check errors
+    if v:shell_error == 0
+      redraw
+      echo "Syntax: 👍"
+    else
+      lf! "/tmp/errors.err"
+      lopen
+    endif
   elseif !empty(matchstr(file, '\.json$'))
     call system("json_check " . file)
     if v:shell_error == 0
@@ -711,8 +723,8 @@ function! CheckSyntax(...)
     else
       redraw
       echo "Syntax: 👎"
-    end
-  end
+    endif
+  endif
 endfunction
 
 function! IrbEval()
