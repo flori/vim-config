@@ -684,6 +684,7 @@ function! Remove(...)
 endfunction
 
 function! CheckSyntax(...)
+  lclose
   if a:0 == 1
     let file = expand(a:1)
   else
@@ -706,7 +707,7 @@ function! CheckSyntax(...)
       lf! "/tmp/errors.err"
       lopen
     end
-  elseif &filetype == 'yaml'
+  elseif &filetype == 'yaml' || &filetype == 'eruby.yaml'
     call system("check-yaml " . file . " >/dev/null 2>/tmp/errors.err") " check errors
     if v:shell_error == 0
       redraw
