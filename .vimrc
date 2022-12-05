@@ -167,12 +167,13 @@ map <silent> <leader>u :UndotreeToggle<CR>
 map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>c :call ProbeToggleCoverage()<CR>
+map <leader>d :call ProbeToggleDebugger()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
 map <leader>g :call Grep()<CR>
-map <leader>d :call Remove()<CR>
-map <leader>D :call Remove('force')<CR>
+map <leader>r :call Remove()<CR>
+map <leader>R :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
@@ -271,6 +272,17 @@ function! ProbeToggleCoverage()
     echo "Switching coverage on."
   else
     call system('probe -C START_SIMPLECOV=0')
+    echo "Switching coverage off."
+  endif
+endfunction
+
+function! ProbeToggleDebugger()
+  let result = system('probe -C DISABLE_DEBUGGER')
+  if result == "0\n" || result == "\n"
+    call system('probe -C DISABLE_DEBUGGER=1')
+    echo "Switching coverage on."
+  else
+    call system('probe -C DISABLE_DEBUGGER=0')
     echo "Switching coverage off."
   endif
 endfunction
