@@ -247,22 +247,30 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
+function ProbeExtraArgs()
+  let args = []
+  if exists('g:pa')
+    call add(args, g:pa)
+  endif
+  return args
+endfunction
+
 function! ProbeLine(...)
   execute 'w'
+  let p_args = ProbeExtraArgs()
   if &filetype == 'cucumber'
-    call system(join([ 'probe', '-t', 'cucumber', '-c', join([ expand('%'), line('.') ], ':') ], ' ') . ' &')
-  else
-    call system(join([ 'probe', '-c', join([ expand('%'), line('.') ], ':') ], ' ') . ' &')
+    call extend(p_args, [ '-t', 'cucumber' ])
   endif
+  call system(join([ 'probe' ] + p_args + [ '-c', join([ expand('%'), line('.') ], ':'), '&' ]))
 endfunction
 
 function! Probe(...)
   execute 'w'
+  let p_args = ProbeExtraArgs()
   if &filetype == 'cucumber'
-    call system('probe -c -t cucumber ' . expand('%') . ' &')
-  else
-    call system('probe -c ' . expand('%') . ' &')
+    call extend(p_args, [ '-t', 'cucumber' ])
   endif
+  call system(join([ 'probe' ] + p_args + [ '-c', expand('%') , '&' ]))
 endfunction
 
 function! ProbeToggleCoverage()
