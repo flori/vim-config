@@ -168,6 +168,7 @@ map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>c :call ProbeToggleCoverage()<CR>
 map <leader>d :call ProbeToggleDebugger()<CR>
+map <leader>D :call ProbeToggleDocumentation()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
@@ -248,11 +249,10 @@ function! ToggleList(bufname, pfx)
 endfunction
 
 function ProbeExtraArgs()
-  let args = []
-  if exists('g:pa')
-    call add(args, g:pa)
+  if !exists('g:pa')
+    let g:pa = []
   endif
-  return args
+  return g:pa
 endfunction
 
 function! ProbeLine(...)
@@ -277,10 +277,10 @@ function! ProbeToggleCoverage()
   let result = system('probe -C START_SIMPLECOV')
   if result == "0\n" || result == "\n"
     call system('probe -C START_SIMPLECOV=1')
-    echo "Switching coverage on."
+    echo 'Switching coverage on.'
   else
     call system('probe -C START_SIMPLECOV=0')
-    echo "Switching coverage off."
+    echo 'Switching coverage off.'
   endif
 endfunction
 
@@ -288,10 +288,24 @@ function! ProbeToggleDebugger()
   let result = system('probe -C DISABLE_DEBUGGER')
   if result == "0\n" || result == "\n"
     call system('probe -C DISABLE_DEBUGGER=1')
-    echo "Switching coverage on."
+    echo 'Switching coverage on.'
   else
     call system('probe -C DISABLE_DEBUGGER=0')
-    echo "Switching coverage off."
+    echo 'Switching coverage off.'
+  endif
+endfunction
+
+function! ProbeToggleDocumentation()
+  if !exists('g:pa')
+    let g:pa = []
+  endif
+  let l:i = index(g:pa, '-fd')
+  if l:i >= 0
+    call remove(g:pa, l:i)
+    echo 'Switching documentation formatter off.'
+  else
+    call add(g:pa, '-fd')
+    echo 'Switching documentation formatter on.'
   endif
 endfunction
 
