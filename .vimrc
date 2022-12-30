@@ -179,12 +179,6 @@ map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 " Functions
 
 function! SetPath()
@@ -288,10 +282,10 @@ function! ProbeToggleDebugger()
   let result = system('probe -C DISABLE_DEBUGGER')
   if result == "0\n" || result == "\n"
     call system('probe -C DISABLE_DEBUGGER=1')
-    echo 'Switching coverage on.'
+    echo 'Switching debugging off.'
   else
     call system('probe -C DISABLE_DEBUGGER=0')
-    echo 'Switching coverage off.'
+    echo 'Switching debugging on.'
   endif
 endfunction
 
