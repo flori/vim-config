@@ -698,7 +698,7 @@ function! Edit(...)
 endfunction
 
 function! Remove(...)
-  let answer = input('Really delete "' . expand('%') . '" (y/n)? ')
+  let answer = input('Really remove "' . expand('%') . '" (y/n)? ')
   if answer =~ "^[Yy]"
     call system('rm -f ' . expand('%p'))
     if a:0 == 1 && a:1 == 'force'

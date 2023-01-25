@@ -127,3 +127,6 @@
 [submodule "vim-plugins/vim-go.git"]
 	path = vim-plugins/vim-go.git
 	url = https://github.com/fatih/vim-go.git
+[submodule "vim-plugins/BlockDiff"]
+	path = vim-plugins/BlockDiff
+	url = https://github.com/vim-scripts/BlockDiff
