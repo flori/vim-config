@@ -130,3 +130,6 @@
 [submodule "vim-plugins/BlockDiff"]
 	path = vim-plugins/BlockDiff
 	url = https://github.com/vim-scripts/BlockDiff
+[submodule "vim-plugins/linediff.vim"]
+	path = vim-plugins/linediff.vim
+	url = https://github.com/AndrewRadev/linediff.vim
