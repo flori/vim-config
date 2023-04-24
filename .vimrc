@@ -148,8 +148,8 @@ map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>n :new <cfile><CR>
 vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
-vnoremap <leader>b c<C-R>=system("base64", @")<CR><ESC>
-vnoremap <leader>B c<C-R>=system("base64 -D", @")<CR><ESC>
+vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
+vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
 " Depending on my own tools
 map <leader>t :TlistToggle<CR>
 map <leader>V :call CheckSyntax()<CR>
@@ -477,10 +477,6 @@ if has("autocmd")
     autocmd BufWritePost *.rb,*.rake call CheckSyntax()
   augroup END
 
-  augroup yaml
-    autocmd BufWritePost *.yml,*.yaml call CheckSyntax()
-  augroup END
-
   augroup javascript
     autocmd!
     autocmd FileType javascript setl et sw=2 ts=2 autoindent
@@ -735,15 +731,6 @@ function! CheckSyntax(...)
       lf! "/tmp/errors.err"
       lopen
     end
-  elseif &filetype == 'yaml' || &filetype == 'eruby.yaml'
-    call system("check-yaml " . file . " >/dev/null 2>/tmp/errors.err") " check errors
-    if v:shell_error == 0
-      redraw
-      echo "Syntax: 👍"
-    else
-      lf! "/tmp/errors.err"
-      lopen
-    endif
   elseif !empty(matchstr(file, '\.json$'))
     call system("json_check " . file)
     if v:shell_error == 0
