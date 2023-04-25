@@ -167,8 +167,8 @@ map <silent> <leader>u :UndotreeToggle<CR>
 map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>c :call ProbeToggleCoverage()<CR>
-map <leader>b :call ProbeToggleDebugger()<CR>
-map <leader>B :call ProbeToggleDocumentation()<CR>
+map <leader>t :call ProbeToggleDebugger()<CR>
+map <leader>T :call ProbeToggleDocumentation()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>E :call IrbEal()<CR>
