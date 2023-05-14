@@ -9,4 +9,3 @@ then
   exit 1
 fi
 git submodule add --force "$url" "$target_dir"
-./install.sh

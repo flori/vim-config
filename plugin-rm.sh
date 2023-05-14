@@ -12,5 +12,4 @@ then
   exit 1
 fi
 git submodule deinit --force "$target_dir"
-rm -rf "$target_dir"
-#./install.sh
+git rm -rf "$target_dir"
