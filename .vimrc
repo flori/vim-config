@@ -178,6 +178,9 @@ map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 
 " Functions
 
