@@ -566,7 +566,7 @@ if has("autocmd")
 
   augroup tf
     autocmd!
-    autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
+    "autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
     autocmd FileType terraform set syntax=hcl
   augroup END
 
