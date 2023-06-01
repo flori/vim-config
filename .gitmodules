@@ -133,3 +133,6 @@
 [submodule "vim-plugins/linediff.vim"]
 	path = vim-plugins/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim
+[submodule "vim-plugins/vim-gitgutter.git"]
+	path = vim-plugins/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
