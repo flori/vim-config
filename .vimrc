@@ -142,7 +142,6 @@ let mapleader=","
 let maplocalleader=","
 " open another file in this files directory
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>T :tabe <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
@@ -180,7 +179,7 @@ map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
+nmap <leader>T :TagbarToggle<CR>
 
 " Functions
 
@@ -566,7 +565,7 @@ if has("autocmd")
 
   augroup tf
     autocmd!
-    "autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
+    autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
     autocmd FileType terraform set syntax=hcl
   augroup END
 
