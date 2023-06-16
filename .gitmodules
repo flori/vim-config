@@ -109,9 +109,6 @@
 [submodule "vim-plugins/NrrwRgn"]
 	path = vim-plugins/NrrwRgn
 	url = https://github.com/chrisbra/NrrwRgn
-[submodule "vim-plugins/tabular.git"]
-	path = vim-plugins/tabular.git
-	url = https://github.com/godlygeek/tabular.git
 [submodule "vim-plugins/vim-easy-align"]
 	path = vim-plugins/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align
