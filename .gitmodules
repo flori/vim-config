@@ -133,3 +133,6 @@
 [submodule "vim-plugins/vim-gitgutter.git"]
 	path = vim-plugins/vim-gitgutter.git
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim-plugins/ghcup.vim.git"]
+	path = vim-plugins/ghcup.vim.git
+	url = https://github.com/hasufell/ghcup.vim.git
