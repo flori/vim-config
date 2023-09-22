@@ -1,7 +1,7 @@
 set background=dark
 
 hi clear
-let g:colors_name = 'desert'
+let g:colors_name = 'flori'
 
 let s:t_Co = exists('&t_Co') && !has('gui_running') ? (&t_Co ?? 0) : -1
 
