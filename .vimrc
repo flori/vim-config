@@ -569,6 +569,16 @@ if has("autocmd")
     autocmd FileType terraform set syntax=hcl
   augroup END
 
+  augroup VimDiff
+    autocmd!
+    nmap g :diffget<CR>
+    nmap p :diffput<CR>
+    vmap g :diffget<CR>
+    vmap p :diffput<CR>
+    nmap n ]c
+    nmap N [c
+  augroup END
+
   au! BufRead,BufNewFile *.rl set filetype=ragel
 
   autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
