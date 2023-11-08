@@ -95,11 +95,21 @@ source $VIMRUNTIME/macros/matchit.vim
 if has("syntax")
   syntax on
 end
+let g:vim_json_syntax_conceal=0
+
+# vimdiff configuration
 hi DiffAdd ctermfg=white ctermbg=22
 hi DiffChange ctermfg=white ctermbg=202
 hi DiffText ctermfg=52 ctermbg=166
 hi DiffDelete ctermfg=white ctermbg=88
-let g:vim_json_syntax_conceal=0
+if &diff
+  nmap g :diffget<CR>
+  nmap p :diffput<CR>
+  vmap g :diffget<CR>
+  vmap p :diffput<CR>
+  nmap n ]c
+  nmap N [c
+endif
 
 " Tweaks
 let g:go_version_warning=0
@@ -567,16 +577,6 @@ if has("autocmd")
     autocmd!
     autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
     autocmd FileType terraform set syntax=hcl
-  augroup END
-
-  augroup VimDiff
-    autocmd!
-    nmap g :diffget<CR>
-    nmap p :diffput<CR>
-    vmap g :diffget<CR>
-    vmap p :diffput<CR>
-    nmap n ]c
-    nmap N [c
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
