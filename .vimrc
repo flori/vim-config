@@ -97,7 +97,7 @@ if has("syntax")
 end
 let g:vim_json_syntax_conceal=0
 
-# vimdiff configuration
+" vimdiff configuration
 hi DiffAdd ctermfg=white ctermbg=22
 hi DiffChange ctermfg=white ctermbg=202
 hi DiffText ctermfg=52 ctermbg=166
@@ -342,7 +342,7 @@ endfunction
 
 function! PrettyTerraform()
   let view = winsaveview()
-  silent %!hclfmt
+  silent %!terraform fmt -
   call winrestview(view)
 endfunction
 
