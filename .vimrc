@@ -168,6 +168,7 @@ map <leader>o :!discover -se<CR>
 map <leader>O :!discover -sre<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
+map <leader>F :call FuncHistory()<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
@@ -767,6 +768,10 @@ endfunction
 
 function! Itime(fmt)
   execute "normal a" . strftime(a:fmt)
+endfunction
+
+function! FuncHistory()
+  execute 'Git log -L :' . expand('<cWORD>') . ':' . expand('%')
 endfunction
 
 " Commands
