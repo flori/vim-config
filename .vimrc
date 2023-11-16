@@ -662,7 +662,7 @@ endfunction
 
 function! CamelUnderscore(...)
   let name = expand('<cWORD>')
-  let output = system('classify -t ' . name)
+  let output = system('classify -t -n 0 ' . name)
   execute "normal ciW" . output
 endfunction
 
