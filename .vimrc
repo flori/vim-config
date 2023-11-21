@@ -162,13 +162,13 @@ vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
 " Depending on my own tools
 map <leader>t :TlistToggle<CR>
 map <leader>V :call CheckSyntax()<CR>
-map <leader>h :call Symbolhash()<CR>
-map <leader>H :%call Symbolhash()<CR>
+map <leader>S :call Symbolhash()<CR>
 map <leader>o :!discover -se<CR>
 map <leader>O :!discover -sre<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>f :!echo %\|pbcopy<CR>
-map <leader>F :call FuncHistory()<CR>
+map <leader>h :call LinesHistory()<CR>
+map <leader>H :call FuncHistory()<CR>
 map <leader>y :w !pbcopy<CR><CR>
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>Q :call Errors()<CR>
@@ -772,6 +772,10 @@ endfunction
 
 function! FuncHistory()
   execute 'Git log -L :' . expand('<cWORD>') . ':' . expand('%')
+endfunction
+
+function! LinesHistory() range
+  execute 'Git log -L ' . a:firstline . ',' . a:lastline . ':' . expand('%')
 endfunction
 
 " Commands
