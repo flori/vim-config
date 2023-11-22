@@ -771,11 +771,11 @@ function! Itime(fmt)
 endfunction
 
 function! FuncHistory()
-  execute 'Git log -L :' . expand('<cWORD>') . ':' . expand('%')
+  execute 'Git log -L :' . expand('<cWORD>') . ':' . FugitivePath()
 endfunction
 
 function! LinesHistory() range
-  execute 'Git log -L ' . a:firstline . ',' . a:lastline . ':' . expand('%')
+  execute 'Git log -L ' . a:firstline . ',' . a:lastline . ':' . FugitivePath()
 endfunction
 
 " Commands
