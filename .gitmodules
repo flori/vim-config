@@ -136,3 +136,6 @@
 [submodule "vim-plugins/ghcup.vim.git"]
 	path = vim-plugins/ghcup.vim.git
 	url = https://github.com/hasufell/ghcup.vim.git
+[submodule "vim-plugins/fzf.vim"]
+	path = vim-plugins/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

@@ -61,6 +61,9 @@ set wildmode=list:full
 set winminheight=0
 set wrap
 
+set runtimepath^=~/.fzf
+set runtimepath^=~/.vim/bundle/fzf.vimset
+
 " Allow original buffer to be modified for NrrwRgn plugin
 let g:nrrw_rgn_protect='n'
 
@@ -166,7 +169,8 @@ map <leader>S :call Symbolhash()<CR>
 map <leader>o :!discover -se<CR>
 map <leader>O :!discover -sre<CR>
 map <leader>C :call CamelUnderscore()<CR>
-map <leader>f :!echo %\|pbcopy<CR>
+map <leader>f :Files<CR>
+map <leader>F :!echo %\|pbcopy<CR>
 map <leader>h :call LinesHistory()<CR>
 map <leader>H :call FuncHistory()<CR>
 map <leader>y :w !pbcopy<CR><CR>
