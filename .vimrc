@@ -164,7 +164,6 @@ vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
 vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
 " Depending on my own tools
 map <leader>t :TlistToggle<CR>
-map <leader>V :call CheckSyntax()<CR>
 map <leader>S :call Symbolhash()<CR>
 map <leader>o :!discover -se<CR>
 map <leader>O :!discover -sre<CR>
@@ -491,7 +490,6 @@ if has("autocmd")
     autocmd FileType ruby setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
-    autocmd BufWritePost *.rb,*.rake call CheckSyntax()
   augroup END
 
   augroup javascript
@@ -721,42 +719,6 @@ function! Remove(...)
     echo 'Done.'
   else
     redraw!
-  endif
-endfunction
-
-function! CheckSyntax(...)
-  lclose
-  if a:0 == 1
-    let file = expand(a:1)
-  else
-    silent w
-    let file = expand('%')
-  endif
-  if &filetype == 'ruby'
-    call system("ruby -c " . file . " 2>/tmp/errors.err") " check errors
-    if v:shell_error == 0
-      call system("ruby -wc " . file . " 2>/tmp/errors.err") " check warnings
-      if v:shell_error == 0
-        redraw
-        lclose
-        echo "Syntax: 👍"
-      else
-        lf! "/tmp/errors.err"
-        lopen
-      endif
-    else
-      lf! "/tmp/errors.err"
-      lopen
-    end
-  elseif !empty(matchstr(file, '\.json$'))
-    call system("json_check " . file)
-    if v:shell_error == 0
-      redraw
-      echo "Syntax: 👍"
-    else
-      redraw
-      echo "Syntax: 👎"
-    endif
   endif
 endfunction
 
