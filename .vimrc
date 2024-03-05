@@ -426,7 +426,6 @@ if has("autocmd")
     autocmd!
     autocmd FileType c setl sw=4 ts=4 cinoptions= formatoptions=cqrol cindent
   augroup END
-
   augroup perl
     autocmd!
     autocmd Filetype perl setl et sw=4 ts=4 autoindent
@@ -438,7 +437,9 @@ if has("autocmd")
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
     autocmd FileType ruby compiler ruby
-    autocmd FileType ruby map <F10> :w<CR>:echo trim(system("ruby -c " . expand("%")))<CR>
+    autocmd FileType ruby setl shellpipe=>\ %s\ 2>&1
+    autocmd FileType ruby setl makeprg=ruby\ -wc\ %
+    autocmd BufWritePost,FileWritePost * if &filetype == "ruby" | silent! make | cwindow | endif
   augroup END
 
   augroup javascript
