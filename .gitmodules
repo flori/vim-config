@@ -139,3 +139,6 @@
 [submodule "vim-plugins/fzf.vim"]
 	path = vim-plugins/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule "vim-plugins/conflict-marker.vim"]
+	path = vim-plugins/conflict-marker.vim
+	url = https://github.com/rhysd/conflict-marker.vim

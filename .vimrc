@@ -189,7 +189,6 @@ map <leader>g :call Grep()<CR>
 map <leader>d :call Remove()<CR>
 map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
-map <leader>a :call AnsibleDecrypt()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -324,26 +323,6 @@ function! Errors()
   silent! cwindow
 endfunction
 
-function! AnsibleDecrypt()
-  call cursor(1, 1)
-  execute ":1,$d"
-  silent! .!ansible-vault view %
-  silent! file %.av
-  silent! set filetype=av
-  echo "Content of ansible vault decrypted."
-endfunction
-
-function! AnsibleEncrypt()
-  if expand('%:e') == 'av'
-    silent! set filetype=ansible
-    silent! file %:r
-    silent! w!
-    silent! !ansible-vault >/dev/null 2>&1 encrypt %
-    silent! !rm -f %.av
-    silent! n! %
-  endif
-endfunction
-
 function! PrettyTerraform()
   let view = winsaveview()
   silent %!terraform fmt -
@@ -409,11 +388,6 @@ nnoremap ` '
 map Y y$
 
 if has("autocmd")
-  augroup av
-    autocmd!
-    autocmd BufWritePost,FileWritePost *.av silent! call AnsibleEncrypt()
-  augroup END
-
   augroup gitcommit
     autocmd!
     autocmd FileType gitcommit setl complete+=k
@@ -448,41 +422,14 @@ if has("autocmd")
     autocmd FileAppendPost *.bz2 !bzip2 -d <afile>:r
   augroup END
 
-  augroup tex
-    autocmd!
-    autocmd FileType tex map <buffer> <F1> <ESC>:silent !latex %<CR>
-    autocmd FileType tex map <buffer> <F2> <ESC>:silent !dvips `echo %\|sed -e 's/tex/dvi/'`<CR>
-    autocmd FileType tex map <buffer> <F3> <ESC><F1>:!xdvi -s 0 `echo %\|sed -e 's/tex/dvi/'` &<CR>
-    autocmd FileType tex map <buffer> <F4> <ESC><F1><F2>:silent !gv `echo %\|sed -e 's/tex/ps/'` &<CR>
-    autocmd FileType tex map <buffer> <F5> <ESC>:silent !pdflatex %<CR>
-    autocmd FileType tex map <buffer> <F6> <ESC><F1>:silent !acroread `echo %\|sed -e 's/tex/pdf/'`<CR>
-  augroup END
-
   augroup c
     autocmd!
     autocmd FileType c setl sw=4 ts=4 cinoptions= formatoptions=cqrol cindent
-    autocmd FileType c map <buffer> <F1> <ESC>:make<CR>
-    autocmd FileType c map <buffer> <F2> <ESC>:silent %!indent 2>/dev/null -kr -i 4<CR>
-    autocmd FileType c map <buffer> <F3> <ESC>:make clean<CR>
-    autocmd FileType c map <buffer> <F4> <ESC><Home>i/* <ESC><End>a */<ESC>
-  augroup END
-
-  augroup pascal
-    autocmd!
-    autocmd FileType pascal setl et st=2 sw=2 autoindent
-    autocmd FileType pascal map <buffer> <F1> <ESC>:!gpc -o `echo %\|sed -e 's/\.pas//'` %<CR>
-    autocmd FileType pascal map <buffer> <F4> <ESC><Home>i{ <ESC><End>a }<ESC>
   augroup END
 
   augroup perl
     autocmd!
     autocmd Filetype perl setl et sw=4 ts=4 autoindent
-    autocmd FileType perl map <buffer> <F1> <ESC>:w<CR><ESC>:!perl -c %<CR>
-    autocmd FileType perl map <buffer> <F2> <ESC>:w<CR><ESC>:!perl -Tc %<CR>
-    autocmd FileType perl map <buffer> <F3> <ESC>:w<CR><ESC>:.!perl -lne '/^(sub\s+\S+\s*\([^)]*\))\s*\{/ and print "$1;"' %<CR>
-    autocmd FileType perl map <buffer> <F4> <ESC>:w<CR><ESC>:%!perl -pe 's/(sub \w+ *)\(.*\) */$1/'<CR>
-    autocmd FileType perl map <buffer> <F5> <ESC><Home>i#<ESC>
-    autocmd FileType perl map <buffer> <F6> <ESC>:w<CR><ESC>:!perl -I lib -I cfg %<CR>
   augroup END
 
   augroup ruby
@@ -490,27 +437,14 @@ if has("autocmd")
     autocmd FileType ruby setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
+    autocmd FileType ruby compiler ruby
+    autocmd FileType ruby map <F10> :w<CR>:echo trim(system("ruby -c " . expand("%")))<CR>
   augroup END
 
   augroup javascript
     autocmd!
     autocmd FileType javascript setl et sw=2 ts=2 autoindent
     autocmd FileType javascript setl suffixesadd=.js,.jsx
-  augroup END
-
-  augroup java
-    autocmd!
-    autocmd FileType java setl cindent et sw=4 ts=4
-    autocmd FileType java map <buffer> <F1> <ESC>:w<CR>:!javac -deprecation %<CR>
-    autocmd FileType java map <buffer> <F2> <ESC>:w<CR>:!javac %<CR>
-    autocmd FileType java map <buffer> <F3> <ESC>:!rm `echo %\|sed -e 's/java/class/'`<CR>
-    autocmd FileType java map <buffer> <F4> <ESC><Home>i//<ESC>
-    autocmd FileType java map <buffer> <F5> <ESC>:w<CR><ESC>:!astyle -j %<CR>:n %<CR>
-    autocmd FileType java nnoremap <buffer> <silent> <F8> :JavaBrowser<CR>
-    autocmd FileType java let JavaBrowser_Ctags_Cmd = '/usr/bin/exuberant-ctags'
-    autocmd FileType java let JavaBrowser_Sort_Type = "name"
-    autocmd FileType java let JavaBrowser_Display_Prototype = 1
-    autocmd FileType java let JavaBrowser_Use_SingleClick = 0
   augroup END
 
   augroup lisp
@@ -532,15 +466,11 @@ if has("autocmd")
     autocmd!
     autocmd BufNewFile,BufRead *.jsf,*.jsp,*.babel,*.konfetti,*.tag,*.tld setl filetype=xml
     autocmd FileType xml setl et sw=2 ts=2 autoindent
-    autocmd FileType xml map <buffer> <F1> <ESC>:w<CR><ESC>:!tidy -xml -raw -e %<CR>
-    autocmd FileType xml map <buffer> <F2> <ESC>:silent %!tidy -xml -raw -i 2>/dev/null<CR>
   augroup END
 
   augroup html
     autocmd!
     autocmd FileType xml setl et sw=2 ts=2 autoindent
-    autocmd FileType html map <buffer> <F1> <ESC>:w<CR><ESC>:!tidy -e %<CR>
-    autocmd FileType html map <buffer> <F2> <ESC>:silent %!tidy -wrap 72 -iu 2>/dev/null<CR>
   augroup END
 
   augroup ino
@@ -774,4 +704,4 @@ iabbrev I_C <ESC>:call Iexec("classify -b " . expand('%'))<CR>
 iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
 iabbrev I_BYEBUG require 'byebug'; byebug
 iabbrev I_DEBUG require 'byebug'; byebug
-iabbrev I_RUBOCOP # rubocop:disable
+iabbrev I_RUBOCOP # rubocop:disable all
