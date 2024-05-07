@@ -439,6 +439,7 @@ if has("autocmd")
     autocmd FileType ruby compiler ruby
     autocmd FileType ruby setl shellpipe=>\ %s\ 2>&1
     autocmd FileType ruby setl makeprg=ruby\ -wc\ %
+    autocmd FileType rails setl makeprg=ruby\ -wc\ %
     autocmd BufWritePost,FileWritePost * if &filetype == "ruby" | silent! make | cwindow | endif
   augroup END
 
