@@ -101,9 +101,9 @@ end
 let g:vim_json_syntax_conceal=0
 
 " vimdiff configuration
-hi DiffAdd ctermfg=white ctermbg=22
-hi DiffChange ctermfg=white ctermbg=202
-hi DiffText ctermfg=52 ctermbg=166
+hi DiffText ctermfg=white ctermbg=244
+hi DiffChange ctermfg=white ctermbg=208
+hi DiffAdd ctermfg=white ctermbg=28
 hi DiffDelete ctermfg=white ctermbg=88
 if &diff
   nmap g :diffget<CR>

@@ -142,3 +142,6 @@
 [submodule "vim-plugins/conflict-marker.vim"]
 	path = vim-plugins/conflict-marker.vim
 	url = https://github.com/rhysd/conflict-marker.vim
+[submodule "vim-plugins/diffchar.vim"]
+	path = vim-plugins/diffchar.vim
+	url = https://github.com/rickhowe/diffchar.vim
