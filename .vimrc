@@ -37,7 +37,8 @@ set nopaste
 set nosmartcase
 set nosmartindent
 set nowrap
-set number
+set nonumber
+set norelativenumber
 set ruler
 set shell=bash
 set shortmess=atIO
