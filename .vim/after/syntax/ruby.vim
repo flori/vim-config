@@ -10,3 +10,4 @@ hi rubyBoolean ctermfg=210
 hi rubyPseudoVariable ctermfg=210
 hi Number ctermfg=249
 hi link rubySymbol Function
+hi link rubySymbolDelimiter Function
