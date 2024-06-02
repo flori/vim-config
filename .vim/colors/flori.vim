@@ -388,40 +388,6 @@ endif
 " Color: bgDiffC8    #5F87AF        67             darkblue
 " Color: bgDiffD8    #AF5FAF        133            darkmagenta
 
-" Ruby specials
-hi rubyInterpolation ctermfg=223
-hi rubyInstanceVariable ctermfg=196
-hi rubyClassVariable ctermfg=197
-hi rubyGlobalVariable ctermfg=magenta
-hi rubyEval ctermfg=darkred
-hi rubyBlockParameter ctermfg=164
-hi rubyBlockArgument ctermfg=164
-hi link rubyEscape              Character
-hi link rubySymbol              Function
-hi link rubyPseudoVariable      Special
-hi link rubyBoolean             Boolean
-hi link rubyPredefinedVariable  Special
-hi link rubyPredefinedConstant  Constant
-hi link rubyConstant            Constant
-hi link railsMethod             PreProc
-hi link rubyDefine              Keyword
-hi link rubyAccess              rubyMethod
-hi link rubyAttribute           rubyMethod
-hi link rubyException           rubyMethod
-hi link rubyInclude             Keyword
-hi link rubyStringDelimiter     rubyString
-hi link rubyRegexp              Regexp
-hi link rubyRegexpDelimiter     rubyRegexp
-hi link javascriptRegexpString  Regexp
-hi link javascriptNumber        Number
-hi link javascriptNull          Constant
-
-" Diffing
-hi DiffAdd ctermbg=34 ctermfg=white
-hi DiffChange ctermbg=166 ctermfg=white
-hi DiffText ctermbg=226 ctermfg=124
-hi DiffDelete ctermbg=160 ctermfg=white
-
 " Whitespaces
 hi ExtraWhitespace ctermbg=124
 match ExtraWhitespace /\s\+$/
