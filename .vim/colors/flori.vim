@@ -111,11 +111,11 @@ if s:t_Co >= 256
   hi Folded ctermfg=226 ctermbg=239 cterm=NONE
   hi Visual ctermfg=186 ctermbg=64 cterm=NONE
   hi VisualNOS ctermfg=186 ctermbg=81 cterm=NONE
-  hi LineNr ctermfg=226 ctermbg=NONE cterm=NONE
+  hi LineNr ctermfg=179 ctermbg=NONE cterm=NONE
   hi FoldColumn ctermfg=226 ctermbg=239 cterm=NONE
   hi CursorLine ctermfg=NONE ctermbg=241 cterm=NONE
   hi CursorColumn ctermfg=NONE ctermbg=241 cterm=NONE
-  hi CursorLineNr ctermfg=226 ctermbg=NONE cterm=bold
+  hi CursorLineNr ctermfg=179 ctermbg=241 cterm=bold
   hi QuickFixLine ctermfg=236 ctermbg=186 cterm=NONE
   hi SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
   hi Underlined ctermfg=111 ctermbg=NONE cterm=underline
