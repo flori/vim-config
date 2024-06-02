@@ -64,6 +64,11 @@ set wrap
 set runtimepath^=~/.fzf
 set runtimepath^=~/.vim/bundle/fzf.vimset
 
+" Set cursor shape dependant on mode
+let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
+let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
+let &t_SR	= "\<Esc>]1337;CursorShape=2\x7"
+
 " Allow original buffer to be modified for NrrwRgn plugin
 let g:nrrw_rgn_protect='n'
 
