@@ -329,6 +329,15 @@ function! Errors()
   silent! cwindow
 endfunction
 
+function! CheckRuby()
+  setl shellpipe=>\ %s\ 2>&1
+  setl makeprg=ruby\ -wc\ %
+  if &filetype == "ruby"
+    silent! make
+    silent! cwindow
+  endif
+endfunction
+
 function! PrettyTerraform()
   let view = winsaveview()
   silent %!terraform fmt -
@@ -443,10 +452,7 @@ if has("autocmd")
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
     autocmd FileType ruby compiler ruby
-    autocmd FileType ruby setl shellpipe=>\ %s\ 2>&1
-    autocmd FileType ruby setl makeprg=ruby\ -wc\ %
-    autocmd FileType rails setl makeprg=ruby\ -wc\ %
-    autocmd BufWritePost,FileWritePost * if &filetype == "ruby" | silent! make | cwindow | endif
+    autocmd BufWritePost,FileWritePost * call CheckRuby()
   augroup END
 
   augroup javascript
