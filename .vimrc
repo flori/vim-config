@@ -190,7 +190,7 @@ map <leader>t :call ProbeToggleDebugger()<CR>
 map <leader>T :call ProbeToggleDocumentation()<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
-map <leader>E :call IrbEal()<CR>
+map <leader>r :call Comment()<CR>
 map <leader>g :call Grep()<CR>
 map <leader>d :call Remove()<CR>
 map <leader>D :call Remove('force')<CR>
@@ -666,9 +666,15 @@ function! Remove(...)
   endif
 endfunction
 
-function! IrbEval()
-  y
-  call system("irb_connect -e '" . getreg('"') . "' &")
+function! Comment() range
+  execute join([ 'silent ', a:firstline, ',', a:lastline, 'y' ], '')
+  let output = system("OLLAMA_MODEL=codellama OLLAMA_SYSTEM='You are a YARD method commenter, you do only add comment lines and do not add or remove any lines of code' OLLAMA_PROMPT='Output a comment that can be inserted before the following ruby method using YARD style beginning with a hash character: " . getreg('"') . "' oc")
+  "let output = getreg('"')
+  "echo output
+  call setreg('"', output)
+  echo join([ 'normal ', a:firstline, 'G' ], '')
+  normal k
+  normal p
 endfunction
 
 function! Iexec(cmd)
