@@ -145,3 +145,6 @@
 [submodule "vim-plugins/diffchar.vim"]
 	path = vim-plugins/diffchar.vim
 	url = https://github.com/rickhowe/diffchar.vim
+[submodule "vim-plugins/ale"]
+	path = vim-plugins/ale
+	url = https://github.com/dense-analysis/ale

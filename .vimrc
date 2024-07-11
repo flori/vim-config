@@ -10,9 +10,6 @@ set complete=.,w,b,u,t
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words
 set encoding=utf8
 set errorfile=/tmp/errors.err
-set errorformat+=%f:%l
-set errorformat+=%E%f:%l
-set errorformat+=%f:%l:%c:%m
 set expandtab shiftwidth=2 tabstop=2
 set foldcolumn=0
 set formatoptions=cqrt
@@ -329,15 +326,6 @@ function! Errors()
   silent! cwindow
 endfunction
 
-function! CheckRuby()
-  setl shellpipe=>\ %s\ 2>&1
-  setl makeprg=ruby\ -wc\ %
-  if &filetype == "ruby"
-    silent! make
-    silent! cwindow
-  endif
-endfunction
-
 function! PrettyTerraform()
   let view = winsaveview()
   silent %!terraform fmt -
@@ -452,7 +440,6 @@ if has("autocmd")
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
     autocmd FileType ruby let ruby_operators=1
     autocmd FileType ruby compiler ruby
-    autocmd BufWritePost,FileWritePost * call CheckRuby()
   augroup END
 
   augroup javascript
