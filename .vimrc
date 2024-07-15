@@ -674,11 +674,11 @@ function! Itime(fmt)
 endfunction
 
 function! FuncHistory()
-  execute 'Git log -w -C -C -C -L :' . expand('<cWORD>') . ':' . FugitivePath()
+  execute 'Git log -w -C3 -L :' . expand('<cWORD>') . ':' . FugitivePath()
 endfunction
 
 function! LinesHistory() range
-  execute 'Git log -w -C -C- -C -L ' . a:firstline . ',' . a:lastline . ':' . FugitivePath()
+  execute 'Git log -w -C3 -L ' . a:firstline . ',' . a:lastline . ':' . FugitivePath()
 endfunction
 
 " Commands
