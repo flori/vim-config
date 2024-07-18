@@ -429,6 +429,7 @@ if has("autocmd")
     autocmd!
     autocmd FileType c setl sw=4 ts=4 cinoptions= formatoptions=cqrol cindent
   augroup END
+
   augroup perl
     autocmd!
     autocmd Filetype perl setl et sw=4 ts=4 autoindent
@@ -438,6 +439,7 @@ if has("autocmd")
     autocmd!
     autocmd FileType ruby setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
+    autocmd FileType ruby let b:ale_linters=[ 'ruby' ]
     autocmd FileType ruby let ruby_operators=1
     autocmd FileType ruby compiler ruby
   augroup END
