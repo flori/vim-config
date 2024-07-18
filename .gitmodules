@@ -34,9 +34,6 @@
 [submodule "vim-plugins/bufexplorer.git"]
 	path = vim-plugins/bufexplorer.git
 	url = https://github.com/c9s/bufexplorer.git
-[submodule "vim-plugins/Rename.git"]
-	path = vim-plugins/Rename.git
-	url = https://github.com/vim-scripts/Rename.git
 [submodule "vim-plugins/vimux.git"]
 	path = vim-plugins/vimux.git
 	url = https://github.com/vim-scripts/vimux.git
