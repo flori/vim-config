@@ -189,8 +189,6 @@ map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<
 map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>r :call Comment()<CR>
 map <leader>g :call Grep()<CR>
-map <leader>d :call Remove()<CR>
-map <leader>D :call Remove('force')<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 xmap ga <Plug>(EasyAlign)
@@ -639,20 +637,6 @@ function! Edit(...)
     let args = [ substitute(args[0], '!', dir, '') ]
   endif
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
-endfunction
-
-function! Remove(...)
-  let answer = input('Really remove "' . expand('%') . '" (y/n)? ')
-  if answer =~ "^[Yy]"
-    call system('rm -f ' . expand('%p'))
-    if a:0 == 1 && a:1 == 'force'
-      bd!
-    endif
-    redraw!
-    echo 'Done.'
-  else
-    redraw!
-  endif
 endfunction
 
 function! Comment() range
