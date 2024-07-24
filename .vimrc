@@ -191,6 +191,7 @@ map <leader>r :call Comment()<CR>
 map <leader>g :call Grep()<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
+map <leader>m :.!git dfc\|commit_message<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 nmap <leader>T :TagbarToggle<CR>
