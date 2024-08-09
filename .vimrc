@@ -67,6 +67,9 @@ set runtimepath^=~/.vim/bundle/fzf.vimset
 " let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
 " let &t_SR	= "\<Esc>]1337;CursorShape=2\x7"
 
+" Set ale linters
+let g:ale_linters={ 'ruby': [ 'ruby' ], 'python': [] }
+
 " Allow original buffer to be modified for NrrwRgn plugin
 let g:nrrw_rgn_protect='n'
 
@@ -438,7 +441,6 @@ if has("autocmd")
     autocmd!
     autocmd FileType ruby setl et sw=2 ts=2 autoindent
     autocmd FileType ruby setl suffixesadd=.rb,.h,.c
-    autocmd FileType ruby let b:ale_linters=[ 'ruby' ]
     autocmd FileType ruby let ruby_operators=1
     autocmd FileType ruby compiler ruby
   augroup END
