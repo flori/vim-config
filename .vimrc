@@ -162,7 +162,6 @@ let maplocalleader=","
 "map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>C :call CamelUnderscore()<CR>
-map <leader>c :w !pbcopy<CR>
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>F :!echo %\|pbcopy<CR>
 map <leader>f :Files<CR>
@@ -183,7 +182,6 @@ map <leader>S :call Symbolhash()<CR>
 map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>t :TlistToggle<CR>
 map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>y :w !pbcopy<CR><CR>
 map <silent> <leader>Q :call Errors()<CR>
 map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 map <silent> <leader>u :UndotreeToggle<CR>
@@ -330,35 +328,22 @@ function! PrettyTerraform()
   call winrestview(view)
 endfunction
 
-" Switch of search highlighting
-if has("fullscreen")
-  set fuoptions=maxhorz,maxvert
-  function! Fullscreen()
-    if &fullscreen == "1"
-      set nofullscreen
-    else
-      set fullscreen
-    end
-  endfunction
-  map <silent> <F11> :call Cfullscreen()<CR>
-  if has("gui_mac")  || has("gui_macvim")
-    map <silent> <D-Enter> :call Cfullscreen()<CR>
-  end
-  " au GUIEnter * set fullscreen
-end
+" F-Keys
+noremap <F2> :TagbarToggle<CR>
 
 " Switch Windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+noremap <C-H> <C-W><C-H>
 
-" Don't use these for navigation navigation keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+" Resize Windows
+noremap <Up> <C-W>+
+noremap <Down> <C-W>-
+noremap <Left> <C-W>>
+noremap <Right> <C-W><
 
+" Disable
 noremap <Ins> <Nop>
 noremap <End> <Nop>
 noremap <Home> <Nop>
@@ -368,15 +353,6 @@ noremap <PageDown> <Nop>
 noremap <C-A> <Nop>
 noremap <C-X> <Nop>
 
-" Navigate command line
-cnoremap <C-0> <Home>
-cnoremap <C-^> <Home>
-cnoremap <C-$> <End>
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
-
 " Moving text objects left and right
 vnoremap < <gv
 vnoremap > >gv
@@ -385,8 +361,7 @@ vnoremap > >gv
 nnoremap ' `
 nnoremap ` '
 
-" yank to eol similar to D
-map Y y$
+map Y :silent w !pbcopy<CR>
 
 if has("autocmd")
   augroup gitcommit
