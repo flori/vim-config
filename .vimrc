@@ -159,45 +159,41 @@ end
 " Mappings
 let mapleader=","
 let maplocalleader=","
-" open another file in this files directory
+"map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>/ :let @/=''<CR>
+map <leader>C :call CamelUnderscore()<CR>
+map <leader>c :w !pbcopy<CR>
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>F :!echo %\|pbcopy<CR>
+map <leader>f :Files<CR>
+map <leader>g :call Grep()<CR>
+map <leader>G :call Grep(expand('<cword>'))<CR>
+map <leader>H :call FuncHistory()<CR>
+map <leader>h :call LinesHistory()<CR>
+map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
+map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
+map <leader>m :.!git dfc\|commit_message<CR>
 map <leader>n :new <cfile><CR>
-vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
-vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
-vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
-" Depending on my own tools
-map <leader>t :TlistToggle<CR>
-map <leader>S :call Symbolhash()<CR>
 map <leader>o :!discover -se<CR>
 map <leader>O :!discover -sre<CR>
-map <leader>C :call CamelUnderscore()<CR>
-map <leader>f :Files<CR>
-map <leader>F :!echo %\|pbcopy<CR>
-map <leader>h :call LinesHistory()<CR>
-map <leader>H :call FuncHistory()<CR>
-map <leader>y :w !pbcopy<CR><CR>
-map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
-map <silent> <leader>Q :call Errors()<CR>
-map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
-map <silent> <leader>u :UndotreeToggle<CR>
-map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
-map <leader>c :call ProbeToggleCoverage()<CR>
-map <leader>t :call ProbeToggleDebugger()<CR>
-map <leader>T :call ProbeToggleDocumentation()<CR>
-map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
-map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
+map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>r :call Comment()<CR>
-map <leader>g :call Grep()<CR>
-map <leader>/ :let @/=''<CR>
-map <leader>G :call Grep(expand('<cword>'))<CR>
-map <leader>m :.!git dfc\|commit_message<CR>
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+map <leader>S :call Symbolhash()<CR>
+map <leader>s :split <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>t :TlistToggle<CR>
+map <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>y :w !pbcopy<CR><CR>
+map <silent> <leader>Q :call Errors()<CR>
+map <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
+map <silent> <leader>u :UndotreeToggle<CR>
+map <silent> <leader>w :call ToggleList("Location List", 'l')<CR>
 nmap <leader>T :TagbarToggle<CR>
+nmap ga <Plug>(EasyAlign)
+vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
+vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
+vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
+xmap ga <Plug>(EasyAlign)
 
 " Functions
 
@@ -324,8 +320,8 @@ function! ProbeToggleDocumentation()
 endfunction
 
 function! Errors()
-  silent! execute 'cf errors.lst'
-  silent! cwindow
+  execute 'cf errors.lst'
+  execute 'copen'
 endfunction
 
 function! PrettyTerraform()
@@ -642,13 +638,12 @@ function! Edit(...)
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
 endfunction
 
-function! Comment() range
-  execute join([ 'silent ', a:firstline, ',', a:lastline, 'y' ], '')
-  let output = system("OLLAMA_MODEL=codellama OLLAMA_SYSTEM='You are a YARD method commenter, you do only add comment lines and do not add or remove any lines of code' OLLAMA_PROMPT='Output a comment that can be inserted before the following ruby method using YARD style beginning with a hash character: " . getreg('"') . "' oc")
-  "let output = getreg('"')
-  "echo output
+function! Comment()
+  let pos = getpos('.')
+  let line = pos[1]
+  execute "w"
+  let output = system('~/bin/code_comment ' . expand('%') . ':' . line)
   call setreg('"', output)
-  echo join([ 'normal ', a:firstline, 'G' ], '')
   normal k
   normal p
 endfunction
