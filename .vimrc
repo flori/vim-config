@@ -617,7 +617,7 @@ function! Comment()
   let pos = getpos('.')
   let line = pos[1]
   execute "w"
-  let output = system('~/bin/code_comment ' . expand('%') . ':' . line)
+  let output = system('code_comment ' . expand('%') . ':' . line)
   call setreg('"', output)
   normal k
   normal p
