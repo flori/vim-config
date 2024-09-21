@@ -362,6 +362,7 @@ nnoremap ' `
 nnoremap ` '
 
 map Y :silent w !pbcopy<CR>
+map O :silent .!ollama_cli<CR>
 
 if has("autocmd")
   augroup gitcommit
