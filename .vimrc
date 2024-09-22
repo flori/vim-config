@@ -62,6 +62,26 @@ set wrap
 set runtimepath^=~/.fzf
 set runtimepath^=~/.vim/bundle/fzf.vimset
 
+let g:fzf_colors =
+\ { 'fg':         ['fg', 'Normal'],
+  \ 'bg':         ['bg', 'Normal'],
+  \ 'preview-bg': ['bg', 'NormalFloat'],
+  \ 'hl':         ['fg', 'Comment'],
+  \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':        ['fg', 'Statement'],
+  \ 'info':       ['fg', 'PreProc'],
+  \ 'border':     ['fg', 'Ignore'],
+  \ 'prompt':     ['fg', 'Conditional'],
+  \ 'pointer':    ['fg', 'Exception'],
+  \ 'marker':     ['fg', 'Keyword'],
+  \ 'spinner':    ['fg', 'Label'],
+  \ 'header':     ['fg', 'Comment'] }
+
+function! FZFOptions()
+    echo fzf#wrap()['options']
+endfunction
+
 " Set cursor shape dependant on mode (doesn't work in tmux)
 " let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
 " let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
