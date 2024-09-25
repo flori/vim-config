@@ -342,12 +342,6 @@ function! Errors()
   execute 'copen'
 endfunction
 
-function! PrettyTerraform()
-  let view = winsaveview()
-  silent %!terraform fmt -
-  call winrestview(view)
-endfunction
-
 " F-Keys
 noremap <F2> :TagbarToggle<CR>
 
@@ -504,8 +498,7 @@ if has("autocmd")
 
   augroup tf
     autocmd!
-    autocmd BufWritePre *.tf,*.tfvars call PrettyTerraform()
-    autocmd FileType terraform set syntax=hcl
+    autocmd BufWritePre *.tf,*.tfvars TerraformFmt
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel

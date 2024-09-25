@@ -145,3 +145,6 @@
 [submodule "vim-plugins/vim-eunuch.git"]
 	path = vim-plugins/vim-eunuch.git
 	url = https://github.com/tpope/vim-eunuch.git
+[submodule "vim-plugins/vim-terraform.git"]
+	path = vim-plugins/vim-terraform.git
+	url = https://github.com/hashivim/vim-terraform.git
