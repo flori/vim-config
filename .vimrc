@@ -179,7 +179,7 @@ end
 " Mappings
 let mapleader=","
 let maplocalleader=","
-"map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
+map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
