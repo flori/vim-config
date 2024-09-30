@@ -148,3 +148,6 @@
 [submodule "vim-plugins/vim-terraform.git"]
 	path = vim-plugins/vim-terraform.git
 	url = https://github.com/hashivim/vim-terraform.git
+[submodule "vim-plugins/vim-fuzzy-stash.git"]
+	path = vim-plugins/vim-fuzzy-stash.git
+	url = https://github.com/aacunningham/vim-fuzzy-stash.git
