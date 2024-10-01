@@ -183,7 +183,7 @@ map <leader>c :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>/ :let @/=''<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-map <leader>F :!echo %\|pbcopy<CR>
+map <leader>F :!echo "%:p"\|pbcopy<CR><C-l>
 map <leader>f :Files<CR>
 map <leader>g :call Grep()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
@@ -193,8 +193,6 @@ map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
 map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>m :.!git dfc\|commit_message<CR>
 map <leader>n :new <cfile><CR>
-map <leader>o :!discover -se<CR>
-map <leader>O :!discover -sre<CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
 map <leader>p :silent w<CR>:call ProbeLine()<CR>
 map <leader>r :call Comment()<CR>
@@ -212,6 +210,8 @@ vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
 vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
 vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
 xmap ga <Plug>(EasyAlign)
+map <leader>y :silent w !pbcopy<CR>
+map <leader>o :silent .!ollama_cli<CR>
 
 " Functions
 
@@ -374,9 +374,6 @@ vnoremap > >gv
 " Marks switch them
 nnoremap ' `
 nnoremap ` '
-
-map Y :silent w !pbcopy<CR>
-map O :silent .!ollama_cli<CR>
 
 if has("autocmd")
   augroup gitcommit
