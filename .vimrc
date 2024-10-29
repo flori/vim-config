@@ -85,7 +85,7 @@ endfunction
 " Set cursor shape dependant on mode (doesn't work in tmux)
 " let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
 " let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
-" let &t_SR	= "\<Esc>]1337;CursorShape=2\x7"
+" let &t_SR = "\<Esc>]1337;CursorShape=2\x7"
 
 " Set ale linters
 let g:ale_linters={ 'ruby': [ 'ruby' ], 'python': [] }
@@ -501,6 +501,7 @@ if has("autocmd")
   au! BufRead,BufNewFile *.rl set filetype=ragel
 
   autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
+  autocmd BufWritePre Rakefile,.vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h,*.md :retab
 end
 
 function! Find(...)
