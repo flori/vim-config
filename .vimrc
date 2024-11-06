@@ -211,7 +211,7 @@ vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
 vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
 xmap ga <Plug>(EasyAlign)
 map <leader>y :silent w !pbcopy<CR>
-map <leader>o :silent .!ollama_cli<CR>
+map <leader>o :call OllamaCli(@*)<CR>
 
 " Functions
 
@@ -340,6 +340,13 @@ endfunction
 function! Errors()
   execute 'cf errors.lst'
   execute 'copen'
+endfunction
+
+function! OllamaCli(input)
+  let response = system("ollama_cli", a:input)
+  execute 'new'
+  call append(0, split(response, "\n"))
+  call cursor(1,1)
 endfunction
 
 " F-Keys
