@@ -63,23 +63,23 @@ set runtimepath^=~/.fzf
 set runtimepath^=~/.vim/bundle/fzf.vimset
 
 let g:fzf_colors =
-\ { 'fg':         ['fg', 'Normal'],
-  \ 'bg':         ['bg', 'Normal'],
-  \ 'preview-bg': ['bg', 'NormalFloat'],
-  \ 'hl':         ['fg', 'Comment'],
-  \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':        ['fg', 'Statement'],
-  \ 'info':       ['fg', 'PreProc'],
-  \ 'border':     ['fg', 'Ignore'],
-  \ 'prompt':     ['fg', 'Conditional'],
-  \ 'pointer':    ['fg', 'Exception'],
-  \ 'marker':     ['fg', 'Keyword'],
-  \ 'spinner':    ['fg', 'Label'],
-  \ 'header':     ['fg', 'Comment'] }
+      \ { 'fg':         ['fg', 'Normal'],
+      \ 'bg':         ['bg', 'Normal'],
+      \ 'preview-bg': ['bg', 'NormalFloat'],
+      \ 'hl':         ['fg', 'Comment'],
+      \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':        ['fg', 'Statement'],
+      \ 'info':       ['fg', 'PreProc'],
+      \ 'border':     ['fg', 'Ignore'],
+      \ 'prompt':     ['fg', 'Conditional'],
+      \ 'pointer':    ['fg', 'Exception'],
+      \ 'marker':     ['fg', 'Keyword'],
+      \ 'spinner':    ['fg', 'Label'],
+      \ 'header':     ['fg', 'Comment'] }
 
 function! FZFOptions()
-    echo fzf#wrap()['options']
+  echo fzf#wrap()['options']
 endfunction
 
 " Set cursor shape dependant on mode (doesn't work in tmux)
@@ -162,16 +162,16 @@ let g:Tlist_WinWidth=70
 
 " CScope
 if has("cscope")
-"  set csprg=/usr/local/bin/cscope
+  "  set csprg=/usr/local/bin/cscope
   set cscopetagorder=0
   set cscopetag
   set nocsverb
   " add any database in current directory
   if filereadable("cscope.out")
-      cs add cscope.out
+    cs add cscope.out
   " else add database pointed to by environment
   elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
+    cs add $CSCOPE_DB
   end
   set csverb
 end
@@ -212,6 +212,7 @@ vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| t
 xmap ga <Plug>(EasyAlign)
 map <leader>y :silent w !pbcopy<CR>
 map <leader>o :call OllamaCli(@*)<CR>
+map <F3> :call TogglePaste()<CR>
 
 " Functions
 
@@ -265,14 +266,26 @@ function! ToggleList(bufname, pfx)
     endif
   endfor
   if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
+    echohl ErrorMsg
+    echo "Location List is Empty."
+    return
   endif
   let winnr = winnr()
   exec(a:pfx.'open')
   if winnr() != winnr
     wincmd p
+  endif
+endfunction
+
+function!  TogglePaste()
+  if &paste
+    set nopaste
+    set et ts=2 sw=2
+    retab
+  else
+    set paste
+    set et ts=2 sw=2
+    retab
   endif
 endfunction
 
