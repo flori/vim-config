@@ -356,7 +356,7 @@ function! Errors()
 endfunction
 
 function! OllamaCli(input)
-  let response = system("ollama_cli", a:input)
+  let response = system('ollama_cli -M "{\"num_ctx\":16384}"', a:input)
   execute 'new'
   call append(0, split(response, "\n"))
   call cursor(1,1)
