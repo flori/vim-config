@@ -687,7 +687,7 @@ command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Edit(<f-args>)
 command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
-command! -range SSLCertInfo <line1>,<line2> :!sed 's/ *//' | tee >(openssl x509 -inform pem -subject -fingerprint -issuer -sha256 -dates) | cat
+command! -range SSLCertInfo <line1>,<line2> :!sed 's/ *//' | tee >(openssl x509 -inform pem -subject -ext subjectAltName -fingerprint -issuer -sha256 -dates) | cat
 command! ProbeToggleCoverage call ProbeToggleCoverage()
 command! ProbeToggleDebugger call ProbeToggleDebugger()
 
