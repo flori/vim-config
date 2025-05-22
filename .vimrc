@@ -211,6 +211,7 @@ vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
 vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
 xmap ga <Plug>(EasyAlign)
 map <leader>y :silent w !pbcopy<CR>
+map <leader>o :<C-U>call OllamaChatSend(@*)<CR>
 map <leader>O :<C-U>call OllamaCli(@*)<CR>
 map <F3> :call TogglePaste()<CR>
 
@@ -353,6 +354,11 @@ endfunction
 function! Errors()
   execute 'cf errors.lst'
   execute 'copen'
+endfunction
+
+function! OllamaChatSend(input)
+  let input = "Take note of the following code snippet (" . &filetype . ") **AND** await further instructions:\n\n```\n" . a:input . "\n```\n"
+  call system('ollama_chat_send', input)
 endfunction
 
 function! OllamaCli(input)
