@@ -362,10 +362,10 @@ function! OllamaChatSend(input)
 endfunction
 
 function! OllamaCli(input)
-  let response = system('ollama_cli -M "{\"num_ctx\":16384}"', a:input)
+  let response = systemlist('ollama_cli -M "{\"num_ctx\":16384}"', a:input)
   execute 'new'
   execute 'set ft=markdown'
-  call append(0, split(response, "\n"))
+  call append(0, response)
   call cursor(1,1)
 endfunction
 
