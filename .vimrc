@@ -184,13 +184,12 @@ map <leader>/ :let @/=''<CR>
 map <leader>C :call CamelUnderscore()<CR>
 map <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
 map <leader>F :!echo "%:p"\|pbcopy<CR><C-l>
+map <leader>i :!echo "/import %:p"\|ollama_chat_send -t<CR><C-l>
 map <leader>f :Files<CR>
 map <leader>g :call Grep()<CR>
 map <leader>G :call Grep(expand('<cword>'))<CR>
 map <leader>H :call FuncHistory()<CR>
 map <leader>h :call LinesHistory()<CR>
-map <leader>L :silent w<CR>:call system('irb_connect -e "reload!"')<CR>
-map <leader>l :silent w<CR>:call system('irb_connect -l ' . expand('%') . ' &')<CR>
 map <leader>m :.!git dfc\|commit_message<CR>
 map <leader>n :new <cfile><CR>
 map <leader>P :silent w<CR>:call Probe()<CR>
@@ -212,7 +211,8 @@ vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| t
 xmap ga <Plug>(EasyAlign)
 map <leader>y :silent w !pbcopy<CR>
 map <leader>o :<C-U>call OllamaChatSend(@*)<CR>
-map <leader>O :<C-U>call OllamaCli(@*)<CR>
+map <leader>O :<C-U>call OllamaChatSendWithResponse(@*)<CR>
+map <leader>d :<C-U>call OllamaCli(@*)<CR>
 map <F3> :call TogglePaste()<CR>
 
 " Functions
@@ -367,6 +367,22 @@ function! OllamaCli(input)
   execute 'set ft=markdown'
   call append(0, response)
   call cursor(1,1)
+endfunction
+
+function! OllamaChatSend(input)
+  let input = "Take note of the following code snippet (" . &filetype . ") **AND** await further instructions:\n\n```\n" . a:input . "\n```\n"
+  call system('ollama_chat_send', input)
+endfunction
+
+function! OllamaChatSendWithResponse(input)
+  let output = systemlist('bundle exec ruby -I lib ./bin/ollama_chat_send -r', a:input)
+  if len(output) == 0
+    echo "Ollama Chat returned an empty response."
+  else
+    let pos = getpos('.')
+    let line = pos[1] - 1
+    call append(line, output)
+  endif
 endfunction
 
 " F-Keys
