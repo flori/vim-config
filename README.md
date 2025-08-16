@@ -61,8 +61,8 @@ to the [main configuration file](./.vimrc).
 - Git for plugin management
 - FZF for enhanced search capabilities
 - External tools from Ruby gems:
-  - `utils` gem: `discover`, `create_tags`, `create_cstags`, `edit`, `probe`, `classify`, `code_comment`
-  - `ollama_chat` gem: `ollama_chat_send` for Ollama integration
+  - [`utils`](https://github.com/flori/utils) gem: `discover`, `create_tags`, `create_cstags`, `edit`, `probe`, `classify`, `code_comment`
+  - [`ollama_chat`](https://github.com/flori/ollama_chat) gem: `ollama_chat_send` for Ollama integration
 
 ## 🛠️ Plugin Management
 
