@@ -7,9 +7,9 @@ git submodule init
 git submodule update
 for plugin in vim-plugins/*/
 do
-  cd "$plugin"
-  echo Pulling $plugin
+  pushd "$plugin" >/dev/null || continue
+  echo "Pulling $plugin"
   git checkout master
   git pull
-  cd >/dev/null -
+  popd >/dev/null || continue
 done
