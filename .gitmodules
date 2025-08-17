@@ -154,3 +154,6 @@
 [submodule "vim-plugins/context.vim"]
 	path = vim-plugins/context.vim
 	url = https://github.com/wellle/context.vim
+[submodule "vim-plugins/yaml-revealer"]
+	path = vim-plugins/yaml-revealer
+	url = https://github.com/Einenlum/yaml-revealer
