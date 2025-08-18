@@ -831,8 +831,8 @@ iabbrev I_MFG Mit freundlichen Grüssen<CR><CR>Florian Frank
 iabbrev I_DATE <ESC>:call Itime("%F")<CR>
 iabbrev I_DATETIME <ESC>:call Itime("%F %T")<CR>
 iabbrev I_TIME <ESC>:call Itime("%T")<CR>
-iabbrev I_M <ESC>:call Iexec("classify -b " . expand('%'))<CR>
-iabbrev I_C <ESC>:call Iexec("classify -b " . expand('%'))<CR>
-iabbrev I_P <ESC>:call Iexec("classify " . expand('%'))<CR>
+iabbrev I_M <ESC>:call Iexec("classify -S -b " . expand('%'))<CR>
+iabbrev I_C <ESC>:call Iexec("classify -S -b " . expand('%'))<CR>
+iabbrev I_P <ESC>:call Iexec("classify -S " . expand('%'))<CR>
 iabbrev I_DEBUG require 'debug'; debugger
 iabbrev I_RUBOCOP # rubocop:disable all
