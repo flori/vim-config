@@ -125,6 +125,8 @@ if &diff
   nnoremap p :diffput<CR>
   vnoremap g :diffget<CR>
   vnoremap p :diffput<CR>
+  nnoremap G :.diffget<CR>
+  nnoremap P :.diffput<CR>
   nnoremap n ]c
   nnoremap N [c
 endif
