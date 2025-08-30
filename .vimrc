@@ -155,7 +155,6 @@ endfunction
 
 " CScope Settings
 if has("cscope")
-  "  set csprg=/usr/local/bin/cscope
   set cscopetagorder=0
   set cscopetag
   set nocsverb
@@ -165,9 +164,9 @@ if has("cscope")
   " else add database pointed to by environment
   elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
-  end
-  set csverb
-end
+  endif
+  nnoremap <C-[> :cs find c <C-r>=expand('<cword>')<CR><CR>
+endif
 
 " Browser Settings
 if has("browse")
@@ -765,7 +764,7 @@ endfunction
 
 " Generates CScope project tags file using external create_cstags command and provides user feedback on completion or errors:
 function! CreateCSTags()
-  silent !create_cstags
+  silent !starscope -e cscope
   redraw!
   if v:shell_error == 0
     echo "Tags created."
