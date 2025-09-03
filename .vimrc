@@ -81,7 +81,7 @@ set visualbell t_vb= " Uses visual bell (flash screen) instead of audible bell f
 set wildchar=<TAB> " Sets tab as the wildmenu character for completion
 set wildmenu                    " Enables the wildmenu feature which displays completion options in a menu at the bottom of the screen
 set wildoptions+=pum            " Adds popup menu (pum) to wildmenu options, showing completions as a floating popup window
-set wildmode=longest:list,full  " Configures completion behavior: longest common string first, then list all matches, then full completion
+set wildmode=longest,full  " Configures completion behavior: longest common string first, then full completion
 set winminheight=0 " Allows windows to be created with zero height (minimal window size)
 
 colorscheme flori " Sets the color scheme to 'flori' for syntax highlighting and UI colors
