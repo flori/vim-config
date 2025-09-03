@@ -56,7 +56,6 @@ set termencoding=utf8 " Sets terminal encoding to UTF-8
 set tildeop " Allows tilde (~) operations on lines
 set ttyfast " Uses fast terminal settings (for faster redraws)
 set viminfo='20,<50,s10,h,! " Configures viminfo: 20 lines for marks, 50% for buffer info, 10k for search history, no history file, save all registers
-set wildmode=list:full " Sets completion mode to list matching files then show full matches
 set wrap " Enables line wrapping (displays long lines as multiple lines)
 
 " Mouse Settings
@@ -64,6 +63,8 @@ set mouse=nv " Enables mouse support in normal and visual modes only (disables m
 set mousehide " Hides the mouse cursor when typing in insert mode (improves readability while editing)
 
 " Visual Configuration
+
+set completeopt=menuone,noinsert,noselect,preview " Shows menu for all matches, waits for selection, displays preview information
 set hlsearch " Highlights all matches of the last search pattern (makes search results visible)
 set laststatus=2 " Always shows status line even when only one window is open
 set nocursorcolumn " Disables highlighting of current column (vertical highlight)
@@ -78,7 +79,9 @@ set t_Co=256 " Sets terminal color capability to 256 colors
 set title " Sets terminal window title to current filename
 set visualbell t_vb= " Uses visual bell (flash screen) instead of audible bell for errors
 set wildchar=<TAB> " Sets tab as the wildmenu character for completion
-set wildmenu " Enables enhanced command-line completion menu
+set wildmenu                    " Enables the wildmenu feature which displays completion options in a menu at the bottom of the screen
+set wildoptions+=pum            " Adds popup menu (pum) to wildmenu options, showing completions as a floating popup window
+set wildmode=longest:list,full  " Configures completion behavior: longest common string first, then list all matches, then full completion
 set winminheight=0 " Allows windows to be created with zero height (minimal window size)
 
 colorscheme flori " Sets the color scheme to 'flori' for syntax highlighting and UI colors
@@ -417,6 +420,11 @@ if has("autocmd")
   augroup tf
     autocmd!
     autocmd BufWritePre *.tf,*.tfvars TerraformFmt
+  augroup END
+
+  augroup vim
+    autocmd!
+    autocmd FileType vim setl nowrap
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
