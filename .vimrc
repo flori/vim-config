@@ -760,30 +760,19 @@ endfunction
 " Tags Generation Configuration
 
 " Generates project tags file using external create_tags command and provides user feedback on completion or errors:
-function! CreateTags()
-  silent !create_tags
+function! CodeIndexer()
+  silent !code_indexer
   redraw!
   if v:shell_error == 0
-    echo "Tags created."
-  else
-    echo output
-  end
-endfunction
-
-" Generates CScope project tags file using external create_cstags command and provides user feedback on completion or errors:
-function! CreateCSTags()
-  silent !starscope -e cscope
-  redraw!
-  if v:shell_error == 0
-    echo "Tags created."
+    echo "Code was indexed."
   else
     echo output
   end
 endfunction
 
 " Edit Configuration, grok `edit foo/bar.rb:23`
-
-" Handles file editing with special case for directory-aware path substitution and background execution:
+" Handles file editing with special case for directory-aware path substitution
+" and background execution:
 function! Edit(...)
   let args = copy(a:000)
   if len(args) == 1 && args[0][0:1] == '!/'
@@ -822,8 +811,7 @@ command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
 command! -nargs=* -complete=file Classify call Classify(<f-args>)
 command! -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
 command! -nargs=* -complete=file Declassify call Declassify(<f-args>)
-command! CreateTags call CreateTags()
-command! CreateCSTags call CreateCSTags()
+command! CodeIndexer call CodeIndexer()
 command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Edit(<f-args>)
