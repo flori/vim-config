@@ -168,7 +168,7 @@ if has("cscope")
   elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
   endif
-  nnoremap <C-[> :cs find c <C-r>=expand('<cword>')<CR><CR>
+  nnoremap <C-}> :cs find c <C-r>=expand('<cword>')<CR><CR>
 endif
 
 " Browser Settings
