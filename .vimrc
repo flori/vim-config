@@ -124,8 +124,8 @@ nnoremap <C-g> :diffget<CR>
 nnoremap <C-p> :diffput<CR>
 vnoremap <C-g> :diffget<CR>
 vnoremap <C-p> :diffput<CR>
-nnoremap <C-l> :.diffget<CR>
-nnoremap <C-k> :.diffput<CR>
+nnoremap <C-f> :.diffget<CR>
+nnoremap <C-o> :.diffput<CR>
 nnoremap <C-n> ]c
 nnoremap <C-b> [c
 
