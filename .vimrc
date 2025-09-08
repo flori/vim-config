@@ -120,19 +120,14 @@ hi DiffChange ctermfg=white ctermbg=208 " Sets highlight for changed text in dif
 hi DiffAdd ctermfg=white ctermbg=28 " Sets highlight for added text in diff mode: white text on green background
 hi DiffDelete ctermfg=white ctermbg=88 " Sets highlight for deleted text in diff mode: white text on dark red background
 " Sets up key mappings for diff mode:
-" - 'g' gets changes from other side of diff
-" - 'p' puts changes to other side of diff
-" - 'n' and 'N' navigate between diff changes
-if &diff
-  nnoremap g :diffget<CR>
-  nnoremap p :diffput<CR>
-  vnoremap g :diffget<CR>
-  vnoremap p :diffput<CR>
-  nnoremap G :.diffget<CR>
-  nnoremap P :.diffput<CR>
-  nnoremap n ]c
-  nnoremap N [c
-endif
+nnoremap <C-g> :diffget<CR>
+nnoremap <C-p> :diffput<CR>
+vnoremap <C-g> :diffget<CR>
+vnoremap <C-p> :diffput<CR>
+nnoremap <C-l> :.diffget<CR>
+nnoremap <C-k> :.diffput<CR>
+nnoremap <C-n> ]c
+nnoremap <C-b> [c
 
 " FZF Settings
 set runtimepath^=~/.fzf " Adds ~/.fzf to the beginning of Vim's runtime path, making fzf-related files available to Vim
