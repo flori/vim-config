@@ -183,6 +183,9 @@ end
 
 source $VIMRUNTIME/macros/matchit.vim " Loads the matchit plugin which enhances Vim's ability to navigate between matching pairs like parentheses, brackets, and HTML tags
 let g:ale_linters={ 'ruby': [ 'ruby' ], 'python': [] } " Set ale linters
+let g:ale_sh_shellcheck_options = '--exclude=SC2120,SC1090,SC1091,SC2119'
+let g:ale_set_highlights = 0
+
 let g:nrrw_rgn_protect='n' " Allow original buffer to be modified for NrrwRgn plugin
 let g:go_version_warning=0 " Disables Go plugin version warnings in Vim
 let g:rails_statusline=0 " do not show [Rails] in status line for vim-rails plugin
