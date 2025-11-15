@@ -1,0 +1,159 @@
+[submodule "home/.vim/bundle/vim-rails.git"]
+	path = home/.vim/bundle/vim-rails.git
+	url = https://github.com/tpope/vim-rails.git
+[submodule "home/.vim/bundle/vim-fugitive.git"]
+	path = home/.vim/bundle/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "home/.vim/bundle/vim-rvm.git"]
+	path = home/.vim/bundle/vim-rvm.git
+	url = https://github.com/tpope/vim-rvm.git
+[submodule "home/.vim/bundle/vim-surround.git"]
+	path = home/.vim/bundle/vim-surround.git
+	url = https://github.com/tpope/vim-surround.git
+[submodule "home/.vim/bundle/ruby-matchit.git"]
+	path = home/.vim/bundle/ruby-matchit.git
+	url = https://github.com/vim-scripts/ruby-matchit.git
+[submodule "home/.vim/bundle/netrw.vim.git"]
+	path = home/.vim/bundle/netrw.vim.git
+	url = https://github.com/vim-scripts/netrw.vim.git
+[submodule "home/.vim/bundle/nerdtree.git"]
+	path = home/.vim/bundle/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "home/.vim/bundle/vim-coffee-script.git"]
+	path = home/.vim/bundle/vim-coffee-script.git
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "home/.vim/bundle/Align.git"]
+	path = home/.vim/bundle/Align.git
+	url = https://github.com/vim-scripts/Align.git
+[submodule "home/.vim/bundle/bufexplorer.git"]
+	path = home/.vim/bundle/bufexplorer.git
+	url = https://github.com/c9s/bufexplorer.git
+[submodule "home/.vim/bundle/vimux.git"]
+	path = home/.vim/bundle/vimux.git
+	url = https://github.com/vim-scripts/vimux.git
+[submodule "home/.vim/bundle/vim-repeat.git"]
+	path = home/.vim/bundle/vim-repeat.git
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "home/.vim/bundle/undotree.git"]
+	path = home/.vim/bundle/undotree.git
+	url = https://github.com/mbbill/undotree.git
+[submodule "home/.vim/bundle/vim-ruby.git"]
+	path = home/.vim/bundle/vim-ruby.git
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "home/.vim/bundle/vis.git"]
+	path = home/.vim/bundle/vis.git
+	url = https://github.com/vim-scripts/vis.git
+[submodule "home/.vim/bundle/Decho.git"]
+	path = home/.vim/bundle/Decho.git
+	url = https://github.com/vim-scripts/Decho.git
+[submodule "home/.vim/bundle/Simplecov-Vim.git"]
+	path = home/.vim/bundle/Simplecov-Vim.git
+	url = https://github.com/nyarly/Simplecov-Vim.git
+[submodule "home/.vim/bundle/vim-markdown.git"]
+	path = home/.vim/bundle/vim-markdown.git
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "home/.vim/bundle/vim-slim.git"]
+	path = home/.vim/bundle/vim-slim.git
+	url = https://github.com/slim-template/vim-slim.git
+[submodule "home/.vim/bundle/vim-ansible-yaml.git"]
+	path = home/.vim/bundle/vim-ansible-yaml.git
+	url = https://github.com/chase/vim-ansible-yaml.git
+[submodule "home/.vim/bundle/vim-textobj-rubyblock.git"]
+	path = home/.vim/bundle/vim-textobj-rubyblock.git
+	url = https://github.com/nelstrom/vim-textobj-rubyblock.git
+[submodule "home/.vim/bundle/vim-textobj-user.git"]
+	path = home/.vim/bundle/vim-textobj-user.git
+	url = https://github.com/kana/vim-textobj-user.git
+[submodule "home/.vim/bundle/vim-blockle.git"]
+	path = home/.vim/bundle/vim-blockle.git
+	url = https://github.com/jgdavey/vim-blockle.git
+[submodule "home/.vim/bundle/github-vim.git"]
+	path = home/.vim/bundle/github-vim.git
+	url = https://github.com/solars/github-vim.git
+[submodule "home/.vim/bundle/vim-jsx.git"]
+	path = home/.vim/bundle/vim-jsx.git
+	url = https://github.com/mxw/vim-jsx.git
+[submodule "home/.vim/bundle/vim-javascript.git"]
+	path = home/.vim/bundle/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "home/.vim/bundle/vim-json.git"]
+	path = home/.vim/bundle/vim-json.git
+	url = https://github.com/elzr/vim-json.git
+[submodule "home/.vim/bundle/vim-rhubarb.git"]
+	path = home/.vim/bundle/vim-rhubarb.git
+	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "home/.vim/bundle/tagbar.git"]
+	path = home/.vim/bundle/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "home/.vim/bundle/vim-pathogen"]
+	path = home/.vim/bundle/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "home/.vim/bundle/vim-bundler.git"]
+	path = home/.vim/bundle/vim-bundler.git
+	url = https://github.com/tpope/vim-bundler.git
+[submodule "home/.vim/bundle/vim-sexp.git"]
+	path = home/.vim/bundle/vim-sexp.git
+	url = https://github.com/guns/vim-sexp.git
+[submodule "home/.vim/bundle/vim-sexp-mappings-for-regular-people.git"]
+	path = home/.vim/bundle/vim-sexp-mappings-for-regular-people.git
+	url = https://github.com/tpope/vim-sexp-mappings-for-regular-people.git
+[submodule "home/.vim/bundle/NrrwRgn"]
+	path = home/.vim/bundle/NrrwRgn
+	url = https://github.com/chrisbra/NrrwRgn
+[submodule "home/.vim/bundle/vim-easy-align"]
+	path = home/.vim/bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "home/.vim/bundle/vim-abolish.git"]
+	path = home/.vim/bundle/vim-abolish.git
+	url = https://github.com/tpope/vim-abolish.git
+[submodule "home/.vim/bundle/vim-vinegar.git"]
+	path = home/.vim/bundle/vim-vinegar.git
+	url = https://github.com/tpope/vim-vinegar.git
+[submodule "home/.vim/bundle/vim-hcl.git"]
+	path = home/.vim/bundle/vim-hcl.git
+	url = https://github.com/jvirtanen/vim-hcl.git
+[submodule "home/.vim/bundle/vim-go.git"]
+	path = home/.vim/bundle/vim-go.git
+	url = https://github.com/fatih/vim-go.git
+[submodule "home/.vim/bundle/linediff.vim"]
+	path = home/.vim/bundle/linediff.vim
+	url = https://github.com/AndrewRadev/linediff.vim
+[submodule "home/.vim/bundle/vim-gitgutter.git"]
+	path = home/.vim/bundle/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "home/.vim/bundle/ghcup.vim.git"]
+	path = home/.vim/bundle/ghcup.vim.git
+	url = https://github.com/hasufell/ghcup.vim.git
+[submodule "home/.vim/bundle/fzf.vim"]
+	path = home/.vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "home/.vim/bundle/conflict-marker.vim"]
+	path = home/.vim/bundle/conflict-marker.vim
+	url = https://github.com/rhysd/conflict-marker.vim
+[submodule "home/.vim/bundle/diffchar.vim"]
+	path = home/.vim/bundle/diffchar.vim
+	url = https://github.com/rickhowe/diffchar.vim
+[submodule "home/.vim/bundle/ale"]
+	path = home/.vim/bundle/ale
+	url = https://github.com/dense-analysis/ale
+[submodule "home/.vim/bundle/vim-eunuch.git"]
+	path = home/.vim/bundle/vim-eunuch.git
+	url = https://github.com/tpope/vim-eunuch.git
+[submodule "home/.vim/bundle/vim-terraform.git"]
+	path = home/.vim/bundle/vim-terraform.git
+	url = https://github.com/hashivim/vim-terraform.git
+[submodule "home/.vim/bundle/vim-fuzzy-stash.git"]
+	path = home/.vim/bundle/vim-fuzzy-stash.git
+	url = https://github.com/aacunningham/vim-fuzzy-stash.git
+[submodule "home/.vim/bundle/yaml-revealer"]
+	path = home/.vim/bundle/yaml-revealer
+	url = https://github.com/Einenlum/yaml-revealer
+[submodule "home/.vim/bundle/rename.git"]
+	path = home/.vim/bundle/rename.git
+	url = https://github.com/flori/rename.git
+[submodule "home/.vim/bundle/taglist.git"]
+	path = home/.vim/bundle/taglist.git
+	url = https://github.com/flori/taglist.git
+[submodule "home/.vim/bundle/vim-easymotion.git"]
+	path = home/.vim/bundle/vim-easymotion.git
+	url = https://github.com/Lokaltog/vim-easymotion.git
