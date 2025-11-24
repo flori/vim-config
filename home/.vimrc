@@ -427,9 +427,14 @@ if has("autocmd")
     autocmd FileType vim setl nowrap
   augroup END
 
-  augroup enc
+  augroup enc_decrypt
     autocmd!
     autocmd BufRead *.enc call SetupEncBuffer()
+  augroup END
+
+  augroup enc_encrypt
+      autocmd!
+      autocmd BufWriteCmd *.enc call EncryptOnSave()
   augroup END
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
@@ -814,7 +819,7 @@ function! SetupEncBuffer()
   let l:filename = expand('%')
   if fnamemodify(l:filename, ':e') == 'enc'
     " Get decrypted content
-    let l:output = system('complex_config display ' . shellescape(l:filename))
+    let l:output = system('complex_config decrypt -O ' . shellescape(l:filename))
     if v:shell_error == 0
       let l:lines = split(l:output, '\n')
 
@@ -827,12 +832,59 @@ function! SetupEncBuffer()
       endif
 
       setlocal filetype=yaml
-      setlocal ro
     else
       echohl ErrorMsg
       echo "Failed to decrypt " . l:filename
       echohl None
     endif
+  endif
+endfunction
+
+function! EncryptOnSave()
+  if fnamemodify(expand('%'), ':e') == 'enc'
+    " Get current buffer content
+    let l:content = join(getline(1, '$'), "\n")
+
+    " Create a temporary file with current content
+    let l:temp_file = tempname()
+    call writefile(split(l:content, "\n"), l:temp_file)
+
+    " Store original filename (without .enc suffix for encryption)
+    let l:original_file = expand('%')
+    let l:base_name = fnamemodify(l:original_file, ':r')  " Remove extension
+
+    " Check if original file exists
+    if filereadable(l:original_file)
+      " Delete the original file first (required by complex_config)
+      let l:delete_cmd = 'rm -f ' . shellescape(l:original_file)
+      let l:delete_output = system(l:delete_cmd)
+
+      if v:shell_error != 0
+        echohl ErrorMsg
+        echo "Failed to delete original file: " . l:delete_output
+        echohl None
+        call delete(l:temp_file)
+        return
+      endif
+    endif
+
+    " Encrypt to the original filename (complex_config will add .enc suffix)
+    let l:cmd = 'complex_config encrypt -I ' . shellescape(l:base_name) . ' < ' . shellescape(l:temp_file)
+    let l:output = system(l:cmd)
+
+    if v:shell_error == 0
+      echo "File re-encrypted successfully"
+      " Force reload the file to show the new encrypted content
+      execute 'edit!'
+      call SetupEncBuffer()
+    else
+      echohl ErrorMsg
+      echo "Encryption failed: " . l:output
+      echohl None
+    endif
+
+    " Clean up
+    call delete(l:temp_file)
   endif
 endfunction
 
