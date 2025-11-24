@@ -427,6 +427,11 @@ if has("autocmd")
     autocmd FileType vim setl nowrap
   augroup END
 
+  augroup enc
+    autocmd!
+    autocmd BufRead *.enc call SetupEncBuffer()
+  augroup END
+
   au! BufRead,BufNewFile *.rl set filetype=ragel
 
   autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
@@ -802,6 +807,33 @@ endfunction
 function! PrintGivenRange() range
     echo "firstline ".a:firstline." lastline ".a:lastline
     " Do some more things
+endfunction
+
+" Function to setup .enc buffer with decrypted content
+function! SetupEncBuffer()
+  let l:filename = expand('%')
+  if fnamemodify(l:filename, ':e') == 'enc'
+    " Get decrypted content
+    let l:output = system('complex_config display ' . shellescape(l:filename))
+    if v:shell_error == 0
+      let l:lines = split(l:output, '\n')
+
+      " Clear current buffer and insert decrypted lines
+      silent execute ':%d'
+
+      if len(l:lines) > 0
+        call append(0, l:lines)
+        silent execute 'delete'
+      endif
+
+      setlocal filetype=yaml
+      setlocal ro
+    else
+      echohl ErrorMsg
+      echo "Failed to decrypt " . l:filename
+      echohl None
+    endif
+  endif
 endfunction
 
 " Commands
