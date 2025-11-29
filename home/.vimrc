@@ -223,8 +223,8 @@ noremap <leader>h :call LinesHistory()<CR>
 noremap <leader>/ :let @/=''<CR>
 
 " Copy and Paste Mappings
-noremap <leader>F :!echo "%:p"\|pbcopy<CR><C-l>
-noremap <leader>y :silent w !pbcopy<CR>
+noremap <leader>F :!echo "%:p"\|ctc<CR><C-l>
+noremap <leader>y :silent w !ctc<CR>
 
 " Buffers and Windows Mappings
 noremap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
