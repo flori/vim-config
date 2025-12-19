@@ -133,7 +133,8 @@ nnoremap <C-b> [c
 set runtimepath^=~/.fzf " Adds ~/.fzf to the beginning of Vim's runtime path, making fzf-related files available to Vim
 set runtimepath^=~/.vim/bundle/fzf.vim " Adds the fzf.vim bundle directory to the runtime path for Vim plugin functionality
 let g:fzf_colors =
-      \ { 'fg':         ['fg', 'Normal'],
+      \ {
+      \ 'fg':         ['fg', 'Normal'],
       \ 'bg':         ['bg', 'Normal'],
       \ 'preview-bg': ['bg', 'NormalFloat'],
       \ 'hl':         ['fg', 'Comment'],
@@ -146,7 +147,8 @@ let g:fzf_colors =
       \ 'pointer':    ['fg', 'Exception'],
       \ 'marker':     ['fg', 'Keyword'],
       \ 'spinner':    ['fg', 'Label'],
-      \ 'header':     ['fg', 'Comment'] }
+      \ 'header':     ['fg', 'Comment']
+      \ }
 function! FZFOptions()
   echo fzf#wrap()['options']
 endfunction
