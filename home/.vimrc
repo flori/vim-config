@@ -244,9 +244,9 @@ noremap <leader>P :silent w<CR>:call Probe()<CR>
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
 
 " Ollama Mappings
-noremap <leader>o :<C-U>call OllamaChatSend(@*)<CR>
-noremap <leader>O :<C-U>call OllamaChatSendWithResponse(@*)<CR>
-noremap <leader>d :<C-U>call OllamaCli(@*)<CR>
+noremap <leader>o :<C-U>call OllamaChatSend(@")<CR>
+noremap <leader>O :<C-U>call OllamaChatSendWithResponse(@")<CR>
+noremap <leader>d :<C-U>call OllamaCli(@")<CR>
 noremap <leader>i :!echo "/import %:p"\|ollama_chat_send -t<CR><C-l>
 noremap <leader>m :.!git dfc\|commit_message<CR>
 noremap <leader>c :call Comment()<CR>
