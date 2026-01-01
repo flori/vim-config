@@ -239,6 +239,11 @@ noremap <leader>v :vsplit <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", 
 noremap <leader>S :call Symbolhash()<CR>
 noremap <leader>C :call CamelUnderscore()<CR>
 
+" IRB eval
+noremap <leader>r :call IrbEvalLines()<CR>
+noremap <leader>R :s/# => .*//<CR>
+
+
 " Testing Probe Mappings
 noremap <leader>P :silent w<CR>:call Probe()<CR>
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
@@ -887,6 +892,22 @@ function! EncryptOnSave()
 
     " Clean up
     call delete(l:temp_file)
+  endif
+endfunction
+
+function! IrbEvalLines() range
+  let buf = bufnr()
+  let input = getbufline(buf, a:firstline, a:lastline)
+  let output = systemlist('irb_client eval_lines', input)
+  if v:shell_error != 0
+    echo "IRB returned an error code: " . v:shell_error
+  elseif len(output) == 0
+    echo "IRB returned an empty response."
+  else
+    call deletebufline(buf, a:firstline, a:lastline)
+    let pos = getpos('.')
+    let line = pos[1] - 1
+    call append(line, output)
   endif
 endfunction
 
