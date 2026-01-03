@@ -240,9 +240,12 @@ noremap <leader>S :call Symbolhash()<CR>
 noremap <leader>C :call CamelUnderscore()<CR>
 
 " IRB eval
-noremap <leader>r :call IrbEvalLines()<CR>
-noremap <leader>R :s/# => .*//<CR>
-
+noremap <leader>re :call IrbEvalLines()<CR>
+noremap <leader>rd :s/# => .*//<CR>
+noremap <leader>rx :call IrbExecute()<CR>
+noremap <leader>rs :call IrbStore()<CR>
+noremap <leader>rc :call IrbExecuteCurrent()<CR>
+noremap <leader>rl :call IrbLoad()<CR>
 
 " Testing Probe Mappings
 noremap <leader>P :silent w<CR>:call Probe()<CR>
@@ -823,7 +826,7 @@ endfunction
 
 " Function to setup .enc buffer with decrypted content
 function! SetupEncBuffer()
-  let l:filename = expand('%')
+  let l:filename = expand('%:p')
   if fnamemodify(l:filename, ':e') == 'enc'
     " Get decrypted content
     let l:output = system('complex_config decrypt -O ' . shellescape(l:filename))
@@ -908,6 +911,48 @@ function! IrbEvalLines() range
     let pos = getpos('.')
     let line = pos[1] - 1
     call append(line, output)
+  endif
+endfunction
+
+function! IrbExecute() range
+  let buf = bufnr()
+  let input = getbufline(buf, a:firstline, a:lastline)
+  call system('irb_client execute_snippet', input)
+  if v:shell_error != 0
+    echo "IRB returned an error code: " . v:shell_error
+  else
+    echo "IRB is executing the code."
+  endif
+endfunction
+
+function! IrbStore() range
+  let buf = bufnr()
+  let input = getbufline(buf, a:firstline, a:lastline)
+  call system('irb_client store_snippet', input)
+  if v:shell_error != 0
+    echo "IRB returned an error code: " . v:shell_error
+  else
+    echo "IRB stored the code."
+  endif
+endfunction
+
+function! IrbExecuteCurrent()
+  call system('irb_client execute_current_snippet', input)
+  if v:shell_error != 0
+    echo "IRB returned an error code: " . v:shell_error
+  else
+    echo "IRB is executing the code."
+  endif
+endfunction
+
+function! IrbLoad()
+  let filename = expand('%:p')
+  let input = 'source "' . filename . '"'
+  call system('irb_client execute_snippet', input)
+  if v:shell_error != 0
+    echo "IRB returned an error code: " . v:shell_error
+  else
+    echo 'IRB is loading "' . filename . '".'
   endif
 endfunction
 
