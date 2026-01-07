@@ -252,9 +252,7 @@ noremap <leader>P :silent w<CR>:call Probe()<CR>
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
 
 " Ollama Mappings
-noremap <leader>o :<C-U>call OllamaChatSend(@")<CR>
-noremap <leader>O :<C-U>call OllamaChatSendWithResponse(@")<CR>
-noremap <leader>d :<C-U>call OllamaCli(@")<CR>
+noremap <leader>o :call OllamaChatSend()<CR>
 noremap <leader>i :!echo "/import %:p"\|ollama_chat_send -t<CR><C-l>
 noremap <leader>m :.!git dfc\|commit_message<CR>
 noremap <leader>c :call Comment()<CR>
@@ -631,30 +629,11 @@ endfunction
 " Ollama Interaction Configuration
 
 " Sends code snippet to Ollama chat session with filetype context:
-function! OllamaChatSend(input)
-  let input = "Take note of the following code snippet (" . &filetype . ") **AND** await further instructions:\n\n```\n" . a:input . "\n```\n"
+function! OllamaChatSend() range
+  let buf = bufnr()
+  let input = join(getbufline(buf, a:firstline, a:lastline), "\n")
+  let input = "Take note of the following code snippet (" . &filetype . ") **AND** await further instructions:\n\n```\n" . input . "\n```\n"
   call system('ollama_chat_send', input)
-endfunction
-
-" Sends input to Ollama chat and appends response at current line:
-function! OllamaChatSendWithResponse(input)
-  let output = systemlist('ollama_chat_send -r', a:input)
-  if len(output) == 0
-    echo "Ollama Chat returned an empty response."
-  else
-    let pos = getpos('.')
-    let line = pos[1] - 1
-    call append(line, output)
-  endif
-endfunction
-
-" Sends input to Ollama CLI and displays results in new markdown buffer:
-function! OllamaCli(input)
-  let response = systemlist('ollama_cli -M "{\"num_ctx\":16384}"', a:input)
-  execute 'new'
-  execute 'set ft=markdown'
-  call append(0, response)
-  call cursor(1,1)
 endfunction
 
 " Generates code comments using external tool, stores result in register, and inserts it above current line:
