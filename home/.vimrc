@@ -782,6 +782,35 @@ function! Edit(...)
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
 endfunction
 
+
+" Open a remote file from URL in a new buffer with proper filename and
+" filetype detection
+" Usage: :call EditURL('https://example.com/file.txt')
+" This function downloads the remote file using curl, creates a new buffer,
+" sets the buffer name to the filename from the URL, and automatically detects
+" and sets the appropriate filetype based on the file extension
+function! EditURL(url)
+  let cmd = 'curl -s ' . a:url
+  execute 'new'
+  execute 'r !' . cmd
+  execute 'normal 1G'
+
+  " Extract base filename from URL
+  let filename = substitute(a:url, '.*/\([^/?]*\).*', '\1', '')
+  if filename == '' || filename =~ '^\s*$'
+    let filename = 'remote_file.txt'
+  endif
+
+  " Set the buffer name
+  silent execute 'file ' . filename
+
+  " Set filetype based on extension
+  let ext = substitute(filename, '.*\.\([^.]*\)$', '\1', '')
+  if ext != ''
+    execute 'setlocal filetype=' . ext
+  endif
+endfunction
+
 " Iabbrev Helpers
 
 " Executes shell command and appends its output to current line in insert mode:
@@ -937,6 +966,7 @@ endfunction
 
 " Commands
 command! -bar -nargs=1 OpenURL :!open <args>
+command! -bar -nargs=1 EditURL :call EditURL(<f-args>)
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
 command! -nargs=* -complete=file Classify call Classify(<f-args>)
