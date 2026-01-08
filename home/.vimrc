@@ -782,7 +782,6 @@ function! Edit(...)
   call system("edit -m " . join(map(copy(args), 'shellescape(v:val)'), ' ') . ' &')
 endfunction
 
-
 " Open a remote file from URL in a new buffer with proper filename and
 " filetype detection
 " Usage: :call EditURL('https://example.com/file.txt')
@@ -794,6 +793,7 @@ function! EditURL(url)
   execute 'new'
   execute 'r !' . cmd
   execute 'normal 1G'
+  execute 'normal! 1dd'
 
   " Extract base filename from URL
   let filename = substitute(a:url, '.*/\([^/?]*\).*', '\1', '')
