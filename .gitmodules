@@ -13,9 +13,6 @@
 [submodule "home/.vim/bundle/ruby-matchit.git"]
 	path = home/.vim/bundle/ruby-matchit.git
 	url = https://github.com/vim-scripts/ruby-matchit.git
-[submodule "home/.vim/bundle/netrw.vim.git"]
-	path = home/.vim/bundle/netrw.vim.git
-	url = https://github.com/vim-scripts/netrw.vim.git
 [submodule "home/.vim/bundle/nerdtree.git"]
 	path = home/.vim/bundle/nerdtree.git
 	url = https://github.com/scrooloose/nerdtree.git
