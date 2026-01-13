@@ -920,6 +920,8 @@ function! EncryptOnSave()
   endif
 endfunction
 
+" Evaluate selected Ruby lines in IRB and insert results with # => comments
+" Executes each line in the same context and replaces original lines with output
 function! IrbEvalLines() range
   let buf = bufnr()
   let input = getbufline(buf, a:firstline, a:lastline)
@@ -936,6 +938,8 @@ function! IrbEvalLines() range
   endif
 endfunction
 
+" Execute selected Ruby code snippet in IRB without returning output
+" Useful for running code that produces side effects or doesn't return values
 function! IrbExecute() range
   let buf = bufnr()
   let input = getbufline(buf, a:firstline, a:lastline)
@@ -947,6 +951,8 @@ function! IrbExecute() range
   endif
 endfunction
 
+" Store selected Ruby code snippet in IRB's memory for later use
+" Allows you to reference the snippet by name in subsequent IRB commands
 function! IrbStore() range
   let buf = bufnr()
   let input = getbufline(buf, a:firstline, a:lastline)
@@ -958,6 +964,8 @@ function! IrbStore() range
   endif
 endfunction
 
+" Execute the current IRB snippet (presumably from buffer or clipboard)
+" Useful for running previously stored or selected code snippets
 function! IrbExecuteCurrent()
   call system('irb_client execute_current_snippet', input)
   if v:shell_error != 0
@@ -967,6 +975,8 @@ function! IrbExecuteCurrent()
   endif
 endfunction
 
+" Load and execute the current file in IRB using the 'source' command
+" Perfect for testing entire Ruby files or modules in the interactive environment
 function! IrbLoad()
   let filename = expand('%:p')
   let input = 'source "' . filename . '"'
