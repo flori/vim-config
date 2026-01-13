@@ -1,0 +1,22 @@
+# vim: set ft=ruby:
+
+search do
+  prune_dirs /\A(\.svn|\.git)\z/
+  skip_files /(\A\.sw[pon]\z|\.log\z|~\z)/
+end
+
+discover do
+  prune_dirs /\A(\.svn|\.git)\z/
+  skip_files /(\A\.sw[pon]\z|\.log\z|~\z)/
+  index_expire_after 3_600
+end
+
+strip_spaces do
+  prune_dirs /\A(\.svn|\.git)\z/
+  skip_files /(\A\.sw[pon]\z|\.log\z|~\z)/
+end
+
+ssh_tunnel do
+  terminal_multiplexer :tmux
+  login_session "/home/#{ENV['USER']}"
+end
