@@ -859,6 +859,19 @@ function! SetupEncBuffer()
   endif
 endfunction
 
+" Encrypts the current buffer content to a .enc file when saving.
+" This function is triggered automatically on BufWriteCmd for files with .enc
+" extension.
+" It:
+" 1. Reads the current buffer content
+" 2. Creates a temporary file with the content
+" 3. Deletes the original .enc file (required by complex_config)
+" 4. Encrypts the content to the original filename (complex_config adds .enc suffix)
+" 5. Reloads the encrypted file to show the new content
+" 6. Sets up the buffer with proper filetype detection
+"
+" Note: This function requires the 'complex_config' command to be available in the PATH
+" and assumes the .enc file is in the same directory as the original file.
 function! EncryptOnSave()
   if fnamemodify(expand('%'), ':e') == 'enc'
     " Get current buffer content
