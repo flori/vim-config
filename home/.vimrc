@@ -217,6 +217,7 @@ noremap <leader>n :new <cfile><CR>
 
 " Finding and Grepping Mappings
 noremap <leader>f :Files<CR>
+noremap <leader>d :call ResetFiles()<CR>
 noremap <leader>g :call Grep()<CR>
 noremap <leader>G :call Grep(expand('<cword>'))<CR>
 noremap <leader>H :call FuncHistory()<CR>
@@ -962,6 +963,20 @@ function! IrbLoad()
   else
     echo 'IRB is loading "' . filename . '".'
   endif
+endfunction
+
+" Reset the files cache using discover -r command and refresh the Files buffer
+" This function clears the discover cache and then reopens the Files buffer
+" to show the updated file list. Displays success or error messages based on
+" the outcome of the discover command execution.
+function! ResetFiles()
+  call system('discover -r')
+  if v:shell_error != 0
+    echo "Resetting files failed, discover returned an error code: " . v:shell_error
+  else
+    echo 'Resetting files cache succeeded.'
+  endif
+  execute 'Files'
 endfunction
 
 " Commands
