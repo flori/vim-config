@@ -201,11 +201,6 @@ let g:rails_statusline=0 " do not show [Rails] in status line for vim-rails plug
 let mapleader=","
 let maplocalleader=","
 
-" VIM Configuration
-
-" Reload current .vimrc configuration dynamically without restarting Vim:
-noremap <leader>r :source $MYVIMRC<CR>
-
 " Directory and File Navigation Mappings
 
 " Change working directory to current file's parent directory with space-safe path handling:
@@ -572,20 +567,24 @@ endfunction
 function! ProbeLine(...)
   execute 'w'
   let p_args = ProbeExtraArgs()
-  if &filetype == 'cucumber'
-    call extend(p_args, [ '-t', 'cucumber' ])
+  let cmd = [ 'probe' ] + p_args + [ '-c', join([ expand('%'), line('.') ], ':'), '&' ]
+  if len(p_args) > 0
+    let cmd = cmd + p_args
   endif
-  call system(join([ 'probe' ] + p_args + [ '-c', join([ expand('%'), line('.') ], ':'), '&' ]))
+  let cmd = cmd + [ '&' ]
+  call system(join(cmd))
 endfunction
 
 " Runs probe command on current file with optional cucumber support:
 function! Probe(...)
   execute 'w'
   let p_args = ProbeExtraArgs()
-  if &filetype == 'cucumber'
-    call extend(p_args, [ '-t', 'cucumber' ])
+  let cmd = [ 'probe', '-c', expand('%') ]
+  if len(p_args) > 0
+    let cmd = cmd + p_args
   endif
-  call system(join([ 'probe' ] + p_args + [ '-c', expand('%') , '&' ]))
+  let cmd = cmd + [ '&' ]
+  call system(join(cmd))
 endfunction
 
 " Toggles code coverage reporting on/off:
@@ -620,8 +619,14 @@ function! ProbeToggleDocumentation()
   let l:i = index(g:pa, '-fd')
   if l:i >= 0
     call remove(g:pa, l:i)
+    if len(g:pa) > 0 && g:pa[-1] == '--'
+      call remove(g:pa, -1)
+    endif
     echo 'Switching documentation formatter off.'
   else
+    if len(g:pa) == 0
+      call add(g:pa, '--')
+    endif
     call add(g:pa, '-fd')
     echo 'Switching documentation formatter on.'
   endif
@@ -1019,6 +1024,8 @@ command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!sed 's/ *//' | tee >(openssl x509 -inform pem -subject -ext subjectAltName -fingerprint -issuer -sha256 -dates) | cat
 command! ProbeToggleCoverage call ProbeToggleCoverage()
 command! ProbeToggleDebugger call ProbeToggleDebugger()
+command! ProbeToggleDocumentation call ProbeToggleDocumentation()
+command! Configure :edit $MYVIMRC
 
 " Abbreviations
 iabclear
