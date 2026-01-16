@@ -202,12 +202,8 @@ let mapleader=","
 let maplocalleader=","
 
 " Directory and File Navigation Mappings
-
-" Change working directory to current file's parent directory with space-safe path handling:
 noremap <leader>E :cd <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-" Edit files from current file's parent directory with space-safe path handling:
 noremap <leader>e :e <C-R>=substitute(expand("%:p:h") . "/", " ", "\\\\ ", "g")<CR>
-" Open current file in new horizontal split window for side-by-side viewing:
 noremap <leader>n :new <cfile><CR>
 
 " Finding and Grepping Mappings
@@ -217,7 +213,6 @@ noremap <leader>g :call Grep()<CR>
 noremap <leader>G :call Grep(expand('<cword>'))<CR>
 noremap <leader>H :call FuncHistory()<CR>
 noremap <leader>h :call LinesHistory()<CR>
-" Clear current search pattern and remove highlighting (resets @/ register):
 noremap <leader>/ :let @/=''<CR>
 
 " Copy and Paste Mappings
