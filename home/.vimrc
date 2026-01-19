@@ -562,7 +562,7 @@ endfunction
 function! ProbeLine(...)
   execute 'w'
   let p_args = ProbeExtraArgs()
-  let cmd = [ 'probe' ] + p_args + [ '-c', join([ expand('%'), line('.') ], ':'), '&' ]
+  let cmd = [ 'probe' ] + [ '-c', join([ expand('%'), line('.') ], ':') ]
   if len(p_args) > 0
     let cmd = cmd + p_args
   endif
