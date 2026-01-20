@@ -609,11 +609,15 @@ endfunction
 " Toggles documentation formatter on/off:
 function! ProbeFormatter(formatter="")
   let g:pa = []
-  if a:formatter == ""
+  let formatter = a:formatter
+  if formatter == ""
     echo 'Use default formatter.'
   else
-    let g:pa = extend(g:pa, [ '-f', a:formatter ])
-    echo 'Set formatter to "' . a:formatter . '".'
+    if formatter == "l"
+      let formatter = "Utils::LineFormatter"
+    endif
+    let g:pa = extend(g:pa, [ '-f', formatter ])
+    echo 'Set formatter to "' . formatter . '".'
   endif
 endfunction
 
