@@ -607,23 +607,13 @@ function! ProbeToggleDebugger()
 endfunction
 
 " Toggles documentation formatter on/off:
-function! ProbeToggleDocumentation()
-  if !exists('g:pa')
-    let g:pa = []
-  endif
-  let l:i = index(g:pa, '-fd')
-  if l:i >= 0
-    call remove(g:pa, l:i)
-    if len(g:pa) > 0 && g:pa[-1] == '--'
-      call remove(g:pa, -1)
-    endif
-    echo 'Switching documentation formatter off.'
+function! ProbeFormatter(formatter="")
+  let g:pa = []
+  if a:formatter == ""
+    echo 'Use default formatter.'
   else
-    if len(g:pa) == 0
-      call add(g:pa, '--')
-    endif
-    call add(g:pa, '-fd')
-    echo 'Switching documentation formatter on.'
+    let g:pa = extend(g:pa, [ '-f', a:formatter ])
+    echo 'Set formatter to "' . a:formatter . '".'
   endif
 endfunction
 
@@ -1003,8 +993,8 @@ function! ResetFiles()
 endfunction
 
 " Commands
-command! -bar -nargs=1 OpenURL :!open <args>
-command! -bar -nargs=1 EditURL :call EditURL(<f-args>)
+command! -bar -nargs=1 OpenURL !open <args>
+command! -bar -nargs=1 EditURL call EditURL(<f-args>)
 command! -bar -nargs=* -complete=file Find call Find(<f-args>)
 command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
 command! -nargs=* -complete=file Classify call Classify(<f-args>)
@@ -1019,8 +1009,8 @@ command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!sed 's/ *//' | tee >(openssl x509 -inform pem -subject -ext subjectAltName -fingerprint -issuer -sha256 -dates) | cat
 command! ProbeToggleCoverage call ProbeToggleCoverage()
 command! ProbeToggleDebugger call ProbeToggleDebugger()
-command! ProbeToggleDocumentation call ProbeToggleDocumentation()
-command! Configure :edit $MYVIMRC
+command! -nargs=? ProbeFormatter call ProbeFormatter(<f-args>)
+command! Configure edit $MYVIMRC
 
 " Abbreviations
 iabclear
