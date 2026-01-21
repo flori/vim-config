@@ -241,6 +241,7 @@ noremap <leader>rl :call IrbLoad()<CR>
 " Testing Probe Mappings
 noremap <leader>P :silent w<CR>:call Probe()<CR>
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
+noremap <leader>pa :silent w<CR>:call ProbeAll()<CR>
 
 " Ollama Mappings
 noremap <leader>o :call OllamaChatSend()<CR>
@@ -558,8 +559,8 @@ function! ProbeExtraArgs()
   return g:pa
 endfunction
 
-" Runs probe command on current line with optional cucumber support:
-function! ProbeLine(...)
+" Runs probe command on current line:
+function! ProbeLine()
   execute 'w'
   let p_args = ProbeExtraArgs()
   let cmd = [ 'probe' ] + [ '-c', join([ expand('%'), line('.') ], ':') ]
@@ -570,8 +571,19 @@ function! ProbeLine(...)
   call system(join(cmd))
 endfunction
 
-" Runs probe command on current file with optional cucumber support:
-function! Probe(...)
+" Runs all tests in dir with probe:
+function! ProbeAll(dir="spec")
+  let p_args = ProbeExtraArgs()
+  let cmd = [ 'probe', '-c', a:dir ]
+  if len(p_args) > 0
+    let cmd = cmd + p_args
+  endif
+  let cmd = cmd + [ '&' ]
+  call system(join(cmd))
+endfunction
+
+" Runs probe command on current file:
+function! Probe()
   execute 'w'
   let p_args = ProbeExtraArgs()
   let cmd = [ 'probe', '-c', expand('%') ]
