@@ -961,7 +961,7 @@ endfunction
 " Execute the current IRB snippet (presumably from buffer or clipboard)
 " Useful for running previously stored or selected code snippets
 function! IrbExecuteCurrent()
-  call system('irb_client execute_current_snippet', input)
+  call system('irb_client execute_current_snippet')
   if v:shell_error != 0
     echo "IRB returned an error code: " . v:shell_error
   else
