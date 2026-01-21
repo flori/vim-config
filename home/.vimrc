@@ -21,7 +21,7 @@ set autowrite " Automatically saves changes when switching between buffers (with
 set backspace=indent,eol,start " Allows backspacing over indentations, end-of-line, and start of line (more flexible backspace behavior)
 set backupskip=/tmp/*,/private/tmp/* " Skips creating backup files for files in temporary directories (saves disk space)
 if $TMUX == ''
-  set clipboard+=unnamed " Makes Vim's unnamed register (which is used for yank/delete operations) sync with the system clipboard
+  set clipboard+=unnamedplus " Makes Vim's unnamed register (which is used for yank/delete operations) sync with the system clipboard
 endif
 set complete=.,w,b,u,t " Configures omni-completion to include various sources: .(omnifunc), w(word completion), b(buffer completion), u(undo completion), t(thesaurus)
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words " Sets up dictionary files for spell checking and word completion
@@ -44,7 +44,6 @@ set nojoinspaces " Prevents automatic space insertion after joining lines
 set nopaste " Disables paste mode
 set nosmartcase " Makes searches case-sensitive even when using lowercase letters
 set nosmartindent " Disables smart indentation behavior
-set nowrap " Disables line wrapping (shows long lines as horizontal scrolling)
 set shell=bash " Uses bash as the default shell for external commands
 set shortmess=atIO " Shortens messages: a(auto-skip), t(truncate long messages), I(no splash screen), O(omit file content from messages)
 set showcmd " Displays incomplete commands in status line
