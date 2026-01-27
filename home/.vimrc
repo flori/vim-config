@@ -605,18 +605,6 @@ function! ProbeToggleCoverage()
   endif
 endfunction
 
-" Toggles debugger mode on/off:
-function! ProbeToggleDebugger()
-  let result = system('probe -C DISABLE_DEBUGGER')
-  if result == "0\n" || result == "\n"
-    call system('probe -C DISABLE_DEBUGGER=1')
-    echo 'Switching debugging off.'
-  else
-    call system('probe -C DISABLE_DEBUGGER=0')
-    echo 'Switching debugging on.'
-  endif
-endfunction
-
 " Toggles documentation formatter on/off:
 function! ProbeFormatter(formatter="")
   let g:pa = []
@@ -1023,7 +1011,6 @@ command! -nargs=* MakeFileExecutable call MakeFileExecutable()
 command! -nargs=* MakeFileNonExecutable call MakeFileNonExecutable()
 command! -range SSLCertInfo <line1>,<line2> :!sed 's/ *//' | tee >(openssl x509 -inform pem -subject -ext subjectAltName -fingerprint -issuer -sha256 -dates) | cat
 command! ProbeToggleCoverage call ProbeToggleCoverage()
-command! ProbeToggleDebugger call ProbeToggleDebugger()
 command! -nargs=? ProbeFormatter call ProbeFormatter(<f-args>)
 command! Configure edit $MYVIMRC
 
