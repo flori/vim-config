@@ -238,7 +238,7 @@ noremap <leader>rc :call IrbExecuteCurrent()<CR>
 noremap <leader>rl :call IrbLoad()<CR>
 
 " Testing Probe Mappings
-noremap <leader>pl :silent w<CR>:call ProbeLine()<CR>
+noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
 noremap <leader>pf :silent w<CR>:call ProbeFile()<CR>
 noremap <leader>pa :silent w<CR>:call ProbeAll()<CR>
 
