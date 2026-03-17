@@ -752,15 +752,27 @@ endfunction
 
 " Tags Generation Configuration
 
-" Generates project tags file using external create_tags command and provides user feedback on completion or errors:
-function! CodeIndexer()
-  silent !code_indexer
-  redraw!
-  if v:shell_error == 0
-    echo "Code was indexed."
+" CodeIndexer
+"   A Vim function to invoke the external code indexing tool.
+"   Usage:
+"     :CodeIndexer          " runs all available tools
+"     :CodeIndexer toolname " runs only this tool (ctags or starscope)
+"   Parameters:
+"     tool (string, optional) – name of the tool to run. If omitted or empty,
+"     the function runs the default 'code_indexer' command.
+"   Behavior:
+"     - Prints a status message to the command line.
+"     - Launches the command in a terminal buffer that closes automatically
+"       when the indexing finishes.
+function! CodeIndexer(tool="")
+  if a:tool  == ""
+    echo 'Index code with all tools.'
+    call term_start('code_indexer', { 'term_finish': 'close' })
   else
-    echo output
-  end
+    echo 'Index code with tool=' . a:tool . '.'
+    call term_start('code_indexer ' . a:tool, { 'term_finish': 'close' })
+  endif
+  execute ':wincmd p'
 endfunction
 
 " Edit Configuration, grok `edit foo/bar.rb:23`
@@ -1003,7 +1015,7 @@ command! -bar -nargs=* -complete=file Grep call Grep(<f-args>)
 command! -nargs=* -complete=file Classify call Classify(<f-args>)
 command! -nargs=* -complete=file PathClassify call PathClassify(<f-args>)
 command! -nargs=* -complete=file Declassify call Declassify(<f-args>)
-command! CodeIndexer call CodeIndexer()
+command! -nargs=? CodeIndexer call CodeIndexer(<f-args>)
 command! -range Symbolhash <line1>,<line2>call Symbolhash()
 command! -range PrintGivenRange <line1>,<line2>call PrintGivenRange()
 command! -nargs=* -complete=file Edit call Edit(<f-args>)
