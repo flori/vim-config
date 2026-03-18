@@ -242,6 +242,7 @@ noremap <leader>rl :call IrbLoad()<CR>
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
 noremap <leader>pf :silent w<CR>:call ProbeFile()<CR>
 noremap <leader>pa :silent w<CR>:call ProbeAll()<CR>
+noremap <leader>pl :silent w<CR>:call ProbeListen()<CR>
 
 " Ollama Mappings
 noremap <leader>o :call OllamaChatSend()<CR>
@@ -586,6 +587,12 @@ function! ProbeAll(dir="spec")
   endif
   let cmd = cmd + [ '&' ]
   call system(join(cmd))
+endfunction
+
+" Runs probe server listening to socket:
+function! ProbeListen()
+  call term_start('probe -l', { 'term_finish': 'close' })
+  execute ':wincmd p'
 endfunction
 
 " Runs probe command on current file:
