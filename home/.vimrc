@@ -56,6 +56,7 @@ set tildeop " Allows tilde (~) operations on lines
 set ttyfast " Uses fast terminal settings (for faster redraws)
 set viminfo='20,<50,s10,h,! " Configures viminfo: 20 lines for marks, 50% for buffer info, 10k for search history, no history file, save all registers
 set wrap " Enables line wrapping (displays long lines as multiple lines)
+set cmdheight=1 " Set command line height to 1
 
 " Mouse Settings
 set mouse=nv " Enables mouse support in normal and visual modes only (disables mouse in insert mode)
@@ -266,6 +267,12 @@ noremap <F2> :TagbarToggle<CR>
 noremap <F3> :call TogglePaste()<CR>
 " F4: Toggle Undotree (visualizes undo history for better navigation):
 noremap <silent><F4>  :UndotreeToggle<CR>
+
+" Open Window with
+noremap <C-W>b :BufExplorerHorizontalSplit<CR>
+silent! unmap <leader>be
+silent! unmap <leader>bs
+silent! unmap <leader>bv
 
 " Switch Windows
 noremap <C-J> <C-W><C-J>
