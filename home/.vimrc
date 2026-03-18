@@ -246,7 +246,7 @@ noremap <leader>pl :silent w<CR>:call ProbeListen()<CR>
 
 " Ollama Mappings
 noremap <leader>o :call OllamaChatSend()<CR>
-noremap <leader>i :!echo "/import %:p"\|ollama_chat_send -t<CR><C-l>
+noremap <leader>i :!echo "/input path %:p"\|ollama_chat_send -t<CR><C-l>
 noremap <leader>m :.!git dfc\|commit_message<CR>
 noremap <leader>c :call Comment()<CR>
 
