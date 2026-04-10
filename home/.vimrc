@@ -247,8 +247,8 @@ noremap <leader>pl :silent w<CR>:call ProbeListen()<CR>
 " Ollama Mappings
 noremap <leader>o :call OllamaChatSend()<CR>
 noremap <leader>i :!echo "/input path %:p"\|ollama_chat_send -t<CR><C-l>
-noremap <leader>m :.!git dfc\|commit_message<CR>
-noremap <leader>c :call Comment()<CR>
+noremap <leader>cm :.!git dfc\|commit_message<CR>
+noremap <leader>cc :call Comment()<CR>
 
 " base64 Helper Mappings
 vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
