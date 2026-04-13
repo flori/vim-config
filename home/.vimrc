@@ -33,7 +33,7 @@ set formatoptions=cqrt " Sets text formatting options: c(auto-wrap comments), r(
 set fsync " Forces filesystem synchronization after writing files
 set hidden " Allows switching between buffers without saving (keeps unsaved changes in background)
 set history=1000 " Stores 1000 commands in command-line history
-set modelines=5 " Checks up to 5 lines at top/bottom of file for vim settings
+set nomodeline " Disables modeline
 set nocindent " Disables C-style indentation
 set nocompatible " Uses Vim-specific features instead of vi compatibility mode
 set nodigraph " Disables digraph input (special character combinations)
