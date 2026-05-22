@@ -241,8 +241,9 @@ noremap <leader>rl :call IrbLoad()<CR>
 " Testing Probe Mappings
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
 noremap <leader>pf :silent w<CR>:call ProbeFile()<CR>
-noremap <leader>pa :silent w<CR>:call ProbeAll()<CR>
+nnoremap <leader>pa :silent w<CR>:call ProbeAll(ProbeGetDefaultDir())<CR>
 noremap <leader>pl :silent w<CR>:call ProbeListen()<CR>
+nnoremap <leader>pr :silent w<CR>:call ProbeRun(ProbeGetDefaultDir())<CR>
 
 " Ollama Mappings
 noremap <leader>o :call OllamaChatSend()<CR>
@@ -566,6 +567,17 @@ function! ProbeExtraArgs()
   return g:pa
 endfunction
 
+" Returns the first existing directory among a list of common test directories:
+function! ProbeGetDefaultDir()
+  let l:candidates = ['spec', 'test', 'tests', 'features']
+  for l:dir in l:candidates
+    if isdirectory(l:dir)
+      return l:dir
+    endif
+  endfor
+  return 'spec' " Fallback if none of the above exist
+endfunction
+
 " Runs probe command on current line:
 function! ProbeLine()
   execute 'w'
@@ -592,6 +604,12 @@ endfunction
 " Runs probe server listening to socket:
 function! ProbeListen()
   call term_start('probe -l', { 'term_finish': 'close' })
+  execute ':wincmd p'
+endfunction
+
+function! ProbeRun(dir="spec")
+  let cmd = [ 'probe', a:dir ]
+  call term_start(cmd)
   execute ':wincmd p'
 endfunction
 
