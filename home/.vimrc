@@ -265,10 +265,12 @@ nmap ea <Plug>(EasyAlign)
 noremap <F1> :call ToggleHelp()<CR>
 " F2: Toggle Tagbar (code outline/navigation panel):
 noremap <F2> :TagbarToggle<CR>
-" F3: Toggle paste mode for improved text pasting behavior:
-noremap <F3> :call TogglePaste()<CR>
-" F4: Toggle Undotree (visualizes undo history for better navigation):
-noremap <silent><F4>  :UndotreeToggle<CR>
+" F3: Toggle Undotree (visualizes undo history for better navigation):
+noremap <silent><F3>  :UndotreeToggle<CR>
+" F5: Enable paste mode for improved text pasting behavior:
+noremap <F5> :call SetPasteOn()<CR>
+" F6: Disable paste mode:
+noremap <F6> :call SetPasteOff()<CR>
 
 " Open Window with
 noremap <C-W>b :BufExplorerHorizontalSplit<CR>
@@ -538,17 +540,20 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-" Toggles paste mode and adjusts indentation settings for proper handling:
-function!  TogglePaste()
-  if &paste
-    set nopaste
-    set et ts=2 sw=2
-    retab
-  else
-    set paste
-    set et ts=2 sw=2
-    retab
-  endif
+" Sets paste mode and adjusts indentation settings for proper handling:
+function! SetPasteOn()
+  set paste
+  set et ts=2 sw=2
+  retab
+  call feedkeys('i')
+endfunction
+
+" Disables paste mode and adjusts indentation settings for proper handling:
+function! SetPasteOff()
+  set nopaste
+  set et ts=2 sw=2
+  retab
+  call feedkeys('i')
 endfunction
 
 " Displays error messages from errors.lst file in quickfix window:
