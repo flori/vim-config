@@ -237,6 +237,7 @@ noremap <leader>rx :call IrbExecute()<CR>
 noremap <leader>rs :call IrbStore()<CR>
 noremap <leader>rc :call IrbExecuteCurrent()<CR>
 noremap <leader>rl :call IrbLoad()<CR>
+noremap <leader>rs :call CheckRubySyntax()<CR>
 
 " Testing Probe Mappings
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
@@ -1027,6 +1028,16 @@ function! IrbLoad()
     echo "IRB returned an error code: " . v:shell_error
   else
     echo 'IRB is loading "' . filename . '".'
+  endif
+endfunction
+
+
+" Checks the current Ruby file for syntax errors
+function! CheckRubySyntax()
+  if &filetype =~ 'ruby\|rake\|slim'
+    execute '!ruby -c %'
+  else
+    echo "Not a Ruby-related file!"
   endif
 endfunction
 
