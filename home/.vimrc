@@ -237,7 +237,7 @@ noremap <leader>rx :call IrbExecute()<CR>
 noremap <leader>rs :call IrbStore()<CR>
 noremap <leader>rc :call IrbExecuteCurrent()<CR>
 noremap <leader>rl :call IrbLoad()<CR>
-noremap <leader>rs :call CheckRubySyntax()<CR>
+noremap <leader>crs :call CheckRubySyntax()<CR>
 
 " Testing Probe Mappings
 noremap <leader>p :silent w<CR>:call ProbeLine()<CR>
