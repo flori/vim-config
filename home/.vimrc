@@ -253,7 +253,11 @@ noremap <leader>cm :.!git dfc\|commit_message<CR>
 noremap <leader>cc :call Comment()<CR>
 
 " base64 Helper Mappings
-vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
+if has('mac') || has('osx')
+  vnoremap <leader>4 c<C-R>=system("base64 -D", @")<CR><ESC>
+else
+  vnoremap <leader>4 c<C-R>=system("base64 -d", @")<CR><ESC>
+endif
 vnoremap <leader>6 c<C-R>=system("base64", @")<CR><ESC>
 vnoremap <leader>x c<C-R>=system("sed 's/^[[:blank:]]*//;s/[[:space:]]*$//' \| tr -d '\n' \| base64", @")<CR><ESC>
 
