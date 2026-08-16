@@ -36,7 +36,7 @@ set history=1000 " Stores 1000 commands in command-line history
 set nomodeline " Disables modeline
 set nocindent " Disables C-style indentation
 set nocompatible " Uses Vim-specific features instead of vi compatibility mode
-set digraph " Enables digraph input (special character combinations)
+set nodigraph " Disables digraph input (special character combinations)
 set nofoldenable " Disables folding by default
 set noignorecase " Makes searches case-sensitive
 set noincsearch " Disables incremental search highlighting
@@ -284,10 +284,10 @@ silent! unmap <leader>bs
 silent! unmap <leader>bv
 
 " Switch Windows
-vnoremap <C-J> <C-W><C-J>
-vnoremap <C-K> <C-W><C-K>
-vnoremap <C-L> <C-W><C-L>
-vnoremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+noremap <C-H> <C-W><C-H>
 
 " Resize Windows
 noremap <Up> <C-W>+
