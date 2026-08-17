@@ -17,6 +17,7 @@ filetype plugin on
 
 " General Settings
 set autoindent " Automatically indents new lines to match the indentation of the previous line
+set autoread " Auto-reloads the buffer if the file changed on disk since last read.
 set autowrite " Automatically saves changes when switching between buffers (without needing to explicitly write)
 set backspace=indent,eol,start " Allows backspacing over indentations, end-of-line, and start of line (more flexible backspace behavior)
 set backupskip=/tmp/*,/private/tmp/* " Skips creating backup files for files in temporary directories (saves disk space)
