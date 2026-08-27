@@ -27,7 +27,7 @@ endif
 set complete=.,w,b,u,t " Configures omni-completion to include various sources: .(omnifunc), w(word completion), b(buffer completion), u(undo completion), t(thesaurus)
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words " Sets up dictionary files for spell checking and word completion
 set encoding=utf8 " Uses UTF-8 encoding for all files and display
-set errorfile=/tmp/errors.err " Specifies location for error file output
+set errorfile=/tmp/errors.lst " Specifies location for error file output
 set expandtab shiftwidth=2 tabstop=2 " Converts tabs to spaces, sets indentation width to 2 spaces
 set foldcolumn=0 " Hides the fold column (no line numbers for folding)
 set formatoptions=cqrt " Sets text formatting options: c(auto-wrap comments), r(continue comments), q(allow comment formatting), t(auto-wrap text)
@@ -55,7 +55,7 @@ set tags=./tags,tags " Searches for tag files in current directory and parent di
 set termencoding=utf8 " Sets terminal encoding to UTF-8
 set tildeop " Allows tilde (~) operations on lines
 set ttyfast " Uses fast terminal settings (for faster redraws)
-set viminfo='20,<50,s10,h,! " Configures viminfo: 20 lines for marks, 50% for buffer info, 10k for search history, no history file, save all registers
+set viminfo='20,<50,s10,h,! " Configures viminfo: 20 lines for marks, 50% for buffer info, 10k for search history, no history file, save alternative file name
 set wrap " Enables line wrapping (displays long lines as multiple lines)
 set cmdheight=1 " Set command line height to 1
 
@@ -188,9 +188,8 @@ source $VIMRUNTIME/macros/matchit.vim " Loads the matchit plugin which enhances 
 let g:ale_linters_explicit = 1 " Ensure ALE only runs the linters you explicitly specify
 let g:ale_linters={ 'ruby': [ 'ruby' ], 'python': [] } " Set ale linters
 let g:ale_sh_shellcheck_options = '--exclude=SC2120,SC1090,SC1091,SC2119' " Exclude these shellchecks
-let g:ale_set_highlights = 0 " Enable the sign column to show lint issues
-let g:ale_sign_column_always = 1 " Disable ALE's syntax highlighting of errors to preserve your existing syntax highlighting
-
+let g:ale_set_highlights = 0 " Disable ALE's syntax highlighting of errors to preserve your existing syntax highlighting
+let g:ale_sign_column_always = 1 " Enable the sign column to show lint issues
 let g:nrrw_rgn_protect='n' " Allow original buffer to be modified for NrrwRgn plugin
 let g:go_version_warning=0 " Disables Go plugin version warnings in Vim
 let g:rails_statusline=0 " do not show [Rails] in status line for vim-rails plugin
@@ -455,8 +454,8 @@ if has("autocmd")
 
   au! BufRead,BufNewFile *.rl set filetype=ragel
 
-  autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
-  autocmd BufWritePre Rakefile,.vimrc,*.rb,*.rake,*.slim,*.haml,*.js,.jsx,*.c,*.cpp,*.java,*.h,*.md :retab
+  autocmd BufWritePre .vimrc,*.rb,*.rake,*.slim,*.haml,*.js,*.jsx,*.c,*.cpp,*.java,*.h :%s/\s\+$//e
+  autocmd BufWritePre Rakefile,.vimrc,*.rb,*.rake,*.slim,*.haml,*.js,*.jsx,*.c,*.cpp,*.java,*.h,*.md :retab
 end
 
 " Functions
