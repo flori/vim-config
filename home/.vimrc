@@ -26,6 +26,7 @@ if $TMUX == ''
 endif
 set complete=.,w,b,u,t " Configures omni-completion to include various sources: .(omnifunc), w(word completion), b(buffer completion), u(undo completion), t(thesaurus)
 set dictionary=/usr/dict/words dictionary+=/usr/share/dict/words " Sets up dictionary files for spell checking and word completion
+set diffopt+=inline:char
 set encoding=utf8 " Uses UTF-8 encoding for all files and display
 set errorfile=/tmp/errors.lst " Specifies location for error file output
 set expandtab shiftwidth=2 tabstop=2 " Converts tabs to spaces, sets indentation width to 2 spaces
@@ -116,10 +117,11 @@ let g:vim_json_syntax_conceal=0 " Disables conceal mode for JSON syntax highligh
 " let &t_SR = "\<Esc>]1337;CursorShape=2\x7"
 
 " vimdiff configuration
-hi DiffText ctermfg=white ctermbg=244 " Sets highlight for text that has changed in diff mode: white text on gray background
-hi DiffChange ctermfg=white ctermbg=208 " Sets highlight for changed text in diff mode: white text on orange background
-hi DiffAdd ctermfg=white ctermbg=28 " Sets highlight for added text in diff mode: white text on green background
-hi DiffDelete ctermfg=white ctermbg=88 " Sets highlight for deleted text in diff mode: white text on dark red background
+hi DiffText   ctermfg=237 ctermbg=249
+hi DiffTextAdd ctermfg=237 ctermbg=130
+hi DiffChange ctermfg=237 ctermbg=178
+hi DiffAdd    ctermfg=252 ctermbg=22
+hi DiffDelete ctermfg=252 ctermbg=52
 " Sets up key mappings for diff mode:
 nnoremap <C-g> :diffget<CR>
 nnoremap <C-p> :diffput<CR>

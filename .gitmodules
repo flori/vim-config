@@ -127,9 +127,6 @@
 [submodule "home/.vim/bundle/conflict-marker.vim"]
 	path = home/.vim/bundle/conflict-marker.vim
 	url = https://github.com/rhysd/conflict-marker.vim
-[submodule "home/.vim/bundle/diffchar.vim"]
-	path = home/.vim/bundle/diffchar.vim
-	url = https://github.com/rickhowe/diffchar.vim
 [submodule "home/.vim/bundle/ale"]
 	path = home/.vim/bundle/ale
 	url = https://github.com/dense-analysis/ale
