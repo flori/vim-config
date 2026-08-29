@@ -210,6 +210,7 @@ noremap <leader>n :new <cfile><CR>
 
 " Finding and Grepping Mappings
 noremap <leader>f :Files<CR>
+noremap <leader>t :Tags<CR>
 noremap <leader>d :call ResetFiles()<CR>
 noremap <leader>g :call Grep()<CR>
 noremap <leader>G :call Grep(expand('<cword>'))<CR>
